@@ -189,7 +189,7 @@ for (c in 1:k)
 {
 U[i,c]=(exp(-D[i,c]/ent))/sum(exp(-D[i,]/ent))
 if (is.nan(U[i,c]))
-stop("Some membership degrees are NaN (Suggestion: run FKM.ent using standardized data")
+stop("Some membership degrees are NaN (Suggestion: run FKM.ent using standardized data)")
 if (U[i,c]<.Machine$double.eps)
 U[i,c]=.Machine$double.eps
 }

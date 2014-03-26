@@ -196,6 +196,7 @@ cputime=system.time(
 while ((sum(abs(U.old-U))>conv) && (iter<maxit))
 {
 iter=iter+1
+D.old=D
 U.old=U
 H.old=H
 F.old=F
@@ -220,6 +221,8 @@ for (c in 1:k)
 D[i,c]=(t(X[i,]-H[c,])%*%solve(F[,,c],tol=FALSE)%*%(X[i,]-H[c,]))
 }
 }
+if (all(is.finite(D))==TRUE)
+{
 for (i in 1:n)
 {
 for (c in 1:k)
@@ -232,6 +235,14 @@ U[i,c]=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
 }
 if (all(is.finite(U))==FALSE)
 U=U.old 
+}
+else
+{
+ U=U.old
+ D=D.old
+ F=F.old
+ H=H.old
+}
 }
 })
 func=sum((U^m)*D);

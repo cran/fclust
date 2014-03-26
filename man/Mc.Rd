@@ -11,8 +11,9 @@
 } 
 \details{
 Data are from McDonald's USA Nutrition Facts for Popular Menu Items. A subset of menu items is reported. Beverages are excluded.
-In case of duplications, regular size or medium size information is reported. Some items are assigned to more than one type. 
-Percent Daily Values (\%DV) are based on a 2,000 calorie diet. Some items are registered trademarks.
+In case of duplications, regular size or medium size information is reported. The variable Type is a factor the levels of which specify the kind of the menu items.
+Although some menu items could be well described by more than one level, only one level of the variable Type specifies each menu item. 
+Percent Daily Values (\%DV) are based on a 2,000 calorie diet. Some menu items are registered trademarks.
 }
 \author{Paolo Giordani, Maria Brigida Ferraro}
 \examples{

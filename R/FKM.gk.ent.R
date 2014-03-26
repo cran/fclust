@@ -196,7 +196,10 @@ cputime=system.time(
 while ((sum(abs(U.old-U))>conv) && (iter<maxit))
 {
 iter=iter+1
+D.old=D
 U.old=U
+H.old=H
+F.old=F
 for (c in 1:k) 
 H[c,]=(t(U[,c])%*%X)/sum(U[,c])
 dd=rep(1,k)
@@ -218,19 +221,29 @@ for (c in 1:k)
 D[i,c]=(t(X[i,]-H[c,])%*%solve(F[,,c], tol=FALSE)%*%(X[i,]-H[c,]))
 }
 }
+if (all(is.finite(D))==TRUE)
+{
 for (i in 1:n)
 {
 for (c in 1:k)
 {
 U[i,c]=(exp(-D[i,c]/ent))/sum(exp(-D[i,]/ent))
-if (is.nan(U[i,c]))
-stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent using standardized data")
+#if (is.nan(U[i,c]))
+#stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent using standardized data)")
 if (U[i,c]<.Machine$double.eps)
 U[i,c]=.Machine$double.eps
 }
 }
 if (all(is.finite(U))==FALSE)
 U=U.old 
+}
+else
+{
+ U=U.old
+ D=D.old
+ F=F.old
+ H=H.old
+}
 }
 }) 
 func=sum(U*D)+ent*sum(U*log(U))

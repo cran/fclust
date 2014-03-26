@@ -24,6 +24,7 @@ if (b<=1)
 b=exp(1)
 cat("The logarithmic base b must be >1: the default value b=exp(1) will be used ",fill=TRUE)
 }
+U[U<.Machine$double.eps]=.Machine$double.eps 
 part.ent=-sum(U*log(U,b))/nrow(U)
 return(part.ent)
 }

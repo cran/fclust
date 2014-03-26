@@ -20,7 +20,7 @@ data(Mc)
 for (j in 2:(ncol(Mc)-1))
 Mc[,j]=Mc[,j]/Mc[,1]
 Mc=Mc[,-1]
-clust=Fclust(Mc)
+clust=Fclust(Mc[,1:(ncol(Mc)-1)])
 }
 }
 \keyword{multivariate}
