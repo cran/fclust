@@ -33,14 +33,20 @@ while (ana==1)
         {
         cat(" ",fill=TRUE)
         cat("Specify the clustering algorithm: ",fill=TRUE)
-        cat("1: Fuzzy k-means (function FKM) ",fill=TRUE)
-        cat("2: Fuzzy k-means with entropy regularization (function FKM.ent) ",fill=TRUE)
-        cat("3: Gustafson-Kessel-like Fuzzy k-means (function FKM.gk) ",fill=TRUE)
-        cat("4: Gustafson-Kessel-like Fuzzy k-means with entropy regularization (function FKM.gk.ent) ",fill=TRUE)
-        cat("5: Fuzzy k-means with noise cluster (function FKM.noise) ",fill=TRUE)
-        cat("6: Fuzzy k-medoids (function FKM.med) ",fill=TRUE)
+        cat(" 1: Fuzzy k-means (function FKM) ",fill=TRUE)
+        cat(" 2: Fuzzy k-means with noise cluster (function FKM.noise) ",fill=TRUE)
+        cat(" 3: Fuzzy k-means with entropy regularization (function FKM.ent) ",fill=TRUE)
+        cat(" 4: Fuzzy k-means with entropy regularization and noise cluster (function FKM.ent.noise) ",fill=TRUE)
+        cat(" 5: Gustafson-Kessel-like Fuzzy k-means (function FKM.gk) ",fill=TRUE)
+        cat(" 6: Gustafson-Kessel-like Fuzzy k-means with noise cluster (function FKM.gk.noise) ",fill=TRUE)
+        cat(" 7: Gustafson-Kessel-like Fuzzy k-means with entropy regularization (function FKM.gk.ent) ",fill=TRUE)
+        cat(" 8: Gustafson-Kessel-like Fuzzy k-means with entropy regularization and noise cluster (function FKM.gk.ent.noise) ",fill=TRUE)
+        cat(" 9: Fuzzy k-medoids (function FKM.med) ",fill=TRUE)
+        cat("10: Fuzzy k-medoids with noise cluster (function FKM.med.noise) ",fill=TRUE)
+        cat("11: Fuzzy k-means with polynomial fuzzifier (function FKM.pf) ",fill=TRUE)
+        cat("12: Fuzzy k-means with polynomial fuzzifier and noise cluster (function FKM.pf.noise) ",fill=TRUE)
         model=scan("",n=1) 
-        if (any(model==1:6,na.rm=TRUE))
+        if (any(model==1:12,na.rm=TRUE))
             ok=1
         else	
             {
@@ -68,7 +74,7 @@ while (ana==1)
                 cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
                 }
             }
-       if (any(model==c(1,3,5,6)))
+       if (any(model==c(1,2,5,6,9,10)))
             {
             if ((is.null(m)) || (param!=1))
                 {
@@ -86,7 +92,7 @@ while (ana==1)
                     }
                 }
             }
-        else
+       if (any(model==c(3,4,7,8)))
             {
             if ((is.null(ent)) || (param!=1))
                 {
@@ -104,7 +110,25 @@ while (ana==1)
                     }
                 }
             }
-        if (any(model==c(3,4)))
+       if (any(model==c(11,12)))
+            {
+            if ((is.null(b)) || (param!=1))
+                {
+                cat(" ",fill=TRUE)
+                cat("Specify the parameter of the polynomial fuzzifier beta (default =0.5): ",fill=TRUE)
+				b=scan("",n=1) 
+                if (length(b)==0)
+                    {
+                    b=0.5
+                    }
+                if ((b>1) || (b<0)) 
+                    {
+                    b=0.5
+                    cat("The parameter of the polynomial fuzzifier beta must be in [0,1]: the default value beta=0.5 will be used ",fill=TRUE)
+                    }
+                }
+            }
+        if (any(model==c(3,4,5,6)))
             {
             if ((is.null(vp)) || (param!=1))
                 {
@@ -187,7 +211,7 @@ while (ana==1)
                 stand=0
                 }
             }
-        if (model==5)
+        if (model==c(2,4,6,8,10,12))
             {
             if ((is.null(delta)) || (param!=1))
                 {
@@ -229,24 +253,48 @@ while (ana==1)
             }
         if (model==2)
             {
-            clust=FKM.ent(X,k,ent,RS,stand,startU,conv,maxit)
+            clust=FKM.noise(X,k,m,delta,RS,stand,startU,conv,maxit)
             }
         if (model==3)
             {
-            clust=FKM.gk(X,k,m,vp,RS,stand,startU,conv,maxit)
+            clust=FKM.ent(X,k,ent,RS,stand,startU,conv,maxit)
             }
         if (model==4)
             {
-            clust=FKM.gk.ent(X,k,ent,vp,RS,stand,startU,conv,maxit)
+          clust=FKM.ent.noise(X,k,ent,delta,RS,stand,startU,conv,maxit)
             }
         if (model==5)
             {
-            clust=FKM.noise(X,k,m,delta,RS,stand,startU,conv,maxit)
+            clust=FKM.gk(X,k,m,vp,RS,stand,startU,conv,maxit)
             }
         if (model==6)
             {
-            clust=FKM.med(X,k,m,RS,stand,startU,conv,maxit)
+          clust=FKM.gk.noise(X,k,m,vp,delta,RS,stand,startU,conv,maxit)
             }
+        if (model==7)
+        {
+            clust=FKM.gk.ent(X,k,ent,vp,RS,stand,startU,conv,maxit)
+        }
+        if (model==8)
+        {
+          clust=FKM.gk.ent.noise(X,k,ent,vp,delta,RS,stand,startU,conv,maxit)
+        }
+        if (model==9)
+        {
+          clust=FKM.med(X,k,m,RS,stand,startU,conv,maxit)
+        }
+        if (model==10)
+        {
+          clust=FKM.med.noise(X,k,m,delta,RS,stand,startU,conv,maxit)
+        }
+        if (model==11)
+        {
+		   clust=FKM.pf(X,k,b,RS,stand,startU,conv,maxit)
+        }
+        if (model==12)
+        {
+          clust=FKM.pf.noise(X,k,b,delta,RS,stand,startU,conv,maxit)
+        }
         cat(" ",fill=TRUE)
         cat("Some preliminary results are displayed: ",fill=TRUE)
         cat(" ",fill=TRUE)

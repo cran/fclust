@@ -188,7 +188,9 @@ Dd[i,c]=sum((X[i,]-Hd[c,])^2)
 }
 }
 delta=mean(Dd)
-} 
+}
+if (delta==0)
+stop("When delta=0, the standard algorithm is applied: run the function FKM")
 value=vector(length(RS),mode="numeric")
 cput=vector(length(RS), mode="numeric")
 it=vector(length(RS), mode="numeric")
@@ -213,7 +215,7 @@ cputime=system.time(
 while ((sum(abs(U.old-U))>conv) && (iter<maxit))
 {
 iter=iter+1
-U.old = U
+U.old=U
 for (c in 1:k) 
 H[c,] = (t(U[,c]^m)%*%X)/sum(U[,c]^m)
 for (i in 1:n) 
@@ -225,11 +227,14 @@ D[i,c]=sum((X[i,]-H[c,])^2)
 }
 for (i in 1:n)
 {
-for (c in 1:k)
+if (min(D[i,])==0)
 {
-if (D[i,c]==0)
-U[i,c]=1
+U[i,]=rep(0,k)
+U[i,which.min(D[i,])]=1
+}
 else
+{ 
+for (c in 1:k)
 {
 q1=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
 q2=((D[i,c])^(1/(m-1)))/(delta^(2/(m-1)))
@@ -277,6 +282,7 @@ out$iter=it
 out$k=k
 out$m=m
 out$ent=NULL
+out$b=NULL
 out$vp=NULL
 out$delta=delta
 out$stand=stand

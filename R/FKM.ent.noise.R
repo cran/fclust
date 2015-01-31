@@ -1,5 +1,5 @@
-FKM <-
-function (X, k, m, RS, stand, startU, conv, maxit)
+FKM.ent.noise <-
+function (X, k, ent, delta, RS, stand, startU, conv, maxit)
 {
 if (missing(X))
 stop("The data set must be given")
@@ -79,19 +79,19 @@ startU=startU/apply(startU,1,sum)
 cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
 }
 }
-if (missing(m))
+if (missing(ent))
 {
-m=2
+ent=1
 }
-if (!is.numeric(m)) 
+if (!is.numeric(ent)) 
 {
-m=2
-cat("The parameter of fuzziness m is not numeric: the default value m=2 will be used ",fill=TRUE)
+ent=1
+cat("The degree of fuzzy entropy ent is not numeric: the default value ent=1 will be used ",fill=TRUE)
 }
-if (m<=1) 
+if (ent<=0) 
 {
-m=2
-cat("The parameter of fuzziness m must be >1: the default value m=2 will be used ",fill=TRUE)
+ent=1
+cat("The degree of fuzzy entropy ent must be >0: the default value ent=1 will be used ",fill=TRUE)
 }
 if (missing(RS))
 {
@@ -114,16 +114,16 @@ RS=ceiling(RS)
 } 
 if (missing(conv))
 conv=1e-9
-if (conv<=0) 
-{
-cat("The convergence criterion conv must be a (small) value >0: the default value conv=1e-9 will be used ",fill=TRUE)
-conv=1e-9
-} 
 if (!is.numeric(conv)) 
 {
 cat("The convergence criterion conv is not numeric: the default value conv=1e-9 will be used ",fill=TRUE)
 conv=1e-9
 }
+if (conv<=0) 
+{
+cat("The convergence criterion conv must be a (small) value >0: the default value conv=1e-9 will be used ",fill=TRUE)
+conv=1e-9
+} 
 if (missing(maxit))
 maxit=1e+6
 if (!is.numeric(maxit)) 
@@ -150,6 +150,47 @@ if (!is.numeric(stand))
 stand=0
 if (stand==1)
 X=scale(X,center=TRUE,scale=TRUE)[,]
+Dd=matrix(0,nrow=n,ncol=k) 
+if (missing(delta))
+{
+  Hd=FKM.ent(X,k,ent,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}  
+if (!is.numeric(delta)) 
+{
+  cat("The noise distance delta must is not numeric: the default value (see ?FKM.ent.noise) will be used ",fill=TRUE)
+  Hd=FKM.ent(X,k,ent,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}
+if (delta<0)
+{
+  cat("The noise distance delta must be non negative: the default value (see ?FKM.ent.noise) will be used ",fill=TRUE)
+  Hd=FKM.ent(X,k,ent,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}
+if (delta==0)
+  stop("When delta=0, the standard algorithm is applied: run the function FKM.ent")
 value=vector(length(RS),mode="numeric")
 cput=vector(length(RS), mode="numeric")
 it=vector(length(RS), mode="numeric")
@@ -166,6 +207,7 @@ U=U/apply(U,1,sum)
 }
 D=matrix(0,nrow=n,ncol=k)
 H=matrix(0,nrow=k,ncol=p)
+Uout=1-apply(U,1,sum)
 U.old=U+1
 iter=0
 cputime=system.time(
@@ -175,39 +217,37 @@ while ((sum(abs(U.old-U))>conv) && (iter<maxit))
 iter=iter+1
 U.old=U
 for (c in 1:k) 
-H[c,]=(t(U[,c]^m)%*%X)/sum(U[,c]^m)
+H[c,]=(t(U[,c])%*%X)/sum(U[,c])
 for (i in 1:n) 
 {
 for (c in 1:k) 
-{
-D[i,c]=sum((X[i,]-H[c,])^2)
+{ 
+D[i,c]=D[i,c]=sum((X[i,]-H[c,])^2)
 }
 }
 for (i in 1:n)
 {
-if (min(D[i,])==0)
-{
-U[i,]=rep(0,k)
-U[i,which.min(D[i,])]=1
-}
-else
-{ 
 for (c in 1:k)
 {
-U[i,c]=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
+U[i,c]=(exp(-D[i,c]/ent))/(sum(exp(-D[i,]/ent))+exp(-delta^2/ent)) 
+if (is.nan(U[i,c]))
+stop("Some membership degrees are NaN (Suggestion: run FKM.ent using standardized data)")
+if (U[i,c]<.Machine$double.eps)
+U[i,c]=.Machine$double.eps
 }
-}
+Uout[i]=1-sum(U[i,])
 }
 }
 })
-func=sum((U^m)*D)
+func=sum(U*D)+ent*sum(U*log(U))+sum((Uout)*(delta^2))
 cput[rs]=cputime[1]
 value[rs]=func
 it[rs]=iter
 if (func<func.opt) 
-{
+{ 
 U.opt=U
 H.opt=H 
+F.opt=F
 func.opt=func
 }
 }
@@ -219,7 +259,8 @@ names(value)=paste("Start",1:RS,sep=" ")
 names(cput)=names(value)
 names(it)=names(value)
 names(k)=c("Number of clusters")
-names(m)=c("Parameter of fuzziness")
+names(p)=c("Degree of fuzzy entropy")
+names(delta)=c("Noise distance")
 if (stand!=1)
 stand=0
 names(stand)=c("Standardization (1=Yes, 0=No)")
@@ -234,11 +275,11 @@ out$value=value
 out$cput=cput
 out$iter=it
 out$k=k
-out$m=m
-out$ent=NULL
+out$m=NULL
+out$ent=ent
 out$b=NULL
 out$vp=NULL
-out$delta=NULL
+out$delta=delta
 out$stand=stand
 out$Xca=X
 out$X=Xraw

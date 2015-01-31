@@ -225,12 +225,17 @@ if (all(is.finite(D))==TRUE)
 {
 for (i in 1:n)
 {
+if (min(D[i,])==0)
+{
+U[i,]=rep(0,k)
+U[i,which.min(D[i,])]=1
+}
+else
+{ 
 for (c in 1:k)
 {
-if (D[i,c]==0)
-U[i,c]=1
-else
 U[i,c]=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
+}
 }
 }
 if (all(is.finite(U))==FALSE)
@@ -289,6 +294,7 @@ out$iter=it
 out$k=k
 out$m=m
 out$ent=NULL
+out$b=NULL
 out$vp=vp
 out$delta=NULL
 out$stand=stand

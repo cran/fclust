@@ -13,7 +13,7 @@
 \value{
  \item{clus.size}{Vector containing the sizes of the clusters}
 } 
-\note{
+\details{
  An object is assigned to a cluster according to the maximal membership degree.
 } 
 \author{Paolo Giordani, Maria Brigida Ferraro}
@@ -21,6 +21,7 @@
 \examples{
 n=20
 k=3
+## randomly generated membership degree matrix
 U=matrix(runif(n*k,0,1), nrow=n, ncol=k)
 U=U/apply(U,1,sum)
 clus.size=cl.size(U)

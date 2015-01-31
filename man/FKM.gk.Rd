@@ -3,6 +3,7 @@
 \title{Gustafson and Kessel - like fuzzy \emph{k}-means}
 \description{
  Performs the Gustafson and Kessel - like fuzzy \emph{k}-means clustering algorithm.
+ \cr Differently from fuzzy \emph{k}-means, it is able to discover non-spherical clusters.
 } 
 \usage{ 
  FKM.gk (X, k, m, vp, RS, stand, startU, conv, maxit)
@@ -31,6 +32,7 @@
  \item{k}{Number of clusters}
  \item{m}{Parameter of fuzziness}
  \item{ent}{Degree of fuzzy entropy (\code{NULL} for \code{FKM.gk})}
+ \item{b}{Parameter of the polynomial fuzzifier (\code{NULL} for \code{FKM.gk})}
  \item{vp}{Volume parameter} 
  \item{delta}{Noise distance (\code{NULL} for \code{FKM.gk})}
  \item{stand}{Standardization (Yes if \code{stand=1}, No if \code{stand=0})}
@@ -38,7 +40,7 @@
  \item{X}{Raw data}
  \item{call}{Matched call}
 } 
-\note{
+\details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
  \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational starting point.
  \cr If a cluster covariance matrix becomes singular, then the algorithm stops and the element of \code{value} is {NaN}.
@@ -47,12 +49,13 @@
  Gustafson E.E., Kessel W.C., 1978. Fuzzy clustering with a fuzzy covariance matrix. Proceedings of the IEEE Conference on Decision and Control, pp. 761-766.
 }
 \author{Paolo Giordani, Maria Brigida Ferraro}
-\seealso{\code{\link{Fclust}}, \code{\link{Fclust.index}}}
+\seealso{\code{\link{FKM.gk.noise}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{unemployment}}}
 \examples{
+## unemployment data
 data(unemployment)
+## Gustafson and Kessel-like fuzzy k-means
 \dontrun{
 ## It may take more than a few seconds
-clust=FKM.gk(unemployment,k=3,RS=10)
-}
+clust=FKM.gk(unemployment,k=3,RS=10)}
 }
 \keyword{multivariate}

@@ -30,6 +30,7 @@
  \item{k}{Number of clusters}
  \item{m}{Parameter of fuzziness}
  \item{ent}{Degree of fuzzy entropy (\code{NULL} for \code{FKM})}
+ \item{b}{Parameter of the polynomial fuzzifier (\code{NULL} for \code{FKM})}
  \item{vp}{Volume parameter (\code{NULL} for \code{FKM})} 
  \item{delta}{Noise distance (\code{NULL} for \code{FKM})}
  \item{stand}{Standardization (Yes if \code{stand=1}, No if \code{stand=0})}
@@ -37,20 +38,25 @@
  \item{X}{Raw data}
  \item{call}{Matched call}
 } 
-\note{
+\details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
  \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational starting point.
 } 
 \references{
- Bezdek J.C., 1981. Pattern Recognition with Fuzzy Objective Function Algorithms. Plenum Press, NewYork.
+ Bezdek J.C., 1981. Pattern Recognition with Fuzzy Objective Function Algorithms. Plenum Press, New York.
 }
 \author{Paolo Giordani, Maria Brigida Ferraro}
-\seealso{\code{\link{Fclust}}, \code{\link{Fclust.index}}}
+\seealso{\code{\link{FKM.noise}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{Mc}}}
 \examples{
+## McDonald's data
 data(Mc)
+names(Mc)
+## data normalization by dividing the nutrition facts by the Serving Size (column 1)
 for (j in 2:(ncol(Mc)-1))
 Mc[,j]=Mc[,j]/Mc[,1]
+## removing the column Serving Size
 Mc=Mc[,-1]
+## fuzzy k-means (excluded the factor column Type (last column))
 clust=FKM(Mc[,1:(ncol(Mc)-1)],k=6,m=1.5,stand=1)
 }
 \keyword{multivariate}

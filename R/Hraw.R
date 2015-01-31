@@ -23,7 +23,7 @@ if (ncol(H)!=ncol(X))
 stop("The numbers of columns of H and X must be the same")
 k=nrow(H)
 p=ncol(H)
-H.raw=H*(matrix(1,k,p)%*%diag(apply(X,2,sd),nrow=length(apply(X,2,sd))))+matrix(1,k,p)%*%diag(apply(X,2,mean),nrow=length(apply(X,2,mean)))
+H.raw=H*(matrix(1,k,p)%*%diag(apply(X,2,sd),nrow=p))+matrix(1,k,p)%*%diag(apply(X,2,mean),nrow=p)
 if (is.null(rownames(H)))
 rownames(H.raw)=paste("Clus",1:k,sep=" ")
 else

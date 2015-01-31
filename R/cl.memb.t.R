@@ -11,16 +11,16 @@ stop("The membership degree matrix U must not contain NA values")
 if (!is.numeric(U)) 
 stop("The membership degree matrix U must be numeric")
 if (missing(t))
-t=0.5
+t=0
 if (!is.numeric(t))
 {
-t=0.5
-cat("The threshold t is not numeric: the default value t=0.5 will be used ",fill=TRUE)
+t=0
+cat("The threshold t is not numeric: the default value t=0 will be used ",fill=TRUE)
 }
-if ((t<0.5) || (t>1))
+if ((t<0) || (t>1))
 {
-t=0.5
-cat("The threshold t must be in the interval [0.5,1.0]: the default value t=0.5 will be used ",fill=TRUE)
+t=0
+cat("The threshold t must be in the interval [0,1]: the default value t=0 will be used ",fill=TRUE)
 }
 n=nrow(U)
 info.U=cbind(max.col(U),apply(U,1,max))

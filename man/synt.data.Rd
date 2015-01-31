@@ -10,18 +10,22 @@
  A matrix with 302 rows and 2 columns.
 } 
 \details{
-Although two clusters are clearly visible, FKM fails to discover them. 
-The Gustafson - Kessel variant of FKM should be used for finding the known-in-advance clusters.}
+Although two clusters are clearly visible, fuzzy k-means fails to discover them. 
+The Gustafson and Kessel-like fuzzy k-means should be used for finding the known-in-advance clusters.}
 \author{Paolo Giordani, Maria Brigida Ferraro}
+\seealso{\code{\link{Fclust}}, \code{\link{FKM}}, \code{\link{FKM.gk}}, \code{\link{plot.fclust}}}
 \examples{
+## synthetic data
 data(synt.data)
 plot(synt.data)
-cor(synt.data)
+## fuzzy k-means
 syntFKM=FKM(synt.data)
+## Gustafson and Kessel-like fuzzy k-means
 syntFKM.gk=FKM.gk(synt.data)
+## plot of cluster structures from fuzzy k-means and Gustafson and Kessel-like fuzzy k-means
 par(mfcol = c(2,1))
-plot(synt.data,col=syntFKM$clus[,1])
-plot(synt.data,col=syntFKM.gk$clus[,1])
+plot(syntFKM)
+plot(syntFKM.gk)
 }
 \keyword{data}
 \keyword{multivariate}

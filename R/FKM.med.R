@@ -206,13 +206,18 @@ D[i,c]=sum((X[i,]-H[c,])^2)
 for (i in 1:n)
 {
 if (match(i,medoid,nomatch=0)==0)
-{ 
-for (c in 1:k) 
 {
-if (D[i,c]==0)
-U[i,c]=1
+if (min(D[i,])==0)
+{
+U[i,]=rep(0,k)
+U[i,which.min(D[i,])]=1
+}
 else
+{ 
+for (c in 1:k)
+{
 U[i,c]=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
+}
 }
 }
 else
@@ -260,6 +265,7 @@ out$iter=it
 out$k=k
 out$m=m
 out$ent=NULL
+out$b=NULL
 out$vp=NULL
 out$delta=NULL
 out$stand=stand

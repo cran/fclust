@@ -1,7 +1,7 @@
 Fclust.index <-
 function (fclust.obj, index, alpha)
 {
-if ((missing(fclust.obj)) || (class(fclust.obj)!="fclust"))
+if ((missing(fclust.obj)) || (!inherits(fclust.obj,"fclust")))
 stop("An object of class fclust must be given")
 X=fclust.obj$Xca
 U=fclust.obj$U

@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+S3method("plot","fclust")
+S3method("print","fclust")
+S3method("summary","fclust")

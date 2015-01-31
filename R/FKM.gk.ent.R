@@ -290,6 +290,7 @@ out$iter=it
 out$k=k
 out$m=NULL
 out$ent=ent
+out$b=NULL
 out$vp=vp
 out$delta=NULL
 out$stand=stand

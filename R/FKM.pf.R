@@ -1,5 +1,5 @@
-FKM <-
-function (X, k, m, RS, stand, startU, conv, maxit)
+FKM.pf <-
+function (X, k, b, RS, stand, startU, conv, maxit)
 {
 if (missing(X))
 stop("The data set must be given")
@@ -79,19 +79,19 @@ startU=startU/apply(startU,1,sum)
 cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
 }
 }
-if (missing(m))
+if (missing(b))
 {
-m=2
+b=0.5
 }
-if (!is.numeric(m)) 
+if (!is.numeric(b)) 
 {
-m=2
-cat("The parameter of fuzziness m is not numeric: the default value m=2 will be used ",fill=TRUE)
+b=0.5
+cat("The parameter of the polynomial fuzzifier beta is not numeric: the default value beta=0.5 will be used ",fill=TRUE)
 }
-if (m<=1) 
+if ((b>1) || (b<0)) 
 {
-m=2
-cat("The parameter of fuzziness m must be >1: the default value m=2 will be used ",fill=TRUE)
+b=0.5
+cat("The parameter of the polynomial fuzzifier beta must be in [0,1]: the default value beta=0.5 will be used ",fill=TRUE)
 }
 if (missing(RS))
 {
@@ -174,8 +174,8 @@ while ((sum(abs(U.old-U))>conv) && (iter<maxit))
 {
 iter=iter+1
 U.old=U
-for (c in 1:k) 
-H[c,]=(t(U[,c]^m)%*%X)/sum(U[,c]^m)
+for (c in 1:k)
+H[c,]=(t((1-b)/(1+b)*U[,c]^2+2*b/(1+b)*U[,c])%*%X)/sum((1-b)/(1+b)*U[,c]^2+2*b/(1+b)*U[,c])
 for (i in 1:n) 
 {
 for (c in 1:k) 
@@ -192,15 +192,26 @@ U[i,which.min(D[i,])]=1
 }
 else
 { 
-for (c in 1:k)
+d=sort(D[i,])
+ki=1
+kok=1
+while (ki<=k)
 {
-U[i,c]=((1/D[i,c])^(1/(m-1)))/sum(((1/D[i,])^(1/(m-1))))
+if ((d[ki]*sum(1/d[1:ki]))<=((1/b)+ki-1))
+{
+kok=ki
+ki=ki+1
 }
+else 
+ki=k+1
+}
+U[i,]=1/(1-b)*((1+b*(kok-1))/(D[i,]*sum(1/(d[1:kok])))-b)
+U[i,which(U[i,]<0)]=0
 }
 }
 }
 })
-func=sum((U^m)*D)
+func=sum(((1-b)/(1+b)*U^2+2*b/(1+b)*U)*D)
 cput[rs]=cputime[1]
 value[rs]=func
 it[rs]=iter
@@ -219,7 +230,7 @@ names(value)=paste("Start",1:RS,sep=" ")
 names(cput)=names(value)
 names(it)=names(value)
 names(k)=c("Number of clusters")
-names(m)=c("Parameter of fuzziness")
+names(b)=c("Parameter of polynomial fuzzifier")
 if (stand!=1)
 stand=0
 names(stand)=c("Standardization (1=Yes, 0=No)")
@@ -234,9 +245,9 @@ out$value=value
 out$cput=cput
 out$iter=it
 out$k=k
-out$m=m
+out$m=NULL
 out$ent=NULL
-out$b=NULL
+out$b=b
 out$vp=NULL
 out$delta=NULL
 out$stand=stand
