@@ -1,5 +1,5 @@
-8c2b6fe893f343c8eb3c15bb4eefce9f *DESCRIPTION
-b126141b1b0cac727b2d0bb790693afe *NAMESPACE
+d01c97db0ffa5dd02102fe180bbb49bf *DESCRIPTION
+94985e527304dc26d9eef71b8c0f91e7 *NAMESPACE
 7f3ce7c2bab21f9441ce21f9813fb2f7 *R/FKM.R
 4dd8d82e5224624db229226a6f371d92 *R/FKM.ent.R
 78b7c5140679a572966edc509662b96c *R/FKM.ent.noise.R
@@ -12,6 +12,7 @@ a7ad39ee8c637f7f9edf459feddd9251 *R/FKM.gk.ent.noise.R
 4e7996e4ae6e766e2883107d7c7bb9d3 *R/FKM.noise.R
 c9200de1a84209d069865426e6ec2feb *R/FKM.pf.R
 dd2427ae530196ba1da9cc6ea4514741 *R/FKM.pf.noise.R
+4103c1b0548a7a29ecc52e806e71e889 *R/Fclust.R
 5de176f1cb1426e0fe92164c828ba205 *R/Fclust.index.R
 c182238554ae7bcfb9b280f7a4f11126 *R/Hraw.R
 59a307d98c7cf3cf0430906ae04f5b53 *R/MPC.R
@@ -29,7 +30,6 @@ c00a0cf24722423f87c36b3c6d9922ac *R/cl.memb.R
 edac6d4641c7930446b7462fb3ec38c3 *R/cl.memb.t.R
 1bdf535b5f949fee2a0c9936efb03dcb *R/cl.size.H.R
 1084ce4592588c79fc895c357f1c7b7f *R/cl.size.R
-4103c1b0548a7a29ecc52e806e71e889 *R/fclust.R
 4bbb8491cc7a5bb68e1695c1dfc4e27e *R/plot.fclust.R
 729e2f8d8f04e57a9608f0ce44e6ade2 *R/print.fclust.R
 461766c3a9eb93f0f775af4734d1d7f4 *R/summary.fclust.R
@@ -37,7 +37,7 @@ c905d89b0121f25a51fb31ccb53f4fe8 *data/Mc.rda
 fb3b4541374fed64eb82de46f8995cb2 *data/butterfly.rda
 cddb0a908c77b83ca3a6999c29389c64 *data/synt.data.rda
 dbdedf228b6c8c7d42b1f6604bb76c6b *data/unemployment.rda
-ab580c70486417f00c68706463ffce27 *inst/CITATION
+e17f8bb95d33565bf47f6def109c0f95 *inst/CITATION
 7e8c3d0de843aaa956b5a6ff3e79e140 *man/FKM.Rd
 f74b4206a73ba52665d4d47c03f02e6d *man/FKM.ent.Rd
 77cb8bddaaded7fdf70a0e033ba45b91 *man/FKM.ent.noise.Rd

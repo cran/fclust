@@ -1,4 +1,7 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("grDevices", "devAskNewPage", "grey", "palette", "rainbow")
+importFrom("graphics", "hist", "image", "par", "plot", "points")
+importFrom("stats", "dist", "runif", "sd")
 S3method("plot","fclust")
 S3method("print","fclust")
 S3method("summary","fclust")
