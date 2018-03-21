@@ -9,7 +9,7 @@
  the power of \emph{m} as is for the fuzzy k-means).
 } 
 \usage{ 
- FKM.gk.ent (X, k, ent, vp, RS, stand, startU, conv, maxit)
+ FKM.gk.ent (X, k, ent, vp, RS, stand, startU, conv, maxit, seed)
 }
 \arguments{
  \item{X}{Matrix or data.frame}
@@ -21,6 +21,7 @@
  \item{startU}{Rational starting point for the membership degree matrix \code{U} (default: no rational start)}
  \item{conv}{Convergence criterion (default: 1e-9)}
  \item{maxit}{Maximum number of iterations (default: 1e+6)}
+ \item{seed}{Seed value for random number generation (default: NULL)}
 }
 \value{
  Object of class \code{fclust}, which is a list with the following components:
@@ -38,6 +39,8 @@
  \item{b}{Parameter of the polynomial fuzzifier (\code{NULL} for \code{FKM.gk.ent})}
  \item{vp}{Volume parameter} 
  \item{delta}{Noise distance (\code{NULL} for \code{FKM.gk.ent})}
+ \item{gam}{Weighting parameter for the fuzzy covariance matrices (\code{NULL} for \code{FKM.gk.ent})}
+ \item{mcn}{Maximum condition number for the fuzzy covariance matrices (\code{NULL} for \code{FKM.gk.ent})}
  \item{stand}{Standardization (Yes if \code{stand=1}, No if \code{stand=0})}
  \item{Xca}{Data used in the clustering algorithm (standardized data if \code{stand=1})}
  \item{X}{Raw data}
@@ -49,12 +52,13 @@
  \cr If a cluster covariance matrix becomes singular, the algorithm stops and the element of \code{value} is {NaN}.
  \cr The default value for \code{ent} is in general not reasonable if \code{FKM.gk.ent} is run using raw data. 
  \cr The update of the membership degrees requires the computation of exponential functions. In some cases, this may produce \code{NaN} values and the algorithm stops. Such a problem is usually solved by running \code{FKM.gk.ent} using standardized data (\code{stand=1}).
+ \cr The Babuska et al. variant in \code{FKM.gkb.ent} is recommended.
 } 
 \references{
  Ferraro M.B., Giordani P., 2013. A new fuzzy clustering algorithm with entropy regularization. Proceedings of the meeting on Classification and Data Analysis (CLADAG).
 }
 \author{Paolo Giordani, Maria Brigida Ferraro}
-\seealso{\code{\link{FKM.gk.ent.noise}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{unemployment}}}
+\seealso{\code{\link{FKM.gkb.ent}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{unemployment}}}
 \examples{
 ## unemployment data
 data(unemployment)

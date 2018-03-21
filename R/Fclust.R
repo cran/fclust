@@ -41,12 +41,18 @@ while (ana==1)
         cat(" 6: Gustafson-Kessel-like Fuzzy k-means with noise cluster (function FKM.gk.noise) ",fill=TRUE)
         cat(" 7: Gustafson-Kessel-like Fuzzy k-means with entropy regularization (function FKM.gk.ent) ",fill=TRUE)
         cat(" 8: Gustafson-Kessel-like Fuzzy k-means with entropy regularization and noise cluster (function FKM.gk.ent.noise) ",fill=TRUE)
-        cat(" 9: Fuzzy k-medoids (function FKM.med) ",fill=TRUE)
-        cat("10: Fuzzy k-medoids with noise cluster (function FKM.med.noise) ",fill=TRUE)
-        cat("11: Fuzzy k-means with polynomial fuzzifier (function FKM.pf) ",fill=TRUE)
-        cat("12: Fuzzy k-means with polynomial fuzzifier and noise cluster (function FKM.pf.noise) ",fill=TRUE)
+		
+        cat(" 9: Gustafson-Kessel-Babuska-like Fuzzy k-means (function FKM.gk) ",fill=TRUE)
+        cat("10: Gustafson-Kessel-Babuska-like Fuzzy k-means with noise cluster (function FKM.gk.noise) ",fill=TRUE)
+        cat("11: Gustafson-Kessel-Babuska-like Fuzzy k-means with entropy regularization (function FKM.gk.ent) ",fill=TRUE)
+        cat("12: Gustafson-Kessel-Babuska-like Fuzzy k-means with entropy regularization and noise cluster (function FKM.gk.ent.noise) ",fill=TRUE)
+		
+        cat("13: Fuzzy k-medoids (function FKM.med) ",fill=TRUE)
+        cat("14: Fuzzy k-medoids with noise cluster (function FKM.med.noise) ",fill=TRUE)
+        cat("15: Fuzzy k-means with polynomial fuzzifier (function FKM.pf) ",fill=TRUE)
+        cat("16: Fuzzy k-means with polynomial fuzzifier and noise cluster (function FKM.pf.noise) ",fill=TRUE)
         model=scan("",n=1) 
-        if (any(model==1:12,na.rm=TRUE))
+        if (any(model==1:16,na.rm=TRUE))
             ok=1
         else	
             {
@@ -74,7 +80,7 @@ while (ana==1)
                 cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
                 }
             }
-       if (any(model==c(1,2,5,6,9,10)))
+       if (any(model==c(1,2,5,6,9,10,13,14)))
             {
             if ((is.null(m)) || (param!=1))
                 {
@@ -92,7 +98,7 @@ while (ana==1)
                     }
                 }
             }
-       if (any(model==c(3,4,7,8)))
+       if (any(model==c(3,4,7,8,11,12)))
             {
             if ((is.null(ent)) || (param!=1))
                 {
@@ -110,7 +116,7 @@ while (ana==1)
                     }
                 }
             }
-       if (any(model==c(11,12)))
+       if (any(model==c(15,16)))
             {
             if ((is.null(b)) || (param!=1))
                 {
@@ -128,7 +134,7 @@ while (ana==1)
                     }
                 }
             }
-        if (any(model==c(3,4,5,6)))
+        if (any(model==c(5,6,7,8,9,10,11,12)))
             {
             if ((is.null(vp)) || (param!=1))
                 {
@@ -146,6 +152,39 @@ while (ana==1)
                     }
                 }
             }
+        if (any(model==c(9,10,11,12)))
+            {
+            if ((is.null(gam)) || (param!=1))
+                {
+                cat(" ",fill=TRUE)
+                cat("Specify the weighting parameter gamma (default =0): ",fill=TRUE)
+				gam=scan("",n=1) 
+                if (length(gam)==0)
+                    {
+                    gam=0
+                    }
+                if ((gam>1) || (gam<0)) 
+                    {
+                    gam=0
+                    cat("The the weighting parameter gamma must be in [0,1]: the default value gamma=0 will be used ",fill=TRUE)
+                    }
+                }
+            if ((is.null(mcn)) || (param!=1))
+                {
+                cat(" ",fill=TRUE)
+                cat("Specify the maximum condition number for the fuzzy covariance matrices (default =1e+15): ",fill=TRUE)
+				mcn=scan("",n=1) 
+                if (length(mcn)==0)
+                    {
+                    mcn=1e+15
+                    }
+                if (mcn<=0)
+                    {
+                    mcn=1e+15
+                    cat("The maximum condition number for the fuzzy covariance matrices be a (large) value >0: the default value mcn=1e+15 will be used ",fill=TRUE)
+                    }
+                }
+			}
         if ((is.null(RS)) || (param!=1))
             {
             cat(" ",fill=TRUE)
@@ -211,7 +250,7 @@ while (ana==1)
                 stand=0
                 }
             }
-        if (model==c(2,4,6,8,10,12))
+        if (model==c(2,4,6,8,10,12,14,16))
             {
             if ((is.null(delta)) || (param!=1))
                 {
@@ -247,53 +286,89 @@ while (ana==1)
                     } 
                 }
             }
+			
+		if ((is.null(seed)) || (param!=1))
+			{
+			cat(" ",fill=TRUE)
+			cat("Specify the integer seed value for random number generation (default =NULL): ",fill=TRUE)
+			seed=scan("",n=1) 
+			if (length(seed)==0)
+				{
+				seed=NULL
+				}
+			else{
+				if (seed%%ceiling(seed)>0)
+					{
+					cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
+					seed=(ceiling(seed))
+					}
+				}
+			}	
+		set.seed(seed)
         if (model==1)
            {
-            clust=FKM(X,k,m,RS,stand,startU,conv,maxit)
+            clust=FKM(X,k,m,RS,stand,startU,conv,maxit,seed)
             }
         if (model==2)
             {
-            clust=FKM.noise(X,k,m,delta,RS,stand,startU,conv,maxit)
+            clust=FKM.noise(X,k,m,delta,RS,stand,startU,conv,maxit,seed)
             }
         if (model==3)
             {
-            clust=FKM.ent(X,k,ent,RS,stand,startU,conv,maxit)
+            clust=FKM.ent(X,k,ent,RS,stand,startU,conv,maxit,seed)
             }
         if (model==4)
             {
-          clust=FKM.ent.noise(X,k,ent,delta,RS,stand,startU,conv,maxit)
+          clust=FKM.ent.noise(X,k,ent,delta,RS,stand,startU,conv,maxit,seed)
             }
         if (model==5)
             {
-            clust=FKM.gk(X,k,m,vp,RS,stand,startU,conv,maxit)
+            clust=FKM.gk(X,k,m,vp,RS,stand,startU,conv,maxit,seed)
             }
         if (model==6)
             {
-          clust=FKM.gk.noise(X,k,m,vp,delta,RS,stand,startU,conv,maxit)
+          clust=FKM.gk.noise(X,k,m,vp,delta,RS,stand,startU,conv,maxit,seed)
             }
         if (model==7)
         {
-            clust=FKM.gk.ent(X,k,ent,vp,RS,stand,startU,conv,maxit)
+            clust=FKM.gk.ent(X,k,ent,vp,RS,stand,startU,conv,maxit,seed)
         }
         if (model==8)
         {
-          clust=FKM.gk.ent.noise(X,k,ent,vp,delta,RS,stand,startU,conv,maxit)
+          clust=FKM.gk.ent.noise(X,k,ent,vp,delta,RS,stand,startU,conv,maxit,seed)
         }
+
         if (model==9)
-        {
-          clust=FKM.med(X,k,m,RS,stand,startU,conv,maxit)
-        }
+            {
+            clust=FKM.gkb(X,k,m,vp,gam,mcn,RS,stand,startU,conv,maxit,seed)
+            }
         if (model==10)
-        {
-          clust=FKM.med.noise(X,k,m,delta,RS,stand,startU,conv,maxit)
-        }
+            {
+          clust=FKM.gkb.noise(X,k,m,vp,delta,gam,mcn,RS,stand,startU,conv,maxit,seed)
+            }
         if (model==11)
         {
-		   clust=FKM.pf(X,k,b,RS,stand,startU,conv,maxit)
+            clust=FKM.gkb.ent(X,k,ent,vp,gam,mcn,RS,stand,startU,conv,maxit,seed)
         }
         if (model==12)
         {
-          clust=FKM.pf.noise(X,k,b,delta,RS,stand,startU,conv,maxit)
+          clust=FKM.gkb.ent.noise(X,k,ent,vp,delta,gam,mcn,RS,stand,startU,conv,maxit,seed)
+        }
+        if (model==13)
+        {
+          clust=FKM.med(X,k,m,RS,stand,startU,conv,maxit,seed)
+        }
+        if (model==14)
+        {
+          clust=FKM.med.noise(X,k,m,delta,RS,stand,startU,conv,maxit,seed)
+        }
+        if (model==15)
+        {
+		   clust=FKM.pf(X,k,b,RS,stand,startU,conv,maxit,seed)
+        }
+        if (model==16)
+        {
+          clust=FKM.pf.noise(X,k,b,delta,RS,stand,startU,conv,maxit,seed)
         }
         cat(" ",fill=TRUE)
         cat("Some preliminary results are displayed: ",fill=TRUE)
@@ -339,6 +414,8 @@ while (ana==1)
                 m=NULL
                 ent=NULL
                 vp=NULL
+				gam=NULL
+				mcn=NULL
                 RS=NULL
                 conv=NULL
                 maxit=NULL

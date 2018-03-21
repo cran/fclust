@@ -1,5 +1,5 @@
-FKM.ent <-
-function (X, k, ent, RS, stand, startU, conv, maxit, seed)
+FKM.gkb.ent.noise <-
+function (X, k, ent, vp, delta, gam, mcn, RS, stand, startU, conv, maxit, seed)
 {
 if (missing(X))
 stop("The data set must be given")
@@ -93,6 +93,55 @@ if (ent<=0)
 ent=1
 cat("The degree of fuzzy entropy ent must be >0: the default value ent=1 will be used ",fill=TRUE)
 }
+if (missing(vp))
+vp=rep(1,k)
+if (!is.numeric(vp)) 
+{
+cat("The volume parameter vp is not numeric: the default value vp=rep(1,k) will be used ",fill=TRUE)
+vp=rep(1,k)
+}
+if (!is.vector(vp)) 
+{
+cat("The volume parameter vp is not a vector: the default value vp=rep(1,k) will be used ",fill=TRUE)
+vp=rep(1,k)
+}
+if (min(vp)<=0) 
+{
+cat("The volume parameter vp must be >0: the default value vp=rep(1,k) will be used ",fill=TRUE)
+vp=rep(1,k)
+}
+if (length(vp)!=k) 
+{
+cat("The number of elements of vp is different from k: the default value vp=rep(1,k) will be used ",fill=TRUE)
+vp=rep(1,k)
+}
+
+if (missing(gam))
+gam=0
+if (!is.numeric(gam)) 
+{
+cat("The parameter gamma is not numeric: the default value gamma=0 will be used ",fill=TRUE)
+gam=0
+}
+if ((gam<0) || (gam>1))
+{
+cat("The parameter gamma must be in the interval [0,1]: the default value gamma=0 will be used ",fill=TRUE)
+gam=0
+} 
+
+if (missing(mcn))
+mcn=1e+15
+if (!is.numeric(mcn)) 
+{
+cat("The parameter mcn is not numeric: the default value mcn=1e+15 will be used ",fill=TRUE)
+mcn=1e+15
+}
+if (mcn<=0)
+{
+cat("The parameter mcn must be a (large) value >0: the default value mcn=1e+15 will be used ",fill=TRUE)
+mcn=1e+15
+} 
+
 if (missing(RS))
 {
 RS=1
@@ -125,16 +174,16 @@ cat("The convergence criterion conv must be a (small) value >0: the default valu
 conv=1e-9
 } 
 if (missing(maxit))
-maxit=1e+6
+maxit=1e+2
 if (!is.numeric(maxit)) 
 {
-cat("The maximum number of iterations maxit is not numeric: the default value maxit=1e+6 will be used ",fill=TRUE)
-maxit=1e+6
+cat("The maximum number of iterations maxit is not numeric: the default value maxit=1e+2 will be used ",fill=TRUE)
+maxit=1e+2
 }
 if (maxit<=0)
 {
-cat("The maximum number of iterations maxit must be an integer >0: the default value maxit=1e+6 will be used ",fill=TRUE)
-maxit=1e+6
+cat("The maximum number of iterations maxit must be an integer >0: the default value maxit=1e+2 will be used ",fill=TRUE)
+maxit=1e+2
 } 
 if (maxit%%ceiling(maxit)>0)
 {
@@ -168,10 +217,52 @@ if (!is.numeric(stand))
 stand=0
 if (stand==1)
 X=scale(X,center=TRUE,scale=TRUE)[,]
+Dd=matrix(0,nrow=n,ncol=k) 
+if (missing(delta))
+{
+  Hd=FKM.gk.ent(X,k,ent,vp,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}  
+if (!is.numeric(delta)) 
+{
+  cat("The noise distance delta must is not numeric: the default value (see ?FKM.gk.ent.noise) will be used ",fill=TRUE)
+  Hd=FKM.gk.ent(X,k,ent,vp,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}
+if (delta<0)
+{
+  cat("The noise distance delta must be non negative: the default value (see ?FKM.gk.ent.noise) will be used ",fill=TRUE)
+  Hd=FKM.gk.ent(X,k,ent,vp,RS=1,stand,conv=1e-6)$H
+  for (i in 1:n) 
+  {
+    for (c in 1:k) 
+    {
+      Dd[i,c]=sum((X[i,]-Hd[c,])^2)
+    }
+  }
+  delta=mean(Dd)
+}
+if (delta==0)
+  stop("When delta=0, the standard algorithm is applied: run the function FKM.gk.ent")
 value=vector(length(RS),mode="numeric")
 cput=vector(length(RS), mode="numeric")
 it=vector(length(RS), mode="numeric")
 func.opt=10^10*sum(X^2)
+F0=diag(det(var(X))^(1/p),nrow=p)
 for (rs in 1:RS) 
 {
 if ((rs==1) & (check!=1)) 
@@ -183,6 +274,8 @@ U=U/apply(U,1,sum)
 }
 D=matrix(0,nrow=n,ncol=k)
 H=matrix(0,nrow=k,ncol=p)
+F=array(0,c(p,p,k))
+Uout=1-apply(U,1,sum)
 U.old=U+1
 iter=0
 cputime=system.time(
@@ -196,13 +289,35 @@ U.old=U
 #F.old=F
 for (c in 1:k) 
 H[c,]=(t(U[,c])%*%X)/sum(U[,c])
+dd=rep(1,k)
+for (c in 1:k)
+{
+F[,,c]=matrix(0,nrow=p,ncol=p)
+for (i in 1:n)
+{
+F[,,c]=(U[i,c])*(X[i,]-H[c,])%*%t(X[i,]-H[c,] )+F[,,c] 
+}
+F[,,c]=F[,,c]/sum(U[,c])
+F[,,c]=(1-gam)*F[,,c]+gam*F0
+if (kappa(F[,,c])>10^15)
+{
+er=eigen(F[,,c])
+em=max(er$values)
+er$values[er$values<em/mcn]=em/mcn
+F[,,c]=er$vectors%*%diag(er$values,nrow=length(er$values))%*%solve(er$vectors)
+}
+dd[c]=det(F[,,c])
+F[,,c]=F[,,c]/((dd[c])^(1/p)*vp[c])
+}
 for (i in 1:n) 
 {
 for (c in 1:k) 
-{ 
-D[i,c]=D[i,c]=sum((X[i,]-H[c,])^2)
+{
+D[i,c]=(t(X[i,]-H[c,])%*%solve(F[,,c], tol=FALSE)%*%(X[i,]-H[c,]))
 }
 }
+# if (all(is.finite(D))==TRUE)
+# {
 for (i in 1:n)
 {
 if (min(D[i,])==0)
@@ -214,17 +329,30 @@ else
 {
 for (c in 1:k)
 {
-U[i,c]=(exp(-D[i,c]/ent))/sum(exp(-D[i,]/ent))
+U[i,c]=(exp(-D[i,c]/ent))/(sum(exp(-D[i,]/ent))+exp(-delta^2/ent)) 
 if (is.nan(U[i,c]))
-stop("Some membership degrees are NaN (Suggestion: run FKM.ent using standardized data)")
+stop("Some membership degrees are NaN (Suggestion: run FKM.gkb.ent.noise using standardized data)")
 if (U[i,c]<.Machine$double.eps)
 U[i,c]=.Machine$double.eps
 }
+Uout[i]=1-sum(U[i,])
 }
 }
+# if (all(is.finite(U))==FALSE)
+# U=U.old
+# Uout=1-apply(U,1,sum)
+# }
+# else
+# {
+# U=U.old
+# Uout=1-apply(U,1,sum)
+# D=D.old
+# F=F.old
+# H=H.old
+# }
 }
-})
-func=sum(U*D)+ent*sum(U*log(U));
+}) 
+func=sum(U*D)+ent*sum(U*log(U))+sum((Uout)*(delta^2))
 cput[rs]=cputime[1]
 value[rs]=func
 it[rs]=iter
@@ -243,11 +371,16 @@ rownames(H.opt)=paste("Clus",1:k,sep=" ")
 colnames(H.opt)=cn
 rownames(U.opt)=rn
 colnames(U.opt)=rownames(H.opt)
+dimnames(F.opt)[[1]]=cn
+dimnames(F.opt)[[2]]=dimnames(F.opt)[[1]]
+dimnames(F.opt)[[3]]=rownames(H.opt)
 names(value)=paste("Start",1:RS,sep=" ")
 names(cput)=names(value)
 names(it)=names(value)
 names(k)=c("Number of clusters")
 names(p)=c("Degree of fuzzy entropy")
+names(delta)=c("Noise distance")
+names(vp)=rownames(H.opt)
 if (stand!=1)
 stand=0
 names(stand)=c("Standardization (1=Yes, 0=No)")
@@ -255,7 +388,7 @@ clus=cl.memb(U.opt)
 out=list()
 out$U=U.opt
 out$H=H.opt
-out$F=NULL
+out$F=F.opt
 out$clus=clus
 out$medoid=NULL
 out$value=value
@@ -265,8 +398,8 @@ out$k=k
 out$m=NULL
 out$ent=ent
 out$b=NULL
-out$vp=NULL
-out$delta=NULL
+out$vp=vp
+out$delta=delta
 out$stand=stand
 out$Xca=X
 out$X=Xraw

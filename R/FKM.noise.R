@@ -1,5 +1,5 @@
 FKM.noise <-
-function (X, k, m, delta, RS, stand, startU, conv, maxit)
+function (X, k, m, delta, RS, stand, startU, conv, maxit, seed)
 {
 if (missing(X))
 stop("The data set must be given")
@@ -139,12 +139,30 @@ maxit=1e+6
 if (maxit%%ceiling(maxit)>0)
 {
 cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
-maxit=1e+6
+maxit=ceiling(maxit)
 } 
 if (missing(stand))
 stand=0
 if (!is.numeric(stand)) 
 stand=0
+if (missing(seed))
+set.seed(NULL)
+else
+{
+if (!is.numeric(seed)) 
+{
+cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
+set.seed(NULL)
+}else
+{
+if (seed%%ceiling(seed)>0)
+{
+cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
+set.seed(ceiling(seed))
+}else
+set.seed(seed)
+}
+}
 Xraw=X
 rownames(Xraw)=rownames(X)
 colnames(Xraw)=colnames(X)
@@ -201,7 +219,6 @@ if ((rs==1) & (check!=1))
 U=startU
 else
 {
-set.seed(rs)
 U=matrix(runif(n*k,0,1), nrow=n, ncol=k)
 U=U/apply(U,1,sum)
 }
@@ -249,11 +266,14 @@ func=sum((U^m)*D)+sum((Uout^m)*(delta^2))
 cput[rs]=cputime[1]
 value[rs]=func
 it[rs]=iter
+if (is.finite(func))
+{
 if (func<func.opt) 
 {
 U.opt=U
 H.opt=H
 func.opt=func
+}
 }
 }
 rownames(H.opt)=paste("Clus",1:k,sep=" ")

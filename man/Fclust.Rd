@@ -14,7 +14,7 @@
  \item{clust}{Object of class \code{fclust}}
 } 
 \author{Paolo Giordani, Maria Brigida Ferraro}
-\seealso{\code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{FKM}}, \code{\link{FKM.ent}}, \code{\link{FKM.gk}}, \code{\link{FKM.gk.ent}}, \code{\link{FKM.med}}, \code{\link{FKM.pf}}, \code{\link{FKM.noise}}, \code{\link{FKM.ent.noise}}, \code{\link{FKM.gk.noise}}, \code{\link{FKM.gk.ent.noise}}, \code{\link{FKM.med.noise}}, \code{\link{FKM.pf.noise}}, \code{\link{Fclust.index}}, \code{\link{Mc}}}
+\seealso{\code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{FKM}}, \code{\link{FKM.ent}}, \code{\link{FKM.gk}}, \code{\link{FKM.gk.ent}}, \code{\link{FKM.gkb}}, \code{\link{FKM.gkb.ent}}, \code{\link{FKM.med}}, \code{\link{FKM.pf}}, \code{\link{FKM.noise}}, \code{\link{FKM.ent.noise}}, \code{\link{FKM.gk.noise}}, \code{\link{FKM.gkb.ent.noise}},  \code{\link{FKM.gkb.noise}}, \code{\link{FKM.gk.ent.noise}},\code{\link{FKM.med.noise}}, \code{\link{FKM.pf.noise}}, \code{\link{Fclust.index}}, \code{\link{Mc}}}
 \examples{
 \dontrun{
 ## McDonald's data

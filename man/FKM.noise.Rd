@@ -6,7 +6,7 @@
  \cr The noise cluster is an additional cluster (with respect to the \emph{k} standard clusters) such that objects recognized to be outliers are assigned to it with high membership degrees.
 } 
 \usage{ 
- FKM.noise (X, k, m, delta, RS, stand, startU, conv, maxit)
+ FKM.noise (X, k, m, delta, RS, stand, startU, conv, maxit, seed)
 }
 \arguments{
  \item{X}{Matrix or data.frame}
@@ -18,6 +18,7 @@
  \item{startU}{Rational starting point for the membership degree matrix \code{U} (default: no rational start)}
  \item{conv}{Convergence criterion (default: 1e-9)}
  \item{maxit}{Maximum number of iterations (default: 1e+6)}
+ \item{seed}{Seed value for random number generation (default: NULL)}
 }
 \value{
  Object of class \code{fclust}, which is a list with the following components:
@@ -35,6 +36,8 @@
  \item{b}{Parameter of the polynomial fuzzifier (\code{NULL} for \code{FKM.noise})}
  \item{vp}{Volume parameter (\code{NULL} for \code{FKM.noise})} 
  \item{delta}{Noise distance}
+ \item{gam}{Weighting parameter for the fuzzy covariance matrices (\code{NULL} for \code{FKM.noise})}
+ \item{mcn}{Maximum condition number for the fuzzy covariance matrices (\code{NULL} for \code{FKM.noise})}
  \item{stand}{Standardization (Yes if \code{stand=1}, No if \code{stand=0})}
  \item{Xca}{Data used in the clustering algorithm (standardized data if \code{stand=1})}
  \item{X}{Raw data}

@@ -1,5 +1,5 @@
 FKM.gk.ent.noise <-
-function (X, k, ent, vp, delta, RS, stand, startU, conv, maxit)
+function (X, k, ent, vp, delta, RS, stand, startU, conv, maxit, seed)
 {
 if (missing(X))
 stop("The data set must be given")
@@ -161,8 +161,26 @@ maxit=1e+6
 if (maxit%%ceiling(maxit)>0)
 {
 cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
-maxit=1e+6
+maxit=ceiling(maxit)
 } 
+if (missing(seed))
+set.seed(NULL)
+else
+{
+if (!is.numeric(seed)) 
+{
+cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
+set.seed(NULL)
+}else
+{
+if (seed%%ceiling(seed)>0)
+{
+cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
+set.seed(ceiling(seed))
+}else
+set.seed(seed)
+}
+}
 Xraw=X
 rownames(Xraw)=rownames(X)
 colnames(Xraw)=colnames(X)
@@ -223,7 +241,6 @@ if ((rs==1) & (check!=1))
 U=startU
 else
 {
-set.seed(rs)
 U=matrix(runif(n*k,0,1), nrow=n, ncol=k)
 U=U/apply(U,1,sum)
 }
@@ -267,13 +284,21 @@ if (all(is.finite(D))==TRUE)
 {
 for (i in 1:n)
 {
+if (min(D[i,])==0)
+{
+U[i,]=rep(0,k)
+U[i,which.min(D[i,])]=1
+}
+else
+{ 
 for (c in 1:k)
 {
 U[i,c]=(exp(-D[i,c]/ent))/(sum(exp(-D[i,]/ent))+exp(-delta^2/ent)) 
-#if (is.nan(U[i,c]))
-#stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent using standardized data)")
+if (is.nan(U[i,c]))
+stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent.noise using standardized data)")
 if (U[i,c]<.Machine$double.eps)
 U[i,c]=.Machine$double.eps
+}
 }
 Uout[i]=1-sum(U[i,])
 }
