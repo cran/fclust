@@ -1,6 +1,6 @@
 \name{FKM.gk.ent} 
 \alias{FKM.gk.ent}
-\title{Gustafson and Kessel - like fuzzy \emph{k}-means with entropy regularization}
+\title{Gustafson and Kessel - like fuzzy k-means with entropy regularization}
 \description{
  Performs the Gustafson and Kessel - like fuzzy \emph{k}-means clustering algorithm with entropy regularization. 
  \cr Differently from fuzzy \emph{k}-means, it is able to discover non-spherical clusters.
@@ -9,16 +9,18 @@
  the power of \emph{m} as is for the fuzzy k-means).
 } 
 \usage{ 
- FKM.gk.ent (X, k, ent, vp, RS, stand, startU, conv, maxit, seed)
+ FKM.gk.ent (X, k, ent, vp, RS, stand, startU, index, alpha, conv, maxit, seed)
 }
 \arguments{
  \item{X}{Matrix or data.frame}
- \item{k}{Number of clusters (default: 2)}
+ \item{k}{An integer value or vector specifying the number of clusters for which the \code{index} is to be calculated (default: 2:6)}
  \item{ent}{Degree of fuzzy entropy (default: 1)}
  \item{vp}{Volume parameter (default: rep(1,k))}
  \item{RS}{Number of (random) starts (default: 1)}
  \item{stand}{Standardization: if \code{stand=1}, the clustering algorithm is run using standardized data (default: no standardization)}
  \item{startU}{Rational starting point for the membership degree matrix \code{U} (default: no rational start)}
+\item{index}{Cluster validity index to select the number of clusters: \code{PC} (partition coefficient), \code{PE} (partition entropy), \code{MPC} (modified partition coefficient), \code{SIL} (silhouette), \code{SIL.F} (fuzzy silhouette), \code{XB} (Xie and Beni) (default: "SIL.F")}
+ \item{alpha}{Weighting coefficient for the fuzzy silhouette index \code{SIL.F} (default: 1)}
  \item{conv}{Convergence criterion (default: 1e-9)}
  \item{maxit}{Maximum number of iterations (default: 1e+6)}
  \item{seed}{Seed value for random number generation (default: NULL)}
@@ -31,19 +33,20 @@
  \item{clus}{Matrix containing the indices of the clusters where the objects are assigned (column 1) and the associated membership degrees (column 2)}
  \item{medoid}{Vector containing the indices of the medoid objects (\code{NULL} for \code{FKM.gk.ent})}
  \item{value}{Vector containing the loss function values for the \code{RS} starts}
- \item{cput}{Vector containing the computational times (user times) for the \code{RS} starts}
+ \item{criterion}{Vector containing the values of clustering index}
  \item{iter}{Vector containing the numbers of iterations for the \code{RS} starts}
  \item{k}{Number of clusters}
  \item{m}{Parameter of fuzziness (\code{NULL} for \code{FKM.gk.ent})}
  \item{ent}{Degree of fuzzy entropy}
  \item{b}{Parameter of the polynomial fuzzifier (\code{NULL} for \code{FKM.gk.ent})}
- \item{vp}{Volume parameter} 
+ \item{vp}{Volume parameter (default: \code{rep(1,max(k)}). If \code{k} is a vector, for each group the first \code{k} element of \code{vp}are considered.}
  \item{delta}{Noise distance (\code{NULL} for \code{FKM.gk.ent})}
  \item{gam}{Weighting parameter for the fuzzy covariance matrices (\code{NULL} for \code{FKM.gk.ent})}
  \item{mcn}{Maximum condition number for the fuzzy covariance matrices (\code{NULL} for \code{FKM.gk.ent})}
  \item{stand}{Standardization (Yes if \code{stand=1}, No if \code{stand=0})}
  \item{Xca}{Data used in the clustering algorithm (standardized data if \code{stand=1})}
  \item{X}{Raw data}
+  \item{D}{Dissimilarity matrix (\code{NULL} for \code{FKM.gk.ent})}
  \item{call}{Matched call}
 } 
 \details{
@@ -57,14 +60,19 @@
 \references{
  Ferraro M.B., Giordani P., 2013. A new fuzzy clustering algorithm with entropy regularization. Proceedings of the meeting on Classification and Data Analysis (CLADAG).
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{FKM.gkb.ent}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{unemployment}}}
 \examples{
 ## unemployment data
 data(unemployment)
-## Gustafson and Kessel-like fuzzy k-means with entropy regularization
+## Gustafson and Kessel-like fuzzy k-means with entropy regularization, 
+##fixing the number of clusters
+clust=FKM.gk.ent(unemployment,k=3,ent=0.2,RS=10,stand=1)
 \dontrun{
-## It may take more than a few seconds
-clust=FKM.gk.ent(unemployment,k=3,ent=0.2,RS=10,stand=1)}
+## Gustafson and Kessel-like fuzzy k-means with entropy regularization,
+##selecting the number of clusters
+clust=FKM.gk.ent(unemployment,k=2:6,ent=0.2,RS=10,stand=1)
 }
+}
+
 \keyword{multivariate}

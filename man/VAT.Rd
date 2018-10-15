@@ -1,8 +1,8 @@
-\name{VAT} 
+\name{VAT}
 \alias{VAT}
 \title{Visual Assessment of (Cluster) Tendency}
-\description{Digital intensity image to inspect the number of clusters} 
-\usage{ 
+\description{Digital intensity image to inspect the number of clusters}
+\usage{
  VAT (Xca)
 }
 \arguments{
@@ -16,7 +16,7 @@ Bezdek J.C., Hathaway, R.J., 2002. VAT: a tool for visual assessment of (cluster
 \cr Hathaway R.J., Bezdek J.C., 2003. Visual cluster validity for prototype generator clustering models. Pattern Recognition Letters, 24, 1563?1569.
 \cr Huband J.M., Bezdek J.C., 2008. VCV2 ? Visual Cluster Validity. In Zurada J.M., Yen G.G., Wang J. (Eds.): Lecture Notes in Computer Science, 5050, pp. 293?308. Springer-Verlag, Berlin Heidelberg.
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{plot.fclust}}, \code{\link{VIFCR}}, \code{\link{VCV}}, \code{\link{VCV2}}, \code{\link{Mc}}}
 \examples{
 ## McDonald's data

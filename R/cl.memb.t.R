@@ -1,5 +1,4 @@
-cl.memb.t <-
-function(U,t)
+cl.memb.t <- function(U,t)
 {
 if (missing(U))
 stop("The membership degree matrix U must be given")
@@ -8,7 +7,7 @@ stop("The membership degree matrix U is empty")
 U=as.matrix(U)
 if (any(is.na(U)))
 stop("The membership degree matrix U must not contain NA values")
-if (!is.numeric(U)) 
+if (!is.numeric(U))
 stop("The membership degree matrix U must be numeric")
 if (missing(t))
 t=0

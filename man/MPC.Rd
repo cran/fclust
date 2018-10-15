@@ -1,10 +1,10 @@
-\name{MPC} 
+\name{MPC}
 \alias{MPC}
 \title{Modified partition coefficient}
 \description{
  Produces the modified partition coefficient index. The optimal number of cluster \emph{k} is achieved when the index value is maximized.
-} 
-\usage{ 
+}
+\usage{
  MPC (U)
 }
 \arguments{
@@ -12,11 +12,11 @@
 }
 \value{
  \item{mpc}{Value of the modified partition coefficient index}
-} 
+}
 \references{
  Dave' R.N., 1996. Validating fuzzy partitions obtained through \emph{c}-shells clustering. Pattern Recognition Letters, 17, 613-623.
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{PC}}, \code{\link{PE}}, \code{\link{SIL}}, \code{\link{SIL.F}}, \code{\link{XB}}, \code{\link{Fclust}}, \code{\link{Mc}}}
 \examples{
 ## McDonald's data

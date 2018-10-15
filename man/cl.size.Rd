@@ -1,10 +1,10 @@
-\name{cl.size} 
+\name{cl.size}
 \alias{cl.size}
 \title{Cluster size}
 \description{
  Produces the sizes of the clusters.
-} 
-\usage{ 
+}
+\usage{
  cl.size (U)
 }
 \arguments{
@@ -12,11 +12,11 @@
 }
 \value{
  \item{clus.size}{Vector containing the sizes of the clusters}
-} 
+}
 \details{
  An object is assigned to a cluster according to the maximal membership degree.
-} 
-\author{Paolo Giordani, Maria Brigida Ferraro}
+}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{cl.size.H}}}
 \examples{
 n=20

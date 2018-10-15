@@ -1,5 +1,4 @@
-VCV2 <-
-function (Xca, U, which)
+VCV2 <- function (Xca, U, which)
 {
 if (missing(Xca))
 stop("The data set must be given")
@@ -49,7 +48,7 @@ if (!is.numeric(which))
 {
   which=c(1,2)
   cat("which must contain 1 and/or 2: the default value which=c(1,2) will be used ",fill=TRUE)
-}  
+}
 else
 {
   if (all(is.wholenumber(which))==FALSE)
@@ -68,14 +67,14 @@ show[which] <- TRUE
 # VAT image
 if (show[1])
 {
-  if (length(which)==2)  
+  if (length(which)==2)
     devAskNewPage(ask=TRUE)
   VAT(Xca)
 }
 # VCV2 image
 if (show[2])
 {
-if (length(which)==2)  
+if (length(which)==2)
   devAskNewPage(ask=TRUE)
 setI1=rep(0,n)
 P=c()
@@ -94,6 +93,6 @@ P[i]=wm
 Ustar=U[P,rev(P)]
 image(Ustar,col=grey(seq(0, 1, length = 256)),xlab="",ylab="",xaxt="n",yaxt="n",main="VCV2")
 }
-if (length(which)==2)  
+if (length(which)==2)
   devAskNewPage(ask=FALSE)
 }

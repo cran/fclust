@@ -1,15 +1,16 @@
-\name{SIL} 
+\name{SIL}
 \alias{SIL}
 \title{Silhouette index}
 \description{
  Produces the silhouette index. The optimal number of cluster \emph{k} is achieved when the index value is maximized.
-} 
-\usage{ 
- SIL (Xca, U)
+}
+\usage{
+ SIL (Xca, U, distance)
 }
 \arguments{
  \item{Xca}{Matrix or data.frame}
  \item{U}{Membership degree matrix}
+ \item{distance}{If \code{distance=TRUE}, \code{Xca} is assumed to be a distance matrix (default: FALSE)}
 }
 \value{
  \item{sil.obj}{Vector containing the silhouette indices for all the objects}
@@ -17,11 +18,12 @@
 }
 \details{
  \code{Xca} should contain the same dataset used in the clustering algorithm, i.e., if the clustering algorithm is run using standardized data, then \code{SIL} should be computed using the same standardized data.
-}  
-\references{
- Kaufman L., Rousseeuw P.J., 1990. Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York. 
+ \cr Set \code{distance=TRUE} if \code{Xca} is a distance matrix.
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\references{
+ Kaufman L., Rousseeuw P.J., 1990. Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York.
+}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{PC}}, \code{\link{PE}}, \code{\link{MPC}}, \code{\link{SIL.F}}, \code{\link{XB}}, \code{\link{Fclust}}, \code{\link{Mc}}}
 \examples{
 ## McDonald's data

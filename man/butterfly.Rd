@@ -8,11 +8,11 @@
 \usage{data(butterfly)}
 \format{
  A matrix with 17 rows and 2 columns.
-} 
+}
 \details{
-The butterfly data motivate the need for the fuzzy approach to clustering. 
+The butterfly data motivate the need for the fuzzy approach to clustering.
 \cr The presence of outliers can be handled using fuzzy \emph{k}-means with noise cluster. In fact, differently from fuzzy \emph{k}-means, the membership degrees of the outliers are low for all the clusters.}
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{Fclust}}, \code{\link{FKM}}, \code{\link{FKM.noise}}}
 \examples{
 ## butterfly data

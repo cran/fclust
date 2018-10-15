@@ -1,29 +1,33 @@
-summary.fclust <-
-function (object,...)  
+summary.fclust <- function (object,...)
 {
-fclust.obj=object  
+fclust.obj=object
 if ((missing(fclust.obj)) || (!inherits(fclust.obj, "fclust")))
 stop("An object of class fclust must be given")
-X=fclust.obj$X
-U=fclust.obj$U 
+X = if(is.null(fclust.obj$X)){fclust.obj$D}else{fclust.obj$X}
+U=fclust.obj$U
 k=fclust.obj$k
 H=fclust.obj$H
+crit = fclust.obj$criterion
 n=nrow(X)
 info.U=cl.memb(U)
 cat("\n Fuzzy clustering object of class 'fclust' ")
 cat("\n ")
-cat("\n Number of objects: \n", n); 
+cat("\n Number of objects: \n", n);
 cat("\n ")
-cat("\n Number of clusters: \n", k); 
+cat("\n Number of clusters: \n", k);
 cat("\n ")
-cat("\n Cluster sizes: \n"); 
+cat("\n Cluster sizes: \n");
 print(cl.size(U))
+cat("\n ")
+cat("\n Clustering index values: \n")
+print(crit)
+cat("\n ")
 cat("\n Closest hard clustering partition: \n")
 print(info.U[,1])
 cat("\n Cluster memberships:")
 cat("\n ")
 for (c in 1:k)
-{  
+{
 cat(" Clus", c)
 objs=rownames(info.U[info.U[,1]==c,])
 if (length(objs)<51)
@@ -44,7 +48,7 @@ if (noua>0)
 {
 cat("\n Objects with unclear assignment: \n")
 print(rownames(info.U[info.U[,2]<0.5,]))
-cat("\n Cluster sizes (without unclear assignments): \n") 
+cat("\n Cluster sizes (without unclear assignments): \n")
 print(cl.size.H(U))
 }
 cat("\n Membership degree matrix (rounded): \n")
@@ -56,7 +60,7 @@ unasU=minU
 maxU=minU
 meanU=minU
 for (c in 1:k)
-{  
+{
 minU[c]=round(min(info.U[info.U[,1]==c,2]),2)
 maxU[c]=round(max(info.U[info.U[,1]==c,2]),2)
 meanU[c]=round(mean(info.U[info.U[,1]==c,2]),2)
@@ -65,8 +69,9 @@ unasU[c]=sum(info.U[info.U[,1]==c,2]<0.5)
 summU=cbind(cl.size(U),minU,maxU,meanU,unasU)
 colnames(summU)=c("Cl.size", "Min.memb.deg.", "Max.memb.deg.", "Av.memb.deg.", "N.uncl.assignm.")
 print(summU)
+if(!is.null(H)){
 cat("\n Euclidean distance matrix for the prototypes (rounded): \n")
-print(round(dist(H),2))
+print(round(dist(H),2))}
 cat("\n Available components: \n")
 print(names(fclust.obj))
 cat("\n ")

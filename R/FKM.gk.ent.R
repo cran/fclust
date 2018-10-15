@@ -1,327 +1,459 @@
-FKM.gk.ent <-
-function (X, k, ent, vp, RS, stand, startU, conv, maxit, seed)
-{
-if (missing(X))
-stop("The data set must be given")
-if (is.null(X))
-stop("The data set X is empty")
-n=nrow(X)
-p=ncol(X)
-if (is.null(rownames(X)))
-rn=paste("Obj",1:n,sep=" ")
-else
-rn=rownames(X)
-if (is.null(colnames(X)))
-cn=paste("Var",1:p,sep=" ")
-else
-cn=colnames(X)
-X=as.matrix(X)
-if (any(is.na(X)))
-stop("The data set X must not contain NA values")
-if (!is.numeric(X)) 
-stop("The data set X is not a numeric data.frame or matrix")
-if ((missing(startU)) || (is.null(startU)))
-{
-check=1
-if (missing(k))
-{
-k=2
-cat("The default value k=2 has been set ",fill=TRUE)
-}
-if (!is.numeric(k)) 
-{
-k=2
-cat("The number of clusters k is not numeric: the default value k=2 will be used ",fill=TRUE)
-}
-if ((k>ceiling(n/2)) || (k<2))
-{
-k=2
-cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 will be used ",fill=TRUE)
-}
-if (k%%ceiling(k)>0)  
-{
-k=ceiling(k)
-cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
-}
-}
-else
-{
-startU=as.matrix(startU)
-ns=nrow(startU)
-k=ncol(startU)
-check=0
-if (any(is.na(startU)))
-{
-k=2
-cat("The rational start must not contain NA values: the default value k=2 and a random start will be used ",fill=TRUE)
-check=1
-}
-if (!is.numeric(startU)) 
-{
-k=2
-cat("The rational start is not a numeric data.frame or matrix: the default value k=2 and a random start will be used ",fill=TRUE)
-check=1
-}
-if ((k>ceiling(n/2)) || (k<2))
-{
-k=2
-cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 and a random start will be used ",fill=TRUE)
-check=1
-}
-if ((ns!=n) && (check=0))
-{
-cat("The number of rows of startU is different from that of X: k=ncol(startU) and a random start will be used ",fill=TRUE)
-check=1
-}
-if (any(apply(startU,1,sum)!=1))
-{
-startU=startU/apply(startU,1,sum)
-cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
-}
-}
-if (missing(ent))
-{
-ent=1
-}
-if (!is.numeric(ent)) 
-{
-ent=1
-cat("The degree of fuzzy entropy ent is not numeric: the default value ent=1 will be used ",fill=TRUE)
-}
-if (ent<=0) 
-{
-ent=1
-cat("The degree of fuzzy entropy ent must be >0: the default value ent=1 will be used ",fill=TRUE)
-}
-if (missing(vp))
-vp=rep(1,k)
-if (!is.numeric(vp)) 
-{
-cat("The volume parameter vp is not numeric: the default value vp=rep(1,k) will be used ",fill=TRUE)
-vp=rep(1,k)
-}
-if (!is.vector(vp)) 
-{
-cat("The volume parameter vp is not a vector: the default value vp=rep(1,k) will be used ",fill=TRUE)
-vp=rep(1,k)
-}
-if (min(vp)<=0) 
-{
-cat("The volume parameter vp must be >0: the default value vp=rep(1,k) will be used ",fill=TRUE)
-vp=rep(1,k)
-}
-if (length(vp)!=k) 
-{
-cat("The number of elements of vp is different from k: the default value vp=rep(1,k) will be used ",fill=TRUE)
-vp=rep(1,k)
-}
-if (missing(RS))
-{
-RS=1
-}
-if (!is.numeric(RS)) 
-{
-cat("The number of starts RS is not numeric: the default value RS=1 will be used ",fill=TRUE)
-RS=1
-}
-if (RS<1)
-{
-cat("The number of starts RS must be an integer >=1: the default value RS=1 will be used ",fill=TRUE)
-RS=1
-} 
-if (RS%%ceiling(RS)>0)
-{
-cat("The number of starts RS  must be an integer >=1: the value ceiling(RS) will be used ",fill=TRUE)
-RS=ceiling(RS)
-} 
-if (missing(conv))
-conv=1e-9
-if (!is.numeric(conv)) 
-{
-cat("The convergence criterion conv is not numeric: the default value conv=1e-9 will be used ",fill=TRUE)
-conv=1e-9
-}
-if (conv<=0) 
-{
-cat("The convergence criterion conv must be a (small) value >0: the default value conv=1e-9 will be used ",fill=TRUE)
-conv=1e-9
-} 
-if (missing(maxit))
-maxit=1e+6
-if (!is.numeric(maxit)) 
-{
-cat("The maximum number of iterations maxit is not numeric: the default value maxit=1e+6 will be used ",fill=TRUE)
-maxit=1e+6
-}
-if (maxit<=0)
-{
-cat("The maximum number of iterations maxit must be an integer >0: the default value maxit=1e+6 will be used ",fill=TRUE)
-maxit=1e+6
-} 
-if (maxit%%ceiling(maxit)>0)
-{
-cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
-maxit=ceiling(maxit)
-}
-if (missing(seed))
-set.seed(NULL)
-else
-{
-if (!is.numeric(seed)) 
-{
-cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
-set.seed(NULL)
-}else
-{
-if (seed%%ceiling(seed)>0)
-{
-cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
-set.seed(ceiling(seed))
-}else
-set.seed(seed)
-}
-} 
-Xraw=X
-rownames(Xraw)=rownames(X)
-colnames(Xraw)=colnames(X)
-if (missing(stand))
-stand=0
-if (!is.numeric(stand)) 
-stand=0
-if (stand==1)
-X=scale(X,center=TRUE,scale=TRUE)[,]
-value=vector(length(RS),mode="numeric")
-cput=vector(length(RS), mode="numeric")
-it=vector(length(RS), mode="numeric")
-func.opt=10^10*sum(X^2)
-for (rs in 1:RS) 
-{
-if ((rs==1) & (check!=1)) 
-U=startU
-else
-{
-U=matrix(runif(n*k,0,1), nrow=n, ncol=k)
-U=U/apply(U,1,sum)
-}
-D=matrix(0,nrow=n,ncol=k)
-H=matrix(0,nrow=k,ncol=p)
-F=array(0,c(p,p,k))
-U.old=U+1
-iter=0
-cputime=system.time(
-{
-while ((sum(abs(U.old-U))>conv) && (iter<maxit))
-{
-iter=iter+1
-D.old=D
-U.old=U
-H.old=H
-F.old=F
-for (c in 1:k) 
-H[c,]=(t(U[,c])%*%X)/sum(U[,c])
-dd=rep(1,k)
-for (c in 1:k)
-{
-F[,,c]=matrix(0,nrow=p,ncol=p)
-for (i in 1:n)
-{
-F[,,c]=(U[i,c])*(X[i,]-H[c,])%*%t(X[i,]-H[c,] )+F[,,c] 
-}
-F[,,c]=F[,,c]/sum(U[,c])
-dd[c]=det(F[,,c])
-F[,,c]=F[,,c]/((dd[c])^(1/p)*vp[c])
-}
-for (i in 1:n) 
-{
-for (c in 1:k) 
-{
-D[i,c]=(t(X[i,]-H[c,])%*%solve(F[,,c], tol=FALSE)%*%(X[i,]-H[c,]))
-}
-}
-if (all(is.finite(D))==TRUE)
-{
-for (i in 1:n)
-{
-if (min(D[i,])==0)
-{
-U[i,]=rep(0,k)
-U[i,which.min(D[i,])]=1
-}
-else
-{ 
-for (c in 1:k)
-{
-U[i,c]=(exp(-D[i,c]/ent))/sum(exp(-D[i,]/ent))
-if (is.nan(U[i,c]))
-stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent using standardized data)")
-if (U[i,c]<.Machine$double.eps)
-U[i,c]=.Machine$double.eps
-}
-}
-}
-if (all(is.finite(U))==FALSE)
-U=U.old 
-}
-else
-{
- U=U.old
- D=D.old
- F=F.old
- H=H.old
-}
-}
-}) 
-func=sum(U*D)+ent*sum(U*log(U))
-cput[rs]=cputime[1]
-value[rs]=func
-it[rs]=iter
-if (is.finite(func))
-{
-if (func<func.opt) 
-{ 
-U.opt=U
-H.opt=H 
-F.opt=F
-func.opt=func
-}
-}
-}
-rownames(H.opt)=paste("Clus",1:k,sep=" ")
-colnames(H.opt)=cn
-rownames(U.opt)=rn
-colnames(U.opt)=rownames(H.opt)
-dimnames(F.opt)[[1]]=cn
-dimnames(F.opt)[[2]]=dimnames(F.opt)[[1]]
-dimnames(F.opt)[[3]]=rownames(H.opt)
-names(value)=paste("Start",1:RS,sep=" ")
-names(cput)=names(value)
-names(it)=names(value)
-names(k)=c("Number of clusters")
-names(p)=c("Degree of fuzzy entropy")
-names(vp)=rownames(H.opt)
-if (stand!=1)
-stand=0
-names(stand)=c("Standardization (1=Yes, 0=No)")
-clus=cl.memb(U.opt)
-out=list()
-out$U=U.opt
-out$H=H.opt
-out$F=F.opt
-out$clus=clus
-out$medoid=NULL
-out$value=value
-out$cput=cput
-out$iter=it
-out$k=k
-out$m=NULL
-out$ent=ent
-out$b=NULL
-out$vp=vp
-out$delta=NULL
-out$stand=stand
-out$Xca=X
-out$X=Xraw
-out$call=match.call()
-class(out)=c("fclust")
-return(out)
-}
+FKM.gk.ent <- function (X, k, ent, vp, RS, stand, startU, index,alpha,conv, maxit, seed)
+  {
+    if (missing(X))
+      stop("The data set must be given")
+    if (is.null(X))
+      stop("The data set X is empty")
+    X=data.matrix(X)
+    n=nrow(X)
+    p=ncol(X)
+
+    if(p==1){
+      stop("Dataset X must contain more than one dimension")
+    }
+    if (is.null(rownames(X)))
+      rn=paste("Obj",1:n,sep=" ")
+    else
+      rn=rownames(X)
+    if (is.null(colnames(X)))
+      cn=paste("Var",1:p,sep=" ")
+    else
+      cn=colnames(X)
+    if (any(is.na(X)))
+      stop("The data set X must not contain NA values")
+    if (!is.numeric(X))
+      stop("The data set X is not a numeric data.frame or matrix")
+
+
+    if ((missing(startU)) || (is.null(startU)))
+    {
+      check=1
+      checkMiss = missing(k) || is.null(k) || !is.numeric(k)
+      if (checkMiss)
+      {
+        k= 2:6
+        cat("The default value k=2:6 has been set ",fill=TRUE)
+      }
+      nk <- length(k)
+      if(nk != 1){
+
+        if(!checkMiss){
+          checkK = any(k <= 1) | any((k-as.integer(k)) != 0)
+          if(checkK)
+          {
+            k  = 2:6
+            nk <- length(k)
+            cat("The number of clusters k must be greter than 1, integer and numeric: the default value k=2:6 will be used ",fill=TRUE)
+
+          }else{
+
+            k <- sort(unique(k))
+            nk <- length(k)
+
+          }
+        }
+
+        if (missing(index))
+        {
+          index = "SIL.F"
+          cat("The default index SIL.F has been set ",fill=TRUE)
+        }else{
+          if(length(index) != 1)
+          {
+            index = "SIL.F"
+            cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
+          }else{
+
+            if(all(index!=c("PC","PE","MPC","SIL","SIL.F","XB"))){
+              index = "SIL.F"
+              cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
+
+            }
+          }
+
+        }
+        if(index == "SIL.F"){
+          if (missing(alpha))
+          {
+            alpha=1
+            cat("The default value alpha=1 has been set for computing SIL.F ",fill=TRUE)
+          }else{
+            if (!is.numeric(alpha))
+            {
+              alpha=1
+              cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+            }
+            if (alpha<0)
+            {
+              alpha=1
+              cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+            }
+          }
+        }else{
+          alpha = 1
+        }
+      }else{
+        nk <- 1
+        if (missing(index))
+        {
+          index = "SIL.F"
+        }else{
+          if(length(index) != 1)
+          {
+            index = "SIL.F"
+            cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
+          }else{
+
+            if(!any(index==c("PC","PE","MPC","SIL","SIL.F","XB"))){
+              index = "SIL.F"
+              cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
+
+            }
+          }
+        }
+
+        if(index == "SIL.F"){
+          if (missing(alpha))
+          {
+            alpha=1
+          }else{
+            if (!is.numeric(alpha))
+            {
+              alpha=1
+              cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+            }
+            if (alpha<0)
+            {
+              alpha=1
+              cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+            }
+          }
+        }else{
+          alpha = 1
+        }
+
+
+        if (!is.numeric(k))
+        {
+          k=2
+          cat("The number of clusters k is not numeric: the default value k=2 will be used ",fill=TRUE)
+        }
+        if ((k>ceiling(n/2)) || (k<2))
+        {
+          k=2
+          cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 will be used ",fill=TRUE)
+        }
+        if (k%%ceiling(k)>0)
+        {
+          k=ceiling(k)
+          cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
+        }
+      }
+    }else
+    {
+      startU=as.matrix(startU)
+      ns=nrow(startU)
+      k=ncol(startU)
+      check=0
+      nk = 1
+      if (any(is.na(startU)))
+      {
+        k=2
+        cat("The rational start must not contain NA values: the default value k=2 and a random start will be used ",fill=TRUE)
+        check=1
+      }
+      if (!is.numeric(startU))
+      {
+        k=2
+        cat("The rational start is not a numeric data.frame or matrix: the default value k=2 and a random start will be used ",fill=TRUE)
+        check=1
+      }
+      if ((k>ceiling(n/2)) || (k<2))
+      {
+        k=2
+        cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 and a random start will be used ",fill=TRUE)
+        check=1
+      }
+      if ((ns!=n) && (check=0))
+      {
+        cat("The number of rows of startU is different from that of X: k=ncol(startU) and a random start will be used ",fill=TRUE)
+        check=1
+      }
+      if (any(apply(startU,1,sum)!=1))
+      {
+        startU=startU/apply(startU,1,sum)
+        cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
+      }
+      if (missing(index))
+      {
+        index = "SIL.F"
+      }else{
+        if(length(index) != 1)
+        {
+          index = "SIL.F"
+          cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
+        }else{
+
+          if(!any(index==c("PC","PE","MPC","SIL","SIL.F","XB"))){
+            index = "SIL.F"
+            cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
+
+          }
+        }
+      }
+
+      if(index == "SIL.F"){
+        if (missing(alpha))
+        {
+          alpha=1
+        }else{
+          if (!is.numeric(alpha))
+          {
+            alpha=1
+            cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+          }
+          if (alpha<0)
+          {
+            alpha=1
+            cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
+          }
+        }
+      }else{
+        alpha = 1
+      }
+    }
+
+    if (missing(ent))
+    {
+      ent=1
+    }
+    if(length(ent) != 1){
+      ent = 1
+      cat("TThe degree of fuzzy entropy ent must be a single value: the default value ent=1 will be used",fill=TRUE)
+
+    }
+    if (!is.numeric(ent))
+    {
+      ent=1
+      cat("The degree of fuzzy entropy ent is not numeric: the default value ent=1 will be used ",fill=TRUE)
+    }
+
+    if (ent<=0)
+    {
+      ent=1
+      cat("The degree of fuzzy entropy ent must be >0: the default value ent=1 will be used ",fill=TRUE)
+    }
+
+    if (missing(vp))
+    {if(nk > 1){
+      vp = rep(1,max(k))
+    }else{
+      vp=rep(1,k)
+    }
+    }
+    if (!is.numeric(vp))
+    {
+      if(nk > 1){
+        cat("The volume parameter vp is not numeric: the default value vp=rep(1,max(k)) will be used ",fill=TRUE)
+        vp = rep(1,max(k))
+      }else{
+        vp=rep(1,k)
+        cat("The volume parameter vp is not numeric: the default value vp=rep(1,k) will be used ",fill=TRUE)
+      }
+    }
+    if (!is.vector(vp))
+    {
+      if(nk > 1){
+        cat("The volume parameter vp is not a vector: the default value vp=rep(1,max(k)) will be used ",fill=TRUE)
+        vp = rep(1,max(k))
+      }else{
+        vp=rep(1,k)
+        cat("The volume parameter vp is not a vector: the default value vp=rep(1,k) will be used ",fill=TRUE)
+      }
+    }
+    if (min(vp)<=0)
+    {
+      if(nk > 1){
+        cat("The volume parameter vp must be >0: the default value vp=rep(1,max(k)) will be used ",fill=TRUE)
+        vp = rep(1,max(k))
+      }else{
+        vp=rep(1,k)
+        cat("The volume parameter vp must be >0: the default value vp=rep(1,k) will be used ",fill=TRUE)
+      }
+    }
+    if (length(vp)!=max(k))
+    {
+      if(nk > 1){
+        cat("The number of elements of vp is different from max(k): the default value vp=rep(1,k) will be used ",fill=TRUE)
+        vp = rep(1,max(k))
+      }else{
+        vp=rep(1,k)
+        cat("The number of elements of vp is different from k: the default value vp=rep(1,k) will be used ",fill=TRUE)
+      }
+    }
+    if (missing(RS))
+    {
+      RS=1
+    }
+    if (!is.numeric(RS))
+    {
+      cat("The number of starts RS is not numeric: the default value RS=1 will be used ",fill=TRUE)
+      RS=1
+    }
+    if (RS<1)
+    {
+      cat("The number of starts RS must be an integer >=1: the default value RS=1 will be used ",fill=TRUE)
+      RS=1
+    }
+    if (RS%%ceiling(RS)>0)
+    {
+      cat("The number of starts RS  must be an integer >=1: the value ceiling(RS) will be used ",fill=TRUE)
+      RS=ceiling(RS)
+    }
+    if (missing(conv))
+      conv=1e-9
+    if (!is.numeric(conv))
+    {
+      cat("The convergence criterion conv is not numeric: the default value conv=1e-9 will be used ",fill=TRUE)
+      conv=1e-9
+    }
+    if (conv<=0)
+    {
+      cat("The convergence criterion conv must be a (small) value >0: the default value conv=1e-9 will be used ",fill=TRUE)
+      conv=1e-9
+    }
+    if (missing(maxit))
+      maxit=1e+6
+    if (!is.numeric(maxit))
+    {
+      cat("The maximum number of iterations maxit is not numeric: the default value maxit=1e+6 will be used ",fill=TRUE)
+      maxit=1e+6
+    }
+    if (maxit<=0)
+    {
+      cat("The maximum number of iterations maxit must be an integer >0: the default value maxit=1e+6 will be used ",fill=TRUE)
+      maxit=1e+6
+    }
+    if (maxit%%ceiling(maxit)>0)
+    {
+      cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
+      maxit=ceiling(maxit)
+    }
+    if (missing(seed))
+      set.seed(NULL)
+    else
+    {
+      if (!is.numeric(seed))
+      {
+        cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
+        set.seed(NULL)
+      }else
+      {
+        if (seed%%ceiling(seed)>0)
+        {
+          cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
+          set.seed(ceiling(seed))
+        }else
+          set.seed(seed)
+      }
+    }
+
+    Xraw=X
+    rownames(Xraw)=rownames(X)
+    colnames(Xraw)=colnames(X)
+    if (missing(stand))
+      stand=0
+    if (!is.numeric(stand))
+      stand=0
+    if (stand==1)
+      X=scale(X,center=TRUE,scale=TRUE)[,]
+
+    crit.f <- rep(NA,nk)
+    crit = 0
+    for(c in 1:nk)
+    {
+
+    if ((check!=1))
+    {
+      comp = k[c]
+      main.temp <- mainFKM_gk_ent_U(data = X, ent = ent, index = index,
+                                    alpha = alpha,n = n, vp = vp[1:comp],p = p, k = k[c],
+                                    U = startU, conv = conv, maxit = maxit)
+      if(main.temp$warn == 1)
+      {
+        warning("At least one cluster covariance matrix seems to be singular. Change starting points or use FKM.gkb")
+      }
+    }else{
+      comp = k[c]
+      main.temp <- mainFKM_gk_ent(data = X, ent = ent, index = index,
+                                  alpha = alpha,n = n,vp = vp[1:comp] ,p = p, k = k[c],
+                                  rs = RS, conv = conv, maxit = maxit)
+      if(main.temp$warn == 1)
+      {
+        warning(paste("When k=", comp,", at least one cluster covariance matrix seems to be singular. Increase the number of starting points RS or use FKM.gkb",sep = ""))
+      }
+    }
+
+
+      crit.temp = main.temp$index_max
+      crit.f[c] = main.temp$index
+      if(c == 1 | crit < crit.temp)
+      {
+        main = main.temp
+        crit = crit.temp
+      }
+    }
+
+    value = as.vector(main$value)
+    it = as.vector(main$iter)
+
+    U.opt = main$U
+    H.opt = main$H
+    F.opt = main$F
+
+    names(crit.f) =  paste(index," ","k=",k,sep="")
+    k = main$k
+    vp = as.vector(main$vp)
+
+    rownames(H.opt)=paste("Clus",1:k,sep=" ")
+    colnames(H.opt)=cn
+    rownames(U.opt)=rn
+    colnames(U.opt)=rownames(H.opt)
+    dimnames(F.opt)[[1]]=cn
+    dimnames(F.opt)[[2]]=dimnames(F.opt)[[1]]
+    dimnames(F.opt)[[3]]=rownames(H.opt)
+    names(value)=paste("Start",1:RS,sep=" ")
+    names(it)=names(value)
+    names(k)=c("Number of clusters")
+    names(p)=c("Degree of fuzzy entropy")
+    names(vp)=rownames(H.opt)
+    if (stand!=1)
+      stand=0
+    names(stand)=c("Standardization (1=Yes, 0=No)")
+    clus=cl.memb(U.opt)
+
+
+    out = list( U=U.opt,
+                H=H.opt,
+                F=F.opt,
+                clus=clus,
+                medoid=NULL,
+                value=value,
+                criterion = crit.f,
+                iter=it,
+                k=k,
+                m=NULL,
+                ent=ent,
+                b=NULL,
+                vp=vp,
+                delta=NULL,
+                stand=stand,
+                Xca=X,
+                X=Xraw,
+                D=NULL,
+                call=match.call())
+
+
+    class(out)=c("fclust")
+    return(out)
+  }

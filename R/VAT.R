@@ -1,5 +1,4 @@
-VAT <-
-function (Xca)
+VAT <- function (Xca)
 {
 if (missing(Xca))
 stop("The data set must be given")

@@ -1,10 +1,10 @@
-\name{PE} 
+\name{PE}
 \alias{PE}
 \title{Partition entropy}
 \description{
  Produces the partition entropy index. The optimal number of cluster \emph{k} is achieved when the index value is minimized.
-} 
-\usage{ 
+}
+\usage{
  PE (U, b)
 }
 \arguments{
@@ -13,11 +13,11 @@
 }
 \value{
  \item{pe}{Value of the partition entropy index}
-} 
+}
 \references{
  Bezdek J.C., 1981. Pattern Recognition with Fuzzy Objective Function Algorithms. Plenum Press, New York.
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{PC}}, \code{\link{MPC}}, \code{\link{SIL}}, \code{\link{SIL.F}}, \code{\link{XB}}, \code{\link{Fclust}}, \code{\link{Mc}}}
 \examples{
 ## McDonald's data

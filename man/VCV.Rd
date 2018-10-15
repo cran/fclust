@@ -1,8 +1,8 @@
-\name{VCV} 
+\name{VCV}
 \alias{VCV}
 \title{Visual Cluster Validity}
-\description{Digital intensity image generated using the prototype matrix (and the membership degree matrix) to do cluster validation. The function also plots the VAT image.} 
-\usage{ 
+\description{Digital intensity image generated using the prototype matrix (and the membership degree matrix) to do cluster validation. The function also plots the VAT image.}
+\usage{
  VCV (Xca, U, H, which)
 }
 \arguments{
@@ -20,7 +20,7 @@ Plot 1 (\code{which=1}): VAT. Each cell refers to a dissimilarity between a pair
 Bezdek J.C., Hathaway, R.J., 2002. VAT: a tool for visual assessment of (cluster) tendency. Proceedings of the IEEE International Joint Conference on Neural Networks, , pp. 2225?2230.
 \cr Hathaway R.J., Bezdek J.C., 2003. Visual cluster validity for prototype generator clustering models. Pattern Recognition Letters, 24, 1563?1569.
 }
-\author{Paolo Giordani, Maria Brigida Ferraro}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{plot.fclust}}, \code{\link{VIFCR}}, \code{\link{VAT}}, \code{\link{VCV2}}, \code{\link{Mc}}}
 \examples{
 ## McDonald's data

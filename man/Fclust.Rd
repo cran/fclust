@@ -1,10 +1,10 @@
-\name{Fclust} 
+\name{Fclust}
 \alias{Fclust}
 \title{Interactive fuzzy clustering analysis}
 \description{
  Performs a fuzzy clustering analysis using the algorithms available in the package.
-} 
-\usage{ 
+}
+\usage{
  Fclust (X)
 }
 \arguments{
@@ -12,8 +12,8 @@
 }
 \value{
  \item{clust}{Object of class \code{fclust}}
-} 
-\author{Paolo Giordani, Maria Brigida Ferraro}
+}
+\author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{FKM}}, \code{\link{FKM.ent}}, \code{\link{FKM.gk}}, \code{\link{FKM.gk.ent}}, \code{\link{FKM.gkb}}, \code{\link{FKM.gkb.ent}}, \code{\link{FKM.med}}, \code{\link{FKM.pf}}, \code{\link{FKM.noise}}, \code{\link{FKM.ent.noise}}, \code{\link{FKM.gk.noise}}, \code{\link{FKM.gkb.ent.noise}},  \code{\link{FKM.gkb.noise}}, \code{\link{FKM.gk.ent.noise}},\code{\link{FKM.med.noise}}, \code{\link{FKM.pf.noise}}, \code{\link{Fclust.index}}, \code{\link{Mc}}}
 \examples{
 \dontrun{
@@ -27,6 +27,6 @@ Mc[,j]=Mc[,j]/Mc[,1]
 Mc=Mc[,-1]
 ## interactive fuzzy clustering
 ## (excluded the factor column Type (last column))
-clust=Fclust(Mc[,1:(ncol(Mc)-1)])}
+##clust=Fclust(Mc[,1:(ncol(Mc)-1)])}
 }
 \keyword{multivariate}

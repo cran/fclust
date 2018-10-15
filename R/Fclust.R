@@ -51,8 +51,10 @@ while (ana==1)
         cat("14: Fuzzy k-medoids with noise cluster (function FKM.med.noise) ",fill=TRUE)
         cat("15: Fuzzy k-means with polynomial fuzzifier (function FKM.pf) ",fill=TRUE)
         cat("16: Fuzzy k-means with polynomial fuzzifier and noise cluster (function FKM.pf.noise) ",fill=TRUE)
-        model=scan("",n=1) 
-        if (any(model==1:16,na.rm=TRUE))
+        cat("17: Fuzzy clustering for realtional data (function NEFRC) ",fill=TRUE)
+        cat("18: Fuzzy ustering for relational data with noise cluster (function NEFRC) ",fill=TRUE)
+        model=scan("",n = 1) 
+        if (any(model==1:18,na.rm=TRUE))
             ok=1
         else	
             {
@@ -63,24 +65,24 @@ while (ana==1)
         if ((is.null(k)) || (param!=1))
             {
             cat(" ",fill=TRUE)
-            cat("Specify the number of cluster k (default =2): ",fill=TRUE)
+            cat("Specify the number of cluster k (default = 1:6): ",fill=TRUE)
             k=scan("",n=1) 
             if (length(k)==0)
                 {
-                k=2
+                k = 1:6
                 }
-            if ((k>ceiling(n/2)) || (k<2))
-                {
-                k=2
-                cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 will be used ",fill=TRUE)
-                }
-            if (k%%ceiling(k)>0)  
-                {
-                k=ceiling(k)
-                cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
-                }
+            # if ((k > ceiling(n/2)) || (k<2))
+            #     {
+            #     k=2
+            #     cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 will be used ",fill=TRUE)
+            #     }
+            # if (k%%ceiling(k)>0)  
+            #     {
+            #     k=ceiling(k)
+            #     cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
+            #     }
             }
-       if (any(model==c(1,2,5,6,9,10,13,14)))
+       if (any(model==c(1,2,5,6,9,10,13,14,17)))
             {
             if ((is.null(m)) || (param!=1))
                 {
@@ -250,7 +252,7 @@ while (ana==1)
                 stand=0
                 }
             }
-        if (model==c(2,4,6,8,10,12,14,16))
+        if (model==c(2,4,6,8,10,12,14,16,18))
             {
             if ((is.null(delta)) || (param!=1))
                 {
@@ -370,7 +372,15 @@ while (ana==1)
         {
           clust=FKM.pf.noise(X,k,b,delta,RS,stand,startU,conv,maxit,seed)
         }
-        cat(" ",fill=TRUE)
+		    if (model == 17)
+		    {
+		      clust = NEFRC(D = X, k, m, RS, startU, conv, maxit, seed)
+		    }
+		if (model == 18)
+		{
+		  clust = NEFRC.noise(D = X, k,delta = delta, m, RS, startU, conv, maxit, seed)
+		}
+	      cat(" ",fill=TRUE)
         cat("Some preliminary results are displayed: ",fill=TRUE)
         cat(" ",fill=TRUE)
         cat("Membership degree matrix ",fill=TRUE)
