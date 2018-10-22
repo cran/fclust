@@ -1,4 +1,4 @@
-f9dce18269d413ac7cadb49c89698d29 *DESCRIPTION
+85f68295fa25976ea091e8e3e54bf5bf *DESCRIPTION
 02d6c7f7a42b171362474154a57516d3 *NAMESPACE
 62730e8bd3b3f28e6288c414a942d6d1 *NEWS.md
 79607874750239388efbe20f1b6a4ca9 *R/ARI.F.R
@@ -109,7 +109,7 @@ acf3165f3a0a29d0992b4fa0e7df1e27 *src/F.cpp
 0cd46708a8bd080fdf7ac581cef5c916 *src/FKM_rcpp.cpp
 8d46d69896a1f1d31ed76035a0e49d67 *src/Makevars
 4f3d2e36262d64a9d68bdd4859899dc0 *src/RcppExports.cpp
-aa371b7eee3adc2b405a0f4ef3ec0c03 *src/centroids.cpp
+b9ceb1c4dd6a02ab3b3ce31a1458e17b *src/centroids.cpp
 e41d81fdc2efab5f496e35d285bdc9be *src/centroids.h
 758b123ddcb17404e02970909a66c7b0 *src/distance.cpp
 9a3726d654dc1e3e91d82f09e4e51055 *src/distance.h

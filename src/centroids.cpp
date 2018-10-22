@@ -85,7 +85,7 @@ List medoids_FKM(arma::mat data, arma::mat U, unsigned int n, unsigned int k, un
 {
 
   arma::mat out(k,p, arma::fill::zeros);
-  double min_med_const = pow(10,5) * accu(pow(data,2));
+  double min_med_const = 1e5 * accu(pow(data,2));
   double min_med_old = 0;
   double min_med = 0;
 
