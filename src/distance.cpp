@@ -44,19 +44,11 @@ arma::mat euclidean_distance_gkb(arma::mat data, arma::mat H, arma::cube F, unsi
 {
 
   arma::mat out(n,k); out.zeros();
-  //arma::mat FF = F.slice(1);
-  //arma::rowvec temp;
 
   for(int i=0; i<n; i++)
   {
     for(int j=0; j<k; j++)
     {
-      //temp = (data.row(i)-H.row(j)) * arma::inv_sympd(F.slice(j));
-      //out(i,j) = as_scalar(temp*(data.row(i)-H.row(j)).t() );
-      //temp =  arma::inv_sympd(F.slice(j))* (data.row(i)-H.row(j)).t();
-      //out(i,j) = as_scalar((data.row(i)-H.row(j)) * temp );
-      //out(i,j) = as_scalar(((data.row(i)-H.row(j)) * inv(F.slice(j))) * (data.row(i)-H.row(j)).t());
-      //FF = F.slice(j);
       out(i,j) = arma::as_scalar(arma::dot((data.row(i)-H.row(j)) * arma::pinv(F.slice(j)) , (data.row(i)-H.row(j)).t()));
 
     }
@@ -73,6 +65,7 @@ arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma:
 {
 
   arma::mat out(n,k); out.zeros();
+  arma::mat outReturn(n,k); outReturn.zeros();
   arma::mat inv_temp(p,p); inv_temp.zeros();
   arma::rowvec temp = data.row(1);
   bool check = false;
@@ -88,8 +81,6 @@ arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma:
         break;
       }
 
-//    temp = (data.row(i)-H.row(j)) * inv_temp;
-//    out(i,j) = as_scalar(temp * (data.row(i)-H.row(j)).t());
       out(i,j) = arma::as_scalar(arma::dot((data.row(i)-H.row(j)) * arma::pinv(F.slice(j)) , (data.row(i)-H.row(j)).t()));
 
     }
@@ -101,11 +92,12 @@ arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma:
 
   if(check)
   {
-    out = inv_temp;
+    outReturn = inv_temp;
+
   }else{
-    out = out;
+    outReturn = out;
   }
-  return out;
+  return outReturn;
 }
 
 /////////////////////////////////////////////////

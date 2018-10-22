@@ -1,6 +1,6 @@
-fa4de094c0d2f47e8a8f626e2e421afa *DESCRIPTION
+f9dce18269d413ac7cadb49c89698d29 *DESCRIPTION
 02d6c7f7a42b171362474154a57516d3 *NAMESPACE
-1882f5e1b50113aa5d580041a9a83867 *NEWS.md
+62730e8bd3b3f28e6288c414a942d6d1 *NEWS.md
 79607874750239388efbe20f1b6a4ca9 *R/ARI.F.R
 755f6134b8d27c46407994ffc5cf3a81 *R/FKM.R
 6d4efc963a49a1f3627f17231cc43f75 *R/FKM.ent.R
@@ -106,12 +106,12 @@ cfd24bd8f56f579404de569f438ebb31 *man/synt.data2.Rd
 4713852817f1b37e692901e0c464ab44 *man/unemployment.Rd
 acf3165f3a0a29d0992b4fa0e7df1e27 *src/F.cpp
 128d86940819bfb7c40d0fe2d01c3c7a *src/F.h
-fb53adfe7f18031f9e31c70d00487e26 *src/FKM_rcpp.cpp
+0cd46708a8bd080fdf7ac581cef5c916 *src/FKM_rcpp.cpp
 8d46d69896a1f1d31ed76035a0e49d67 *src/Makevars
 4f3d2e36262d64a9d68bdd4859899dc0 *src/RcppExports.cpp
 aa371b7eee3adc2b405a0f4ef3ec0c03 *src/centroids.cpp
 e41d81fdc2efab5f496e35d285bdc9be *src/centroids.h
-29072b061c44174ee1f34a576d31bc89 *src/distance.cpp
+758b123ddcb17404e02970909a66c7b0 *src/distance.cpp
 9a3726d654dc1e3e91d82f09e4e51055 *src/distance.h
 7ee129e361849da2d053cc1b2c891db4 *src/func.cpp
 565b62e286455443739f4e49e4f180b5 *src/func.h

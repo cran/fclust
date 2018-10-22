@@ -1849,7 +1849,7 @@ List mainFKM_gkb_noise_U(arma::mat data,
   double q1 = 0;
   double q2 = 0;
 
-  double deltasq = pow(delta,2);
+  double deltasq = pow(delta,2.0);
 
   bool prova = true;
 
@@ -2233,6 +2233,7 @@ List mainFKM_gk(arma::mat data,
   arma::vec it(rs); it.zeros();
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::mat U(n,k); U.zeros();
   arma::mat U_old(n,k); U_old.zeros();
   arma::cube F(p,p,k); F.zeros();
@@ -2272,6 +2273,7 @@ List mainFKM_gk(arma::mat data,
       U_old = U;
       F_old = F;
       H_old = H;
+      D_old = D;
 
       H = centroids_FKM(data, U, n, k, p, m);
 
@@ -2282,7 +2284,7 @@ List mainFKM_gk(arma::mat data,
       if(D_temp.is_empty()){
 
         U = U_old;
-        D = D;
+        D = D_old;
         F = F_old;
         H = H_old;
         iter = iter - 1;
@@ -2372,6 +2374,7 @@ List mainFKM_gk_U(arma::mat data,
   int iter = 0;
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::cube F(p,p,k); F.zeros();
   arma::mat U_old = U;
 
@@ -2394,6 +2397,7 @@ List mainFKM_gk_U(arma::mat data,
     U_old = U;
     F_old = F;
     H_old = H;
+    D_old = D;
 
     H = centroids_FKM(data, U, n, k, p, m);
 
@@ -2404,7 +2408,7 @@ List mainFKM_gk_U(arma::mat data,
     if(D_temp.is_empty()){
 
       U = U_old;
-      D = D;
+      D = D_old;
       warn = 1;
 
     }else{
@@ -2476,6 +2480,7 @@ List mainFKM_gk_ent(arma::mat data,
   arma::vec it(rs); it.zeros();
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::mat U(n,k); U.zeros();
   arma::mat U_old(n,k); U_old.zeros();
   arma::cube F(p,p,k); F.zeros();
@@ -2511,6 +2516,7 @@ List mainFKM_gk_ent(arma::mat data,
 
       iter++;
       U_old = U;
+      D_old = D;
 
 
       H = centroids_FKM_ent(data, U, n, k, p);
@@ -2522,7 +2528,7 @@ List mainFKM_gk_ent(arma::mat data,
       if(D_temp.is_empty()){
 
         U = U_old;
-        D = D;
+        D = D_old;
         F = F_old;
         H = H_old;
         iter = iter - 1;
@@ -2611,6 +2617,7 @@ List mainFKM_gk_ent_U(arma::mat data,
   int iter = 0;
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::cube F(p,p,k); F.zeros();
   arma::mat U_old = U;
 
@@ -2629,6 +2636,7 @@ List mainFKM_gk_ent_U(arma::mat data,
 
     iter++;
     U_old = U;
+    D_old = D;
 
     H = centroids_FKM_ent(data, U, n, k, p);
 
@@ -2639,7 +2647,7 @@ List mainFKM_gk_ent_U(arma::mat data,
     if(D_temp.is_empty()){
 
       U = U_old;
-      D = D;
+      D = D_old;
       warn = 1;
 
     }else{
@@ -2705,6 +2713,7 @@ List mainFKM_gk_noise(arma::mat data,
   arma::vec it(rs); it.zeros();
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::mat U(n,k); U.zeros();
   arma::cube F(p,p,k); F.zeros();
 
@@ -2715,7 +2724,7 @@ List mainFKM_gk_noise(arma::mat data,
   double q1 = 0;
   double q2 = 0;
 
-  double deltasq = pow(delta,2);
+  double deltasq = pow(delta,2.0);
 
   double func = 0;
   double func_opt = 0;
@@ -2750,6 +2759,7 @@ List mainFKM_gk_noise(arma::mat data,
 
       iter++;
       U_old = U;
+      D_old = D;
 
       H = centroids_FKM(data, U, n, k, p, m);
 
@@ -2760,7 +2770,7 @@ List mainFKM_gk_noise(arma::mat data,
       if(D_temp.is_empty()){
 
         U = U_old;
-        D = D;
+        D = D_old;
         F = F_old;
         H = H_old;
         iter = iter - 1;
@@ -2873,6 +2883,7 @@ List mainFKM_gk_noise_U(arma::mat data,
   int iter = 0;
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::cube F(p,p,k); F.zeros();
   arma::mat U_old = U;
 
@@ -2889,7 +2900,7 @@ List mainFKM_gk_noise_U(arma::mat data,
   double q1 = 0;
   double q2 = 0;
 
-  double deltasq = pow(delta,2);
+  double deltasq = pow(delta,2.0);
 
   int nan_check = 1;
 
@@ -2900,6 +2911,7 @@ List mainFKM_gk_noise_U(arma::mat data,
 
     iter++;
     U_old = U;
+    D_old = D;
 
     H = centroids_FKM(data, U, n, k, p, m);
 
@@ -2910,7 +2922,7 @@ List mainFKM_gk_noise_U(arma::mat data,
     if(D_temp.is_empty()){
 
       U = U_old;
-      D = D;
+      D = D_old;
       warn = 1;
 
     }else{
@@ -3012,6 +3024,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
   arma::vec it(rs); it.zeros();
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::mat U(n,k); U.zeros();
   arma::cube F(p,p,k); F.zeros();
 
@@ -3054,6 +3067,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
 
       iter++;
       U_old = U;
+      D_old = D;
 
 
       H = centroids_FKM_ent(data, U, n, k, p);
@@ -3065,7 +3079,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
       if(D_temp.is_empty()){
 
         U = U_old;
-        D = D;
+        D = D_old;
         F = F_old;
         H = H_old;
         iter = iter - 1;
@@ -3170,6 +3184,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
   int iter = 0;
   arma::mat H(k, p); H.zeros();
   arma::mat D(n, k); D.zeros();
+  arma::mat D_old(n, k); D_old.zeros();
   arma::cube F(p,p,k); F.zeros();
   arma::mat U_old = U;
 
@@ -3195,6 +3210,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
 
     iter++;
     U_old = U;
+    D_old = D;
 
     H = centroids_FKM_ent(data, U, n, k, p);
 
@@ -3205,7 +3221,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
     if(D_temp.is_empty()){
 
       U = U_old;
-      D = D;
+      D = D_old;
       warn = 1;
 
     }else{
@@ -3579,7 +3595,7 @@ List mainFKM_med_noise(arma::mat data,
   arma::uvec medoid_opt(k); medoid_opt.zeros();
   arma::uword mm = 0;
 
-  double min_med_const = pow(10,5) * accu(pow(data,2));
+  double min_med_const = pow(10.0,5.0) * accu(pow(data,2.0));
   double min_med_old = 0;
   double min_med = 0;
 
@@ -3785,7 +3801,7 @@ List mainFKM_med_noise_U(arma::mat data,
   double q1 = 0;
   double q2 = 0;
 
-  double deltasq = pow(delta,2);
+  double deltasq = pow(delta,2.0);
 
   double ind = 0;
   double ind_max = 0;
