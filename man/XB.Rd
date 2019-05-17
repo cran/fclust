@@ -2,7 +2,7 @@
 \alias{XB}
 \title{Xie and Beni index}
 \description{
- Produces the Xie and Beni index. The optimal number of cluster \emph{k} is achieved when the index value is minimized.
+ Produces the Xie and Beni index. The optimal number of clusters \emph{k} is  is such that the index takes the minimum value.
 }
 \usage{
  XB (Xca, U, H, m)

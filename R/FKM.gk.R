@@ -1,4 +1,4 @@
-FKM.gk <- function (X, k, m, vp, RS, stand, startU, index,alpha,conv, maxit, seed)
+FKM.gk <- function (X, k, m, vp, RS, stand, startU, index,alpha,conv, maxit, seed = NULL)
   {
     if (missing(X))
       stop("The data set must be given")
@@ -342,22 +342,14 @@ FKM.gk <- function (X, k, m, vp, RS, stand, startU, index,alpha,conv, maxit, see
       cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
       maxit=ceiling(maxit)
     }
-    if (missing(seed))
-      set.seed(NULL)
-    else
+    if(!is.null(seed))
     {
       if (!is.numeric(seed))
       {
         cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
         set.seed(NULL)
-      }else
-      {
-        if (seed%%ceiling(seed)>0)
-        {
-          cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
-          set.seed(ceiling(seed))
-        }else
-          set.seed(seed)
+      }else{
+        set.seed(seed)
       }
     }
 

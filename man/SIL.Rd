@@ -2,7 +2,7 @@
 \alias{SIL}
 \title{Silhouette index}
 \description{
- Produces the silhouette index. The optimal number of cluster \emph{k} is achieved when the index value is maximized.
+ Produces the silhouette index. The optimal number of clusters \emph{k} is  is such that the index takes the maximum value.
 }
 \usage{
  SIL (Xca, U, distance)
@@ -10,15 +10,15 @@
 \arguments{
  \item{Xca}{Matrix or data.frame}
  \item{U}{Membership degree matrix}
- \item{distance}{If \code{distance=TRUE}, \code{Xca} is assumed to be a distance matrix (default: FALSE)}
+ \item{distance}{If \code{distance=TRUE}, \code{Xca} is assumed to contain distances/dissimilarities (default: FALSE)}
 }
 \value{
- \item{sil.obj}{Vector containing the silhouette indices for all the objects}
+ \item{sil.obj}{Vector containing the silhouette indexes for all the objects}
  \item{sil}{Value of the silhouette index (mean of \code{sil.obj})}
 }
 \details{
  \code{Xca} should contain the same dataset used in the clustering algorithm, i.e., if the clustering algorithm is run using standardized data, then \code{SIL} should be computed using the same standardized data.
- \cr Set \code{distance=TRUE} if \code{Xca} is a distance matrix.
+ \cr Set \code{distance=TRUE} if \code{Xca} is a distance/dissimilarity matrix.
 }
 \references{
  Kaufman L., Rousseeuw P.J., 1990. Finding Groups in Data: An Introduction to Cluster Analysis. Wiley, New York.

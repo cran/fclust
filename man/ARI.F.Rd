@@ -6,18 +6,15 @@ Fuzzy adjusted Rand index}
 Produces the fuzzy version of the adjusted Rand index between a hard (reference) partition and a fuzzy partition.
 }
 \usage{
-ARI.F(partHard, partFuzzy, t_norm)
+ARI.F(VC, U, t_norm)
 }
 \arguments{
-\item{partHard}{(Reference) partition matrix or data.frame}
-\item{partFuzzy}{Fuzzy membership degree matrix or data.frame}
+\item{VC}{Vector of class labels}
+\item{U}{Fuzzy membership degree matrix or data.frame}
 \item{t_norm}{Type of the triangular norm: "minimum" (minimum triangular norm), "triangular product" (product norm) (default: "minimum")}
 }
 \value{
 \code{ari.f}{Value of the fuzzy adjusted Rand index}
-}
-\details{
-\code{partHard} and \code{partFuzzy} must have the same number of rows, but, not necessarily, the same number of columns (i.e., the same number of clusters in the two partitions).
 }
 \references{
 Campello, R.J., 2007. A fuzzy extension of the Rand index and other related indexes for clustering and classification assessment. Pattern Recognition Letters, 28, 833-841.
@@ -29,7 +26,6 @@ Campello, R.J., 2007. A fuzzy extension of the Rand index and other related inde
 }
 \examples{
 \dontrun{
-require("mclust")
 ## McDonald's data
 data(Mc)
 names(Mc)
@@ -42,9 +38,7 @@ Mc=Mc[,-1]
 ## (excluded the factor column Type (last column))
 clust=FKM(Mc[,1:(ncol(Mc)-1)],k=6,m=1.5,stand=1)
 ## fuzzy adjusted Rand index
-classTrue=unmap(classification=Mc$Type)
-classEst=unmap(classification=clust$clus[,1])
-ari.f=ARI.F(partHard=classTrue,partFuzzy=classEst)
+ari.f=ARI.F(VC=Mc$Type,U=clust$U)
 }
 }
 \keyword{multivariate}

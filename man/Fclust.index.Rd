@@ -1,15 +1,15 @@
 \name{Fclust.index}
 \alias{Fclust.index}
-\title{Cluster validity indices}
+\title{Cluster validity indexes}
 \description{
- Performs some cluster validity indices for choosing the optimal number of cluster \emph{k}.
+ Performs some cluster validity indexes for choosing the optimal number of clusters \emph{k}.
 }
 \usage{
  Fclust.index (fclust.obj, index, alpha)
 }
 \arguments{
  \item{fclust.obj}{Object of class \code{fclust}}
- \item{index}{Cluster validity indices to select the number of clusters: \code{PC} (partition coefficient), \code{PE} (partition entropy), \code{MPC} (modified partition coefficient), \code{SIL} (silhouette), \code{SIL.F} (fuzzy silhouette), \code{XB} (Xie and Beni),\code{ALL} for all the indices (default: "ALL")}
+ \item{index}{Cluster validity indexes to select the number of clusters: \code{PC} (partition coefficient), \code{PE} (partition entropy), \code{MPC} (modified partition coefficient), \code{SIL} (silhouette), \code{SIL.F} (fuzzy silhouette), \code{XB} (Xie and Beni),\code{ALL} for all the indexes (default: "ALL")}
  \item{alpha}{Weighting coefficient for the fuzzy silhouette index \code{SIL.F} (default: 1)}
 }
 \value{

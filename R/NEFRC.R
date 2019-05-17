@@ -1,5 +1,5 @@
 
-NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
+NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed = NULL)
 {
 
   if (missing(D))
@@ -20,36 +20,36 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
     cn=colnames(D)
   if (any(is.na(D)))
     stop("The distance matrix D must not contain NA values")
-  if (!is.numeric(D)) 
+  if (!is.numeric(D))
     stop("The distance matrix D is not a numeric data.frame or matrix")
-  
+
   if ((missing(startU)) || (is.null(startU)))
   {
     check=1
     checkMiss = missing(k) || is.null(k) || !is.numeric(k)
-    if (checkMiss)  
+    if (checkMiss)
     {
       k= 2:6
       cat("The default value k=2:6 has been set ",fill=TRUE)
     }
-    nk <- length(k) 
+    nk <- length(k)
     if(nk != 1){
-      
+
       if(!checkMiss){
         checkK = any(k <= 1) | any((k-as.integer(k)) != 0)
         if(checkK)
         {
           k  = 2:6
-          nk <- length(k) 
+          nk <- length(k)
           cat("The number of clusters k must be greter than 1, integer and numeric: the default value k=2:6 will be used ",fill=TRUE)
-          
+
         }else{
-          
+
           k <- sort(unique(k))
-          
+
         }
       }
-      
+
       if (missing(index))
       {
         index = "SIL.F"
@@ -60,14 +60,14 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
           index = "SIL.F"
           cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
         }else{
-          
-          if(all(index!=c("PC","PE","MPC","SIL","SIL.F","XB"))){
+
+          if(all(index!=c("PC","PE","MPC","SIL","SIL.F"))){
             index = "SIL.F"
             cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
-            
+
           }
         }
-        
+
       }
       if(index == "SIL.F"){
         if (missing(alpha))
@@ -75,20 +75,20 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
           alpha=1
           cat("The default value alpha=1 has been set for computing SIL.F ",fill=TRUE)
         }else{
-          if (!is.numeric(alpha)) 
+          if (!is.numeric(alpha))
           {
             alpha=1
             cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
           }
-          if (alpha<0)  
+          if (alpha<0)
           {
             alpha=1
             cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
           }
-        } 
+        }
       }else{
         alpha = 1
-      } 
+      }
     }else{
       nk <- 1
       if (missing(index))
@@ -100,37 +100,37 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
           index = "SIL.F"
           cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
         }else{
-          
-          if(!any(index==c("PC","PE","MPC","SIL","SIL.F","XB"))){
+
+          if(!any(index==c("PC","PE","MPC","SIL","SIL.F"))){
             index = "SIL.F"
             cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
-            
+
           }
         }
-      } 
-      
+      }
+
       if(index == "SIL.F"){
         if (missing(alpha))
         {
           alpha=1
         }else{
-          if (!is.numeric(alpha)) 
+          if (!is.numeric(alpha))
           {
             alpha=1
             cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
           }
-          if (alpha<0)  
+          if (alpha<0)
           {
             alpha=1
             cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
           }
-        } 
+        }
       }else{
         alpha = 1
-      }  
-      
-      
-      if (!is.numeric(k)) 
+      }
+
+
+      if (!is.numeric(k))
       {
         k=2
         cat("The number of clusters k is not numeric: the default value k=2 will be used ",fill=TRUE)
@@ -140,12 +140,12 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
         k=2
         cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(n/2)}: the default value k=2 will be used ",fill=TRUE)
       }
-      if (k%%ceiling(k)>0)  
+      if (k%%ceiling(k)>0)
       {
         k=ceiling(k)
         cat("The number of clusters k must be an integer in {2, 3, ..., ceiling(nrow(X)/2)}: the value ceiling(k) will be used ",fill=TRUE)
-      } 
-    } 
+      }
+    }
   }else
   {
     startU=as.matrix(startU)
@@ -159,7 +159,7 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
       cat("The rational start must not contain NA values: the default value k=2 and a random start will be used ",fill=TRUE)
       check=1
     }
-    if (!is.numeric(startU)) 
+    if (!is.numeric(startU))
     {
       k=2
       cat("The rational start is not a numeric data.frame or matrix: the default value k=2 and a random start will be used ",fill=TRUE)
@@ -190,35 +190,35 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
         index = "SIL.F"
         cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
       }else{
-        
+
         if(!any(index==c("PC","PE","MPC","SIL","SIL.F","XB"))){
           index = "SIL.F"
           cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
-          
+
         }
-      } 
-    } 
-    
+      }
+    }
+
     if(index == "SIL.F"){
       if (missing(alpha))
       {
         alpha=1
       }else{
-        if (!is.numeric(alpha)) 
+        if (!is.numeric(alpha))
         {
           alpha=1
           cat("The weighting coefficient alpha is not numeric: the default value alpha=1 will be used for computing SIL.F ",fill=TRUE)
         }
-        if (alpha<0)  
+        if (alpha<0)
         {
           alpha=1
           cat("The number of clusters k must be non negative: the value alpha=1 will be used for computing SIL.F ",fill=TRUE)
         }
-      } 
+      }
     }else{
       alpha = 1
-    }  
-    
+    }
+
   }
 
   if (missing(m))
@@ -283,23 +283,17 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
     cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
     maxit=ceiling(maxit)
   }
-  if (missing(seed))
-    set.seed(NULL)
-  else
+
+  if(!is.null(seed))
   {
     if (!is.numeric(seed))
     {
       cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
       set.seed(NULL)
-    }else
-    {
-      if (seed%%ceiling(seed)>0)
-      {
-        cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
-        set.seed(ceiling(seed))
-      }else
-        set.seed(seed)
+    }else{
+      set.seed(seed)
     }
+
   }
 
   crit.f <- rep(NA,nk)
@@ -333,7 +327,7 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed)
 
   U.opt = main$U
 
-  names(crit.f) =  paste(index," ","k=",k,sep="")   
+  names(crit.f) =  paste(index," ","k=",k,sep="")
   k = main$k
   rownames(U.opt)=rn
   colnames(U.opt)=paste("Clus",1:k,sep=" ")

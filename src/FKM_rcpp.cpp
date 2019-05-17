@@ -97,7 +97,13 @@ List mainFKM(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -156,12 +162,17 @@ List mainFKM_U(arma::mat data,
 
   ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
   }
-
   return List::create(Rcpp::Named("H") = H,
                       Rcpp::Named("U") = U,
                       Rcpp::Named("iter") = iter,
@@ -263,7 +274,13 @@ List mainFKM_ent(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -323,12 +340,17 @@ List mainFKM_ent_U(arma::mat data,
 
   ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
   }
-
   return List::create(Rcpp::Named("H") = H,
                       Rcpp::Named("U") = U,
                       Rcpp::Named("iter") = iter,
@@ -467,7 +489,13 @@ List mainFKM_noise(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -585,7 +613,13 @@ List mainFKM_noise_U(arma::mat data,
     value = accu(pow(U,m)%D) + sum(Uout);
     ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -690,7 +724,13 @@ List mainFKM_pf(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -749,7 +789,13 @@ List mainFKM_pf_U(arma::mat data,
 
   ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -886,7 +932,13 @@ List mainFKM_ent_noise(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -988,7 +1040,13 @@ List mainFKM_ent_noise_U(arma::mat data,
 
   ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -1046,6 +1104,8 @@ List mainFKM_pf_noise(arma::mat data,
   arma::vec Uout(n); Uout.zeros();
   arma::uvec id;
 
+  arma::rowvec deltatemp(1); deltatemp = delta;
+
   int nan_check = 1;
 
 
@@ -1091,11 +1151,13 @@ List mainFKM_pf_noise(arma::mat data,
 
           ki = 0;
           kok = 0;
+          d = arma::join_rows(d,deltatemp);
           d = sort(d);
           while(ki < k)
 
           {
-            if((d(ki) * (sum(1/d.subvec(0,ki)) + (1/deltasq))) <= ((1/b) + ki))
+            //if((d(ki) * (sum(1/d.subvec(0,ki)) + (1/deltasq))) <= ((1/b) + ki))
+            if((d(ki) * (sum(1/d.subvec(0,ki)))) <= ((1/b) + ki))
             {
               kok = ki;
               ki++;
@@ -1104,7 +1166,7 @@ List mainFKM_pf_noise(arma::mat data,
               ki++;
             }
           }
-          U.row(i) = 1/(1-b)*(((1+b*(kok))/(D.row(i)*(sum(1/d.subvec(0,kok)) + (1/deltasq))))-b);;
+          U.row(i) = 1/(1-b)*(((1+b*(kok))/(D.row(i)*(sum(1/d.subvec(0,kok)))))-b);;
           U.row(i) = replace(U.row(i),0,0);
 
         }
@@ -1145,7 +1207,13 @@ List mainFKM_pf_noise(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, 1,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -1193,6 +1261,8 @@ List mainFKM_pf_noise_U(arma::mat data,
   arma::uvec id;
   arma::uword mm = 0;
 
+  arma::rowvec deltatemp(1); deltatemp = delta;
+
   double deltasq = pow(delta,2.0);
   double ind = 0;
   double ind_max = 0;
@@ -1233,11 +1303,14 @@ List mainFKM_pf_noise_U(arma::mat data,
 
         ki = 0;
         kok = 0;
+        d = arma::join_rows(d,deltatemp);
         d = sort(d);
+
         while(ki < k)
 
         {
-          if(d(ki) * (sum(1/d.subvec(0,ki)) + (1/pow(delta,2.0)))<= ((1/b) + ki))
+          //if((d(ki) * (sum(1/d.subvec(0,ki)) + (1/deltasq))) <= ((1/b) + ki))
+          if((d(ki) * (sum(1/d.subvec(0,ki)))) <= ((1/b) + ki))
           {
             kok = ki;
             ki++;
@@ -1246,7 +1319,7 @@ List mainFKM_pf_noise_U(arma::mat data,
             ki++;
           }
         }
-        U.row(i) = 1/(1-b)*(((1+b*(kok))/(D.row(i)*(sum(1/d.subvec(0,kok)) + (1/deltasq))))-b);
+        U.row(i) = 1/(1-b)*(((1+b*(kok))/(D.row(i)*(sum(1/d.subvec(0,kok)))))-b);
         U.row(i) = replace(U.row(i),0,0);
 
       }
@@ -1269,7 +1342,13 @@ List mainFKM_pf_noise_U(arma::mat data,
     value = accu((((1-b)/(1+b))*pow(U,2.0) + ((2*b)/(1+b))*U) % D) + accu((((1-b)/(1+b))*pow(U,2.0)* deltasq)) + sum(((2*b)/(1+b))*Uout * deltasq);
     ind = indices(index, data, U, H, 1,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -1381,7 +1460,13 @@ List mainFKM_gkb(arma::mat data,
   }
   ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -1454,7 +1539,13 @@ List mainFKM_gkb_U(arma::mat data,
 
   ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -1565,7 +1656,13 @@ List mainFKM_gkb_ent(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -1637,7 +1734,13 @@ List mainFKM_gkb_ent_U(arma::mat data,
 
   ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -1790,7 +1893,13 @@ List mainFKM_gkb_noise(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -1928,7 +2037,13 @@ List mainFKM_gkb_noise_U(arma::mat data,
     }
   }
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -2075,7 +2190,13 @@ List mainFKM_gkb_ent_noise(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -2184,7 +2305,13 @@ List mainFKM_gkb_ent_noise_U(arma::mat data,
 
   ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -2328,7 +2455,13 @@ List mainFKM_gk(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -2430,7 +2563,13 @@ List mainFKM_gk_U(arma::mat data,
     value = accu(pow(U,m)%D);
     ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -2570,7 +2709,13 @@ List mainFKM_gk_ent(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, 1,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -2666,7 +2811,13 @@ List mainFKM_gk_ent_U(arma::mat data,
     value = accu(U%D) + ent * accu(U % log(U));
     ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -2837,7 +2988,13 @@ List mainFKM_gk_noise(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -2972,7 +3129,13 @@ List mainFKM_gk_noise_U(arma::mat data,
     value = accu(pow(U,m)%D) + sum(Uout);
     ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -3148,7 +3311,13 @@ List mainFKM_gk_ent_noise(arma::mat data,
 
   ind = indices(index, data, U_opt, H_opt, 2,  n, k, p,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC" || index == "XB")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -3271,7 +3440,13 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
     value = accu(U%D) + ent * accu(U % log(U)) + sum(Uout) * pow(delta,2.0);
     ind = indices(index, data, U, H, 2,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -3420,7 +3595,13 @@ List mainFKM_med(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -3537,7 +3718,13 @@ List mainFKM_med_U(arma::mat data,
     value = accu(pow(U,m)%D);
     ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -3735,7 +3922,13 @@ List mainFKM_med_noise(arma::mat data,
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -3901,7 +4094,13 @@ List mainFKM_med_noise_U(arma::mat data,
     value = accu(pow(U,m)%D) + sum(Uout);
     ind = indices(index, data, U, H, m,  n, k, p,  exp(1.0), alpha);
 
-    if(index == "PE" || index == "PC" || index == "XB")
+    // if(index == "PE" || index == "PC" || index == "XB")
+    //   {ind_max = -ind;
+    //   }else{
+    //     ind_max = ind;
+    //   }
+
+    if(index == "PE" || index == "XB")
     {ind_max = -ind;
     }else{
       ind_max = ind;
@@ -4063,7 +4262,13 @@ List mainnefrc(arma::mat D,
   arma::mat H(1,1); H.ones();
   ind = indices(index, D, U_opt, H, m,  n, k, n,  exp(1.0), alpha, true);
 
-  if(index == "PE" || index == "PC")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -4187,7 +4392,13 @@ List mainnefrc_U(arma::mat D,
 
   arma::mat H(1,1); H.ones();
   ind = indices(index, D, U, H, m,  n, k, n,  exp(1.0), alpha, true);
-  if(index == "PE" || index == "PC")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -4352,7 +4563,13 @@ List mainrnefrc(arma::mat D,
   arma::mat H(1,1); H.ones();
   ind = indices(index, D, U_opt, H, m,  n, k, n,  exp(1.0), alpha,true);
 
-  if(index == "PE" || index == "PC")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;
@@ -4493,7 +4710,13 @@ List mainrnefrc_U(arma::mat D,
   arma::mat H(1,1); H.ones();
   ind = indices(index, D, U, H, m,  n, k, n,  exp(1.0), alpha);
 
-  if(index == "PE" || index == "PC")
+  // if(index == "PE" || index == "PC" || index == "XB")
+  //   {ind_max = -ind;
+  //   }else{
+  //     ind_max = ind;
+  //   }
+
+  if(index == "PE" || index == "XB")
   {ind_max = -ind;
   }else{
     ind_max = ind;

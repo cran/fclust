@@ -12,7 +12,7 @@
  \item{t}{Threshold in [0,1] (default: 0)}
 }
 \value{
- \item{info.U}{Matrix containing the indices of the clusters where the objects are assigned (row 1) and the associated membership degrees (row 2)}
+ \item{info.U}{Matrix containing the indexes of the clusters where the objects are assigned (row 1) and the associated membership degrees (row 2)}
 }
 \details{
  An object is assigned to a cluster according to the maximal membership degree provided that such a maximal membership degree is >= \code{t}, otherwise it is assumed that an object is not assigned to any cluster (denoted by cluster index = 0 in row 1).

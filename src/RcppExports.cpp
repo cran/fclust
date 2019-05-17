@@ -6,133 +6,6 @@
 
 using namespace Rcpp;
 
-// centroids_FKM
-arma::mat centroids_FKM(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double m);
-RcppExport SEXP _fclust_centroids_FKM(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type m(mSEXP);
-    rcpp_result_gen = Rcpp::wrap(centroids_FKM(data, U, n, k, p, m));
-    return rcpp_result_gen;
-END_RCPP
-}
-// centroids_FKM_ent
-arma::mat centroids_FKM_ent(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p);
-RcppExport SEXP _fclust_centroids_FKM_ent(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(centroids_FKM_ent(data, U, n, k, p));
-    return rcpp_result_gen;
-END_RCPP
-}
-// centroids_FKM_pf
-arma::mat centroids_FKM_pf(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double b);
-RcppExport SEXP _fclust_centroids_FKM_pf(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(centroids_FKM_pf(data, U, n, k, p, b));
-    return rcpp_result_gen;
-END_RCPP
-}
-// medoids_FKM
-List medoids_FKM(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double m);
-RcppExport SEXP _fclust_medoids_FKM(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< double >::type m(mSEXP);
-    rcpp_result_gen = Rcpp::wrap(medoids_FKM(data, U, n, k, p, m));
-    return rcpp_result_gen;
-END_RCPP
-}
-// euclidean_distance
-arma::mat euclidean_distance(arma::mat data, arma::mat H, unsigned int n, unsigned int k, bool Square);
-RcppExport SEXP _fclust_euclidean_distance(SEXP dataSEXP, SEXP HSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
-    rcpp_result_gen = Rcpp::wrap(euclidean_distance(data, H, n, k, Square));
-    return rcpp_result_gen;
-END_RCPP
-}
-// euclidean_distance_gkb
-arma::mat euclidean_distance_gkb(arma::mat data, arma::mat H, arma::cube F, unsigned int n, unsigned int k, bool Square);
-RcppExport SEXP _fclust_euclidean_distance_gkb(SEXP dataSEXP, SEXP HSEXP, SEXP FSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
-    Rcpp::traits::input_parameter< arma::cube >::type F(FSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
-    rcpp_result_gen = Rcpp::wrap(euclidean_distance_gkb(data, H, F, n, k, Square));
-    return rcpp_result_gen;
-END_RCPP
-}
-// euclidean_distance_gk
-arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma::mat D_old, unsigned int n, unsigned int k, unsigned int p, bool Square);
-RcppExport SEXP _fclust_euclidean_distance_gk(SEXP dataSEXP, SEXP HSEXP, SEXP FSEXP, SEXP D_oldSEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP SquareSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
-    Rcpp::traits::input_parameter< arma::cube >::type F(FSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type D_old(D_oldSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
-    rcpp_result_gen = Rcpp::wrap(euclidean_distance_gk(data, H, F, D_old, n, k, p, Square));
-    return rcpp_result_gen;
-END_RCPP
-}
-// euclidean_distance_medoid
-arma::mat euclidean_distance_medoid(arma::mat data, arma::mat H, unsigned int n, unsigned int k, bool Square);
-RcppExport SEXP _fclust_euclidean_distance_medoid(SEXP dataSEXP, SEXP HSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
-    rcpp_result_gen = Rcpp::wrap(euclidean_distance_medoid(data, H, n, k, Square));
-    return rcpp_result_gen;
-END_RCPP
-}
 // F_gkb
 arma::cube F_gkb(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, double m, double gam, unsigned int n, unsigned int k, int p, double mcn, arma::vec vp);
 RcppExport SEXP _fclust_F_gkb(SEXP dataSEXP, SEXP USEXP, SEXP HSEXP, SEXP F0SEXP, SEXP mSEXP, SEXP gamSEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mcnSEXP, SEXP vpSEXP) {
@@ -972,6 +845,133 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type index(indexSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     rcpp_result_gen = Rcpp::wrap(mainrnefrc_U(D, U, m, delta, n, k, conv, maxit, index, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// centroids_FKM
+arma::mat centroids_FKM(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double m);
+RcppExport SEXP _fclust_centroids_FKM(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(centroids_FKM(data, U, n, k, p, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// centroids_FKM_ent
+arma::mat centroids_FKM_ent(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p);
+RcppExport SEXP _fclust_centroids_FKM_ent(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(centroids_FKM_ent(data, U, n, k, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// centroids_FKM_pf
+arma::mat centroids_FKM_pf(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double b);
+RcppExport SEXP _fclust_centroids_FKM_pf(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(centroids_FKM_pf(data, U, n, k, p, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// medoids_FKM
+List medoids_FKM(arma::mat data, arma::mat U, unsigned int n, unsigned int k, unsigned int p, double m);
+RcppExport SEXP _fclust_medoids_FKM(SEXP dataSEXP, SEXP USEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(medoids_FKM(data, U, n, k, p, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// euclidean_distance
+arma::mat euclidean_distance(arma::mat data, arma::mat H, unsigned int n, unsigned int k, bool Square);
+RcppExport SEXP _fclust_euclidean_distance(SEXP dataSEXP, SEXP HSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
+    rcpp_result_gen = Rcpp::wrap(euclidean_distance(data, H, n, k, Square));
+    return rcpp_result_gen;
+END_RCPP
+}
+// euclidean_distance_gkb
+arma::mat euclidean_distance_gkb(arma::mat data, arma::mat H, arma::cube F, unsigned int n, unsigned int k, bool Square);
+RcppExport SEXP _fclust_euclidean_distance_gkb(SEXP dataSEXP, SEXP HSEXP, SEXP FSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type F(FSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
+    rcpp_result_gen = Rcpp::wrap(euclidean_distance_gkb(data, H, F, n, k, Square));
+    return rcpp_result_gen;
+END_RCPP
+}
+// euclidean_distance_gk
+arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma::mat D_old, unsigned int n, unsigned int k, unsigned int p, bool Square);
+RcppExport SEXP _fclust_euclidean_distance_gk(SEXP dataSEXP, SEXP HSEXP, SEXP FSEXP, SEXP D_oldSEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP SquareSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
+    Rcpp::traits::input_parameter< arma::cube >::type F(FSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type D_old(D_oldSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
+    rcpp_result_gen = Rcpp::wrap(euclidean_distance_gk(data, H, F, D_old, n, k, p, Square));
+    return rcpp_result_gen;
+END_RCPP
+}
+// euclidean_distance_medoid
+arma::mat euclidean_distance_medoid(arma::mat data, arma::mat H, unsigned int n, unsigned int k, bool Square);
+RcppExport SEXP _fclust_euclidean_distance_medoid(SEXP dataSEXP, SEXP HSEXP, SEXP nSEXP, SEXP kSEXP, SEXP SquareSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< bool >::type Square(SquareSEXP);
+    rcpp_result_gen = Rcpp::wrap(euclidean_distance_medoid(data, H, n, k, Square));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -1,4 +1,4 @@
-FKM.med.noise <- function (X, k, m, delta, RS, stand, startU, index,alpha,conv, maxit, seed)
+FKM.med.noise <- function (X, k, m, delta, RS, stand, startU, index,alpha,conv, maxit, seed = NULL)
   {
     if (missing(X))
       stop("The data set must be given")
@@ -291,23 +291,17 @@ FKM.med.noise <- function (X, k, m, delta, RS, stand, startU, index,alpha,conv, 
       cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
       maxit=ceiling(maxit)
     }
-    if (missing(seed))
-      set.seed(NULL)
-    else
+
+    if(!is.null(seed))
     {
       if (!is.numeric(seed))
       {
         cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
         set.seed(NULL)
-      }else
-      {
-        if (seed%%ceiling(seed)>0)
-        {
-          cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
-          set.seed(ceiling(seed))
-        }else
-          set.seed(seed)
+      }else{
+        set.seed(seed)
       }
+
     }
 
     Xraw=X
@@ -385,7 +379,7 @@ FKM.med.noise <- function (X, k, m, delta, RS, stand, startU, index,alpha,conv, 
       {
         Hd=FKM(X,k[c],m = m,RS=1,stand = stand,conv=1e-6,seed = seed)$H
         Dd = euclidean_distance(data = X,H = Hd,n = n,k = k[c])
-        delta[c] <- mean(Dd)
+        delta[c] <- sqrt(mean(Dd))
       }
       main.temp <- mainFKM_med_noise_U(data = X, m = m, delta = delta[c],
                                        index = index,alpha = alpha,n = n,
@@ -396,7 +390,7 @@ FKM.med.noise <- function (X, k, m, delta, RS, stand, startU, index,alpha,conv, 
       {
         Hd=FKM(X,k[c],m = m,RS=1,stand = stand,conv=1e-6,seed = seed)$H
         Dd = euclidean_distance(data = X,H = Hd,n = n,k = k[c])
-        delta[c] <- mean(Dd)
+        delta[c] <- sqrt(mean(Dd))
       }
       main.temp <- mainFKM_med_noise(data = X, m = m, delta = delta[c],
                                      index = index,alpha = alpha,n = n,

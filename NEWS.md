@@ -1,3 +1,11 @@
+# fclust 2.1.0
+
+- Fixed bugs
+
+# fclust 2.0.2
+
+- Fixed bugs
+
 # fclust 2.0.1
 
 - Fixed C++ issues.

@@ -5,7 +5,7 @@ Fclust.index <- function (fclust.obj, index, alpha)
 
 
     if(is.null(fclust.obj$D)){
-      X <- fclust.obj$X
+      X <- fclust.obj$Xca
       isRelational = FALSE
     }else{
       X <- fclust.obj$D

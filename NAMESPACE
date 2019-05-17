@@ -25,4 +25,4 @@ export("cl.memb", "cl.memb.H", "cl.memb.t", "cl.size", "cl.size.H", "Hraw", "VAT
 export("MPC","PC","PE","SIL","SIL.F","XB","Fclust.index")
 export("Fclust.compare","JACCARD.F","RI.F","ARI.F")
 export("NEFRC","NEFRC.noise")
-#export("Fclust")
+export("Fclust")

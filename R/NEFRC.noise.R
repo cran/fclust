@@ -1,5 +1,5 @@
 
-NEFRC.noise = function(D, k, m, delta, RS, startU,index,alpha,conv, maxit, seed)
+NEFRC.noise = function(D, k, m, delta, RS, startU,index,alpha,conv, maxit, seed = NULL)
 {
 
   if (missing(D))
@@ -62,7 +62,7 @@ NEFRC.noise = function(D, k, m, delta, RS, startU,index,alpha,conv, maxit, seed)
           cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
         }else{
 
-          if(all(index!=c("PC","PE","MPC","SIL","SIL.F","XB"))){
+          if(all(index!=c("PC","PE","MPC","SIL","SIL.F"))){
             index = "SIL.F"
             cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
 
@@ -102,7 +102,7 @@ NEFRC.noise = function(D, k, m, delta, RS, startU,index,alpha,conv, maxit, seed)
           cat("The index must be a single value: SIL.F will be used ",fill=TRUE)
         }else{
 
-          if(!any(index==c("PC","PE","MPC","SIL","SIL.F","XB"))){
+          if(!any(index==c("PC","PE","MPC","SIL","SIL.F"))){
             index = "SIL.F"
             cat("No match found for the index name: SIL.F will be used ", fill = TRUE)
 
@@ -284,39 +284,33 @@ NEFRC.noise = function(D, k, m, delta, RS, startU,index,alpha,conv, maxit, seed)
     cat("The maximum number of iterations maxit must be an integer >0: the value ceiling(maxit) will be used ",fill=TRUE)
     maxit=ceiling(maxit)
   }
-  if (missing(seed))
-    set.seed(NULL)
-  else
+
+  if(!is.null(seed))
   {
     if (!is.numeric(seed))
     {
       cat("The seed value is not numeric: set.seed(NULL) will be used ",fill=TRUE)
       set.seed(NULL)
-    }else
-    {
-      if (seed%%ceiling(seed)>0)
-      {
-        cat("The seed value must be an integer: set.seed(ceiling(seed)) will be used ",fill=TRUE)
-        set.seed(ceiling(seed))
-      }else
-        set.seed(seed)
+    }else{
+      set.seed(seed)
     }
+
   }
 
   if (missing(delta))
   {
-    delta = 2
-    cat("The default value delta=2 will be used ",fill=TRUE)
+    delta = mean(D)
+    cat("The default value delta=mean(D) will be used ",fill=TRUE)
   }
   if (!is.numeric(delta))
   {
-    delta = 2
-    cat("The noise distance delta is not numeric: the default value delta=2 will be used ",fill=TRUE)
+    delta = mean(D)
+    cat("The noise distance delta is not numeric: the default value delta=mean(D) will be used ",fill=TRUE)
   }
   if (delta<0)
   {
-    delta = 2
-    cat("The noise distance delta must be non negative: the default value delta=2 will be used ",fill=TRUE)
+    delta = mean(D)
+    cat("The noise distance delta must be non negative: the default value delta=mean(D) will be used ",fill=TRUE)
   }
   if (delta==0)
   {

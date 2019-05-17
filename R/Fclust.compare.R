@@ -1,22 +1,27 @@
-Fclust.compare <- function(partHard, partFuzzy, index, tnorm = c("minimum","product"))
+Fclust.compare <- function(VC, U, index, tnorm = c("minimum","product"))
 {
 
-  if (missing(partHard))
-    stop("The hard partitions partHard must be given")
-  if (missing(partFuzzy))
-    stop("The fuzzy partitions partFuzzy must be given")
+  if (missing(VC))
+    stop("The hard partitions VC must be given")
+  if (missing(U))
+    stop("The fuzzy partitions U must be given")
 
-  if (is.null(partHard))
-    stop("The hard partitions partHard is empty")
+  if (is.null(VC))
+    stop("The hard partitions VC is empty")
 
-  if (is.null(partFuzzy))
-    stop("The fuzzy partitions partFuzzy is empty")
+  if (is.null(U))
+    stop("The fuzzy partitions U is empty")
+ VC <- as.numeric(VC)
+  U <- as.matrix(U)
+  partHard=matrix(0,nrow=length(VC),ncol=length(unique(VC)))
+  for (i in 1:length(VC))
+  {
+    partHard[i, VC[i]]=1
+  }
 
-  partHard = as.matrix(partHard)
-  partFuzzy = as.matrix(partFuzzy)
 
-  if((dim(partHard)[1] != dim(partFuzzy)[1]))
-    stop("partHard and partFuzzy must have the same number of observations")
+  # if(any(dim(partHard) != dim(partFuzzy)))
+  #   stop("partHard and partFuzzy must be matrix with the same dimension")
 
   lg=length(c("ARI.F","RI.F","JACCARD.F","ALL"))
 
@@ -45,11 +50,10 @@ Fclust.compare <- function(partHard, partFuzzy, index, tnorm = c("minimum","prod
 
   tnorm <- match.arg(tnorm, choices = eval(formals(Fclust.compare)$tnorm))
 
-  partHard  = as.matrix(partHard)
-  partFuzzy = as.matrix(partFuzzy)
+  U = as.matrix(U)
 
 
-  out = partition_comp(HardClust = partHard,Fuzzy = partFuzzy, t_norm = tnorm)
+  out = partition_comp(HardClust = partHard,Fuzzy = U, t_norm = tnorm)
 
   if (any(index==1) || any(index==lg))
     out.index[1]=out$adjRand.F

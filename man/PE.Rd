@@ -2,7 +2,7 @@
 \alias{PE}
 \title{Partition entropy}
 \description{
- Produces the partition entropy index. The optimal number of cluster \emph{k} is achieved when the index value is minimized.
+ Produces the partition entropy index. The optimal number of clusters \emph{k} is  is such that the index takes the minimum value.
 }
 \usage{
  PE (U, b)

@@ -2,7 +2,7 @@
 \alias{MPC}
 \title{Modified partition coefficient}
 \description{
- Produces the modified partition coefficient index. The optimal number of cluster \emph{k} is achieved when the index value is maximized.
+ Produces the modified partition coefficient index. The optimal number of clusters \emph{k} is such that the index takes the maximum value.
 }
 \usage{
  MPC (U)
