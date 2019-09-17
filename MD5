@@ -1,4 +1,4 @@
-fa7dd1c0a975ab219ec6aa3bb019c2a5 *DESCRIPTION
+33b10880c748bfbb81eb81a9d213a31d *DESCRIPTION
 b0edffd3655d6c3dc665526ee66b8420 *NAMESPACE
 0dfc8c3347dccc5678c01fea635fcb8e *NEWS.md
 9a88b635748601f7554fbe55dee574df *R/ARI.F.R
@@ -53,7 +53,7 @@ fb3b4541374fed64eb82de46f8995cb2 *data/butterfly.rda
 cddb0a908c77b83ca3a6999c29389c64 *data/synt.data.rda
 8ca579bf9a95dfb65490ce68e38e6efb *data/synt.data2.rda
 dbdedf228b6c8c7d42b1f6604bb76c6b *data/unemployment.rda
-e17f8bb95d33565bf47f6def109c0f95 *inst/CITATION
+fcaa80db6e2f55076ba471c2365cd13f *inst/CITATION
 4240bb1390aab51d1c8619d1fe2d7b31 *man/ARI.F.Rd
 a7fe38de6178eac13d2c0f0ce17299ba *man/FKM.Rd
 0f556478c3f6253bf6b967d652a1d168 *man/FKM.ent.Rd

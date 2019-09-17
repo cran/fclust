@@ -1,13 +1,12 @@
 citHeader("To cite fclust in publications use:")
 
 citEntry(entry = "Article",
-  title        = "A toolbox for fuzzy clustering using the R programming language",
-  author       = personList(as.person("M.B. Ferraro"), as.person("P. Giordani")),
-  journal      = "Fuzzy Sets and Systems",
-  year         = "2015",
-  volume       = "279",
-  pages        = "1-16",
-  url          = "http://dx.doi.org/10.1016/j.fss.2015.05.001",
+  title        = "fclust: An R Package for Fuzzy Clustering",
+  author       = personList(as.person("M.B. Ferraro"), as.person("P. Giordani"), as.person("A. Serafini")),
+  journal      = "The {R} Journal",
+  year         = "2019",
+  volume       = "11",
+  url          = "https://journal.r-project.org/archive/2019/RJ-2019-017/RJ-2019-017.pdf",
   textVersion  =
-paste("M.B. Ferraro and P. Giordani (2015) A toolbox for fuzzy clustering using the R programming language, Fuzzy Sets and Systems, 279, 1-16, http://dx.doi.org/10.1016/j.fss.2015.05.001")
+paste("M.B. Ferraro, P. Giordani and A. Serafini (2019) fclust: An R Package for Fuzzy Clustering, The R Journal, 11, https://journal.r-project.org/archive/2019/RJ-2019-017/RJ-2019-017.pdf")
 )
