@@ -1,7 +1,7 @@
 Package: fclust
 Type: Package
 Title: Fuzzy Clustering
-Version: 2.1.1
+Version: 2.1.1.1
 Date: 2019-09-16
 Author: Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini
 Maintainer: Paolo Giordani <paolo.giordani@uniroma1.it>
@@ -15,5 +15,5 @@ Repository: CRAN
 NeedsCompilation: yes
 LazyLoad: yes
 Encoding: UTF-8
-Packaged: 2019-09-16 09:37:03 UTC; alessioserafini
-Date/Publication: 2019-09-17 09:40:07 UTC
+Packaged: 2022-11-16 15:59:35 UTC; hornik
+Date/Publication: 2022-11-16 16:34:44 UTC

@@ -1,4 +1,4 @@
-33b10880c748bfbb81eb81a9d213a31d *DESCRIPTION
+00ed3eab0e2c08973d1f4ac02acf67b5 *DESCRIPTION
 b0edffd3655d6c3dc665526ee66b8420 *NAMESPACE
 0dfc8c3347dccc5678c01fea635fcb8e *NEWS.md
 9a88b635748601f7554fbe55dee574df *R/ARI.F.R
@@ -46,13 +46,13 @@ b4ecdae4127be6fd00fdd6db0da9ca49 *R/cl.size.H.R
 c6ccc50f21caaf87bdca8b30d259f396 *R/print.fclust.R
 c5f29aecf12557645bce3e7833177c22 *R/summary.fclust.R
 5a68b9770171a565851f03662578bebe *R/zzz.R
-c905d89b0121f25a51fb31ccb53f4fe8 *data/Mc.rda
-61e9acde744dbfac1ba4a33bb7daf390 *data/NBA.rda
-fb3b4541374fed64eb82de46f8995cb2 *data/butterfly.rda
-5b45756c800f8bef54534b53ba24def9 *data/houseVotes.rda
-cddb0a908c77b83ca3a6999c29389c64 *data/synt.data.rda
-8ca579bf9a95dfb65490ce68e38e6efb *data/synt.data2.rda
-dbdedf228b6c8c7d42b1f6604bb76c6b *data/unemployment.rda
+79eb4fbbe4a83abfcdd2e597e4a5d633 *data/Mc.rda
+53065cca7daf13e40e18d3bf5026a1ea *data/NBA.rda
+5fa70c3997c70dbd68b4cbdf81bd9dbf *data/butterfly.rda
+ba5eb657c2290b2cdd952dcac0b074e5 *data/houseVotes.rda
+f2ee99895e958a6f25ecf8d1c75f36f6 *data/synt.data.rda
+f249e5c046dbb071b9256ccc1fe1f21a *data/synt.data2.rda
+db745af734f6f7fee874cce5175de99f *data/unemployment.rda
 fcaa80db6e2f55076ba471c2365cd13f *inst/CITATION
 4240bb1390aab51d1c8619d1fe2d7b31 *man/ARI.F.Rd
 a7fe38de6178eac13d2c0f0ce17299ba *man/FKM.Rd
@@ -113,7 +113,7 @@ b9ceb1c4dd6a02ab3b3ce31a1458e17b *src/centroids.cpp
 e41d81fdc2efab5f496e35d285bdc9be *src/centroids.h
 758b123ddcb17404e02970909a66c7b0 *src/distance.cpp
 9a3726d654dc1e3e91d82f09e4e51055 *src/distance.h
-7ee129e361849da2d053cc1b2c891db4 *src/func.cpp
+a0502282dd271f4d0e9a4b5aa8d66aa6 *src/func.cpp
 565b62e286455443739f4e49e4f180b5 *src/func.h
 56d21ba7594c8a47b68e463e48d41489 *src/init.c
 998cc1a0bd41ffad053365bd2342b16f *src/memDeg.cpp

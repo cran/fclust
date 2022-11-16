@@ -121,7 +121,7 @@ void distCheck(NumericMatrix D, unsigned int n, unsigned int p)
     for(int j=0; j<i+1; j++)
     {
 
-      finite = (arma::is_finite(D(i,j)) & arma::is_finite(D(j,i)));
+      finite = (arma::is_finite(D(i,j)) && arma::is_finite(D(j,i)));
       if(finite == false)
       {
         stop("The data set X must not contain NA values");
