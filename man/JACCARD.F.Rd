@@ -14,7 +14,7 @@ JACCARD.F(VC, U, t_norm)
 \item{t_norm}{Type of the triangular norm: "minimum" (minimum triangular norm), "triangular product" (product norm) (default: "minimum")}
 }
 \value{
-\code{jaccard.f}{Value of the fuzzy Jaccard index}
+\item{jaccard.f}{Value of the fuzzy Jaccard index}
 }
 \references{
 Campello, R.J., 2007. A fuzzy extension of the Rand index and other related indexes for clustering and classification assessment. Pattern Recognition Letters, 28, 833-841.

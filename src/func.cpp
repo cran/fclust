@@ -103,7 +103,7 @@ bool Match(int i, arma::uvec B)
 
 // [[Rcpp::export]]
 
-void distCheck(NumericMatrix D, unsigned int n, unsigned int p)
+void distCheck(NumericMatrix D,  int n,  int p)
 {
 
   bool diag = true;
@@ -116,7 +116,7 @@ void distCheck(NumericMatrix D, unsigned int n, unsigned int p)
     stop("D must be a square matrix");
   }
 
-  for(int i=0; i<n;i++)
+  for(int i=0; i<(int)n;i++)
   {
     for(int j=0; j<i+1; j++)
     {
@@ -163,7 +163,7 @@ void distCheck(NumericMatrix D, unsigned int n, unsigned int p)
 
 // [[Rcpp::export]]
 
-double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsigned int n,bool distance = false)
+double silhouette_internal(arma::mat X, arma::mat U, unsigned int p,  int k,  int n,bool distance = false)
 {
 
   arma::vec memb(n); memb.zeros();
@@ -178,7 +178,7 @@ double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned in
 
   double sil = 0;
 
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
 
     memb(i) = U.row(i).index_max();
@@ -188,9 +188,9 @@ double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned in
 
   if(distance == false)
   {
-    for(int i=0;i<(n-1);i++)
+    for(int i=0;i<(int)(n-1);i++)
     {
-      for(int i2=(i+1); i2<n;i2++)
+      for(int i2=(i+1); i2<(int)n;i2++)
       {
         D(i,i2) = sum(pow(X.row(i)-X.row(i2),2.0));
         D(i2,i) = D(i,i2);
@@ -201,19 +201,19 @@ double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned in
     D = X;
   }
 
-  for(int i=0;i<n;i++)
+  for(int i=0;i<(int)n;i++)
   {
-    for(int j=0;j<k;j++)
+    for(int j=0;j<(int)k;j++)
     {
-      for(int i2=0;i2<n;i2++)
+      for(int i2=0;i2<(int)n;i2++)
       {
         if(memb(i2)==j){B(i,j) += D(i,i2);}
       }
     }
   }
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
-    for(int j = 0; j<k;j++)
+    for(int j = 0; j<(int)k;j++)
     {
       if(memb(i) == j)
       {
@@ -247,7 +247,7 @@ double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned in
 
 // [[Rcpp::export]]
 
-List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsigned int n, bool distance = false)
+List silhouette(arma::mat X, arma::mat U, unsigned int p,  int k,  int n, bool distance = false)
 {
   arma::uvec memb(n); memb.zeros();
   arma::ivec count(k); count.zeros();
@@ -261,7 +261,7 @@ List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsign
 
   double sil = 0;
 
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
 
     memb(i) = U.row(i).index_max();
@@ -271,9 +271,9 @@ List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsign
 
   if(distance == false)
   {
-    for(int i=0;i<(n-1);i++)
+    for(int i=0;i<(int)(n-1);i++)
     {
-      for(int i2=(i+1); i2<n;i2++)
+      for(int i2=(i+1); i2<(int)n;i2++)
       {
         D(i,i2) = sum(pow(X.row(i)-X.row(i2),2.0));
         D(i2,i) = D(i,i2);
@@ -287,21 +287,21 @@ List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsign
 
   }
 
-  for(int i=0;i<n;i++)
+  for(int i=0;i<(int)n;i++)
   {
-    for(int j=0;j<k;j++)
+    for(int j=0;j<(int)k;j++)
     {
-      for(int i2=0;i2<n;i2++)
+      for(int i2=0;i2<(int)n;i2++)
       {
-        if(memb(i2)==j){B(i,j) += D(i,i2);}
+        if(memb(i2)==(unsigned int)j){B(i,j) += D(i,i2);}
       }
     }
   }
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
-    for(int j = 0; j<k;j++)
+    for(int j = 0; j<(int)k;j++)
     {
-      if(memb(i) == j)
+      if(memb(i) == (unsigned int)j)
       {
         if (count(j)!=1)
         {
@@ -335,7 +335,7 @@ List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsign
 
 // [[Rcpp::export]]
 
-double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p, unsigned int k, unsigned int n, bool distance = false)
+double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p,  int k,  int n, bool distance = false)
 {
   arma::uvec memb(n); memb.zeros();
   arma::ivec count(k); count.zeros();
@@ -356,7 +356,7 @@ double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p, un
   arma::rowvec uu(k-1); uu.zeros();
   arma::rowvec u(k); u.zeros();
 
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
 
     memb(i) = U.row(i).index_max();
@@ -366,9 +366,9 @@ double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p, un
 
   if(distance == false)
   {
-    for(int i=0;i<(n-1);i++)
+    for(int i=0;i<(int)(n-1);i++)
     {
-      for(int i2=(i+1); i2<n;i2++)
+      for(int i2=(i+1); i2<(int)n;i2++)
       {
         D(i,i2) = sum(pow(X.row(i)-X.row(i2),2.0));
         D(i2,i) = D(i,i2);
@@ -379,22 +379,22 @@ double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p, un
     D = X;
   }
 
-  for(int i=0;i<n;i++)
+  for(int i=0;i<(int)n;i++)
   {
-    for(int j=0;j<k;j++)
+    for(int j=0;j<(int)k;j++)
     {
-      for(int i2=0;i2<n;i2++)
+      for(int i2=0;i2<(int)n;i2++)
       {
-        if(memb(i2)==j){B(i,j) += D(i,i2);}
+        if(memb(i2)==(unsigned int)j){B(i,j) += D(i,i2);}
       }
     }
   }
 
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
-    for(int j = 0; j<k;j++)
+    for(int j = 0; j<(int)k;j++)
     {
-      if(memb(i) == j)
+      if(memb(i) == (unsigned int)j)
       {
         if (count(j)!=1)
         {
@@ -415,7 +415,7 @@ double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha,unsigned int p, un
 
   }
 
-  for(int i = 0; i<n;i++)
+  for(int i = 0; i<(int)n;i++)
   {
     u = arma::sort(U.row(i),"descend");
     uu = u.subvec(1,k-1);
@@ -485,7 +485,7 @@ double partCoef_mod(arma::mat U, unsigned int n, unsigned int k)
 //////////////////////////////////////////////////////////
 
 // [[Rcpp::export]]
-double xie_beni(arma::mat X,arma::mat U, arma::mat H, double m, unsigned int n, unsigned int k)
+double xie_beni(arma::mat X,arma::mat U, arma::mat H, double m, unsigned int n, int k)
 {
 
   arma::mat D(n,k); D = euclidean_distance(X,H,n,k);
@@ -493,9 +493,9 @@ double xie_beni(arma::mat X,arma::mat U, arma::mat H, double m, unsigned int n, 
 
   double out=0;
 
-  for(int i=0; i<(k-1);i++)
+  for(int i=0; i<(int)(k-1);i++)
   {
-    for(int j=(i+1); j<k;j++)
+    for(int j=(i+1); j<(int)k;j++)
     {
       if (sum(pow(H.row(i)-H.row(j),2.0))<distH)
       {

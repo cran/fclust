@@ -1,19 +1,30 @@
 Package: fclust
-Type: Package
 Title: Fuzzy Clustering
-Version: 2.1.1.1
-Date: 2019-09-16
-Author: Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini
+Version: 2.1.2
+Date: 2025-07-22
+Authors@R: c(person(given = "Paolo",
+                      family = "Giordani",
+                      role = c("aut", "cre"),
+                      email = "paolo.giordani@uniroma1.it"),
+               person(given = c("Maria", "Brigida"),
+                      family = "Ferraro",
+                      role = "aut"),
+               person(given = "Alessio",
+                      family = "Serafini",
+                      role = "aut"))
 Maintainer: Paolo Giordani <paolo.giordani@uniroma1.it>
 Description: Algorithms for fuzzy clustering, cluster validity indices and plots for cluster validity and visualizing fuzzy clustering results.
-Depends: R (>= 3.3), base, stats, graphics, grDevices, utils
-Imports: Rcpp (>= 0.12.5), MASS (>= 7.3)
-LinkingTo: Rcpp, RcppArmadillo (>= 0.7)
+Depends: R (>= 4.5), base, stats, graphics, grDevices, utils
+Imports: Rcpp (>= 1.1.0), MASS (>= 7.3-65)
+LinkingTo: Rcpp, RcppArmadillo (>= 14.6.0-1)
 License: GPL (>= 2)
 ByteCompile: true
 Repository: CRAN
 NeedsCompilation: yes
 LazyLoad: yes
 Encoding: UTF-8
-Packaged: 2022-11-16 15:59:35 UTC; hornik
-Date/Publication: 2022-11-16 16:34:44 UTC
+Packaged: 2025-07-22 12:51:00 UTC; paolo
+Author: Paolo Giordani [aut, cre],
+  Maria Brigida Ferraro [aut],
+  Alessio Serafini [aut]
+Date/Publication: 2025-07-22 23:01:24 UTC

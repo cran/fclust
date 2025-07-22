@@ -10,7 +10,7 @@
 \arguments{
  \item{X}{Matrix or data.frame}
  \item{k}{An integer value specifying the number of clusters (default: 2)}
- \item{type}{Fuzzy clustering algorithm: \code{"standard"} (standard algorithms: FKM - type if \code{distance=TRUE}, NEFRC - type if if \code{distance=FALSE}), \code{"polynomial"} (algorithms with the polynomial fuzzifier), \code{"gk"} (Gustafson and Kessel - like algorithms), \code{"gkb"} (Gustafson, Kessel and Babuska - like algorithms), \code{"medoids"} (Medoid - based algorithms) (default: "standard")}
+ \item{type}{Fuzzy clustering algorithm: \code{"standard"} (standard algorithms: FKM - type if \code{distance=FALSE}, NEFRC - type if \code{distance=TRUE}), \code{"polynomial"} (algorithms with the polynomial fuzzifier), \code{"gk"} (Gustafson and Kessel - like algorithms), \code{"gkb"} (Gustafson, Kessel and Babuska - like algorithms), \code{"medoids"} (Medoid - based algorithms) (default: "standard")}
  \item{ent}{If \code{ent=TRUE}, the entropy regularization variant of the algorithm is run (default: FALSE)}
  \item{noise}{If \code{noise=TRUE}, the noise cluster variant of the algorithm is run (default: FALSE)}
  \item{stand}{Standardization: if \code{stand=1}, the clustering algorithm is run using standardized data (default: no standardization)}

@@ -14,7 +14,7 @@ Fclust.compare(VC, U, index, tnorm)
 \item{tnorm}{Type of the triangular norm: "minimum" (minimum triangular norm), "triangular product" (product norm) (default: "minimum")}
 }
 \value{
- \code{out.index}{Vector containing the similarity measures}
+ \item{out.index}{Vector containing the similarity measures}
 }
 \details{
 \code{index} is not case-sensitive. All the measures of similarity share the same properties of their non-fuzzy counterpart.

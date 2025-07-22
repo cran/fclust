@@ -56,8 +56,8 @@
 }
 \details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
- \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational start.
- \cr If a cluster covariance matrix becomes singular, the algorithm stops and the element of \code{value} is {NaN}.
+ \cr If \code{startU} is given, the argument \code{RS} is ignored (the algorithm is run using the rational start) and therefore \code{value}, \code{cput} and \code{iter} refer to such a rational start.
+ \cr If a cluster covariance matrix becomes singular, the algorithm stops and the element of \code{value} is \code{NaN}.
  \cr The default value for \code{ent} is in general not reasonable if \code{FKM.gk.ent} is run using raw data.
  \cr The update of the membership degrees requires the computation of exponential functions. In some cases, this may produce \code{NaN} values and the algorithm stops. Such a problem is usually solved by running \code{FKM.gk.ent.noise} using standardized data (\code{stand=1}).
 }

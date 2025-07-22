@@ -184,6 +184,10 @@ FKM.gk.noise <- function (X, k, m, vp, delta, RS, stand, startU, index,alpha,con
         startU=startU/apply(startU,1,sum)
         cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
       }
+	  if (check==0)
+	  {
+		RS=1
+	  }
       if (missing(index))
       {
         index = "SIL.F"

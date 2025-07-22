@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // F_gkb
 arma::cube F_gkb(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, double m, double gam, unsigned int n, unsigned int k, int p, double mcn, arma::vec vp);
 RcppExport SEXP _fclust_F_gkb(SEXP dataSEXP, SEXP USEXP, SEXP HSEXP, SEXP F0SEXP, SEXP mSEXP, SEXP gamSEXP, SEXP nSEXP, SEXP kSEXP, SEXP pSEXP, SEXP mcnSEXP, SEXP vpSEXP) {
@@ -1012,19 +1017,19 @@ BEGIN_RCPP
 END_RCPP
 }
 // distCheck
-void distCheck(NumericMatrix D, unsigned int n, unsigned int p);
+void distCheck(NumericMatrix D, int n, int p);
 RcppExport SEXP _fclust_distCheck(SEXP DSEXP, SEXP nSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type D(DSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
     distCheck(D, n, p);
     return R_NilValue;
 END_RCPP
 }
 // silhouette_internal
-double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsigned int n, bool distance);
+double silhouette_internal(arma::mat X, arma::mat U, unsigned int p, int k, int n, bool distance);
 RcppExport SEXP _fclust_silhouette_internal(SEXP XSEXP, SEXP USEXP, SEXP pSEXP, SEXP kSEXP, SEXP nSEXP, SEXP distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1032,15 +1037,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
     Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< bool >::type distance(distanceSEXP);
     rcpp_result_gen = Rcpp::wrap(silhouette_internal(X, U, p, k, n, distance));
     return rcpp_result_gen;
 END_RCPP
 }
 // silhouette
-List silhouette(arma::mat X, arma::mat U, unsigned int p, unsigned int k, unsigned int n, bool distance);
+List silhouette(arma::mat X, arma::mat U, unsigned int p, int k, int n, bool distance);
 RcppExport SEXP _fclust_silhouette(SEXP XSEXP, SEXP USEXP, SEXP pSEXP, SEXP kSEXP, SEXP nSEXP, SEXP distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1048,15 +1053,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
     Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< bool >::type distance(distanceSEXP);
     rcpp_result_gen = Rcpp::wrap(silhouette(X, U, p, k, n, distance));
     return rcpp_result_gen;
 END_RCPP
 }
 // silhouetteFuzzy
-double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha, unsigned int p, unsigned int k, unsigned int n, bool distance);
+double silhouetteFuzzy(arma::mat X, arma::mat U, double alpha, unsigned int p, int k, int n, bool distance);
 RcppExport SEXP _fclust_silhouetteFuzzy(SEXP XSEXP, SEXP USEXP, SEXP alphaSEXP, SEXP pSEXP, SEXP kSEXP, SEXP nSEXP, SEXP distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1065,8 +1070,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type U(USEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< bool >::type distance(distanceSEXP);
     rcpp_result_gen = Rcpp::wrap(silhouetteFuzzy(X, U, alpha, p, k, n, distance));
     return rcpp_result_gen;
@@ -1111,7 +1116,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // xie_beni
-double xie_beni(arma::mat X, arma::mat U, arma::mat H, double m, unsigned int n, unsigned int k);
+double xie_beni(arma::mat X, arma::mat U, arma::mat H, double m, unsigned int n, int k);
 RcppExport SEXP _fclust_xie_beni(SEXP XSEXP, SEXP USEXP, SEXP HSEXP, SEXP mSEXP, SEXP nSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -1121,7 +1126,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
     Rcpp::traits::input_parameter< double >::type m(mSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
     rcpp_result_gen = Rcpp::wrap(xie_beni(X, U, H, m, n, k));
     return rcpp_result_gen;
 END_RCPP

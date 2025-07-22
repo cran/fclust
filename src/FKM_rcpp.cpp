@@ -54,7 +54,7 @@ List mainFKM(arma::mat data,
   arma::mat H_opt(k, p); H.zeros();
   arma::mat U_opt(n,k); U.zeros();
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -65,7 +65,7 @@ List mainFKM(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -142,7 +142,7 @@ List mainFKM_U(arma::mat data,
   double ind_max = 0;
   double value = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -225,7 +225,7 @@ List mainFKM_ent(arma::mat data,
   arma::mat H_opt(k, p); H.zeros();
   arma::mat U_opt(n,k); U.zeros();
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -237,7 +237,7 @@ List mainFKM_ent(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -320,7 +320,7 @@ List mainFKM_ent_U(arma::mat data,
   double ind = 0;
   double ind_max = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -398,7 +398,7 @@ List mainFKM_noise(arma::mat data,
 
   int nan_check = 1;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -416,7 +416,7 @@ List mainFKM_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -426,7 +426,7 @@ List mainFKM_noise(arma::mat data,
 
       D = euclidean_distance(data, H, n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
         nan_check = arma::is_finite(U.row(i));
         if(nan_check == 0){
@@ -443,7 +443,7 @@ List mainFKM_noise(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
 
             q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -555,7 +555,7 @@ List mainFKM_noise_U(arma::mat data,
   int nan_check = 1;
 
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -565,7 +565,7 @@ List mainFKM_noise_U(arma::mat data,
 
     D = euclidean_distance(data, H, n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       d = D.row(i);
@@ -579,7 +579,7 @@ List mainFKM_noise_U(arma::mat data,
 
       }else{
 
-        for(int j=0; j<k;j++)
+        for(int j=0; j<(int)k;j++)
         {
 
           q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -676,7 +676,7 @@ List mainFKM_pf(arma::mat data,
   arma::mat H_opt(k, p); H.zeros();
   arma::mat U_opt(n,k); U.zeros();
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -687,7 +687,7 @@ List mainFKM_pf(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -769,7 +769,7 @@ List mainFKM_pf_U(arma::mat data,
   double ind_max = 0;
   double value = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -854,7 +854,7 @@ List mainFKM_ent_noise(arma::mat data,
 
   double eps = std::numeric_limits<double>::epsilon();
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -865,7 +865,7 @@ List mainFKM_ent_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -875,7 +875,7 @@ List mainFKM_ent_noise(arma::mat data,
 
       D = euclidean_distance(data, H, n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
 
         d = D.row(i);
@@ -889,7 +889,7 @@ List mainFKM_ent_noise(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -987,7 +987,7 @@ List mainFKM_ent_noise_U(arma::mat data,
 
   double eps = std::numeric_limits<double>::epsilon();
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -997,7 +997,7 @@ List mainFKM_ent_noise_U(arma::mat data,
 
     D = euclidean_distance(data, H, n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       d = D.row(i);
@@ -1011,7 +1011,7 @@ List mainFKM_ent_noise_U(arma::mat data,
 
       }else{
 
-        for(int j=0; j<k;j++)
+        for(int j=0; j<(int)k;j++)
         {
           U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -1109,7 +1109,7 @@ List mainFKM_pf_noise(arma::mat data,
   int nan_check = 1;
 
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -1122,7 +1122,7 @@ List mainFKM_pf_noise(arma::mat data,
 
     double deltasq = pow(delta,2.0);
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -1132,7 +1132,7 @@ List mainFKM_pf_noise(arma::mat data,
 
       D = euclidean_distance(data, H, n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
         nan_check = arma::is_finite(U.row(i));
         if(nan_check == 0){
@@ -1273,7 +1273,7 @@ List mainFKM_pf_noise_U(arma::mat data,
 
   int nan_check = 1;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -1283,7 +1283,7 @@ List mainFKM_pf_noise_U(arma::mat data,
 
     D = euclidean_distance(data, H, n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       nan_check = arma::is_finite(U.row(i));
@@ -1414,7 +1414,7 @@ List mainFKM_gkb(arma::mat data,
 
   F0.diag().fill(pow(arma::det(arma::cov(data)), (1/(double)p)));
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -1425,7 +1425,7 @@ List mainFKM_gkb(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -1517,7 +1517,7 @@ List mainFKM_gkb_U(arma::mat data,
   double ind = 0;
   double ind_max = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -1608,7 +1608,7 @@ List mainFKM_gkb_ent(arma::mat data,
 
   F0.diag().fill(pow(arma::det(arma::cov(data)), (1/(double)p)));
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -1619,7 +1619,7 @@ List mainFKM_gkb_ent(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -1712,7 +1712,7 @@ List mainFKM_gkb_ent_U(arma::mat data,
   double ind = 0;
   double ind_max = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -1804,7 +1804,7 @@ List mainFKM_gkb_noise(arma::mat data,
 
   int nan_check = 1;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
     int iter = 0;
     U = unifInit(n,k);
@@ -1821,7 +1821,7 @@ List mainFKM_gkb_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -1833,7 +1833,7 @@ List mainFKM_gkb_noise(arma::mat data,
 
       D = euclidean_distance_gkb(data, H, F,n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
 
         d = D.row(i);
@@ -1847,7 +1847,7 @@ List mainFKM_gkb_noise(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
 
             q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -1970,7 +1970,7 @@ List mainFKM_gkb_noise_U(arma::mat data,
 
   int nan_check = 1;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -1982,7 +1982,7 @@ List mainFKM_gkb_noise_U(arma::mat data,
 
     D = euclidean_distance_gkb(data, H, F,n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       d = D.row(i);
@@ -1996,7 +1996,7 @@ List mainFKM_gkb_noise_U(arma::mat data,
 
       }else{
 
-        for(int j=0; j<k;j++)
+        for(int j=0; j<(int)k;j++)
         {
 
           q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -2110,7 +2110,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
 
   F0.diag().fill(pow(arma::det(arma::cov(data)), (1/(double)p)));
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
     int iter = 0;
     U = unifInit(n,k);
@@ -2120,7 +2120,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -2132,7 +2132,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
 
       D = euclidean_distance_gkb(data, H, F,n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
 
         d = D.row(i);
@@ -2146,7 +2146,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -2253,7 +2253,7 @@ List mainFKM_gkb_ent_noise_U(arma::mat data,
   double ind = 0;
   double ind_max = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -2265,7 +2265,7 @@ List mainFKM_gkb_ent_noise_U(arma::mat data,
 
     D = euclidean_distance_gkb(data, H, F,n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       d = D.row(i);
@@ -2279,7 +2279,7 @@ List mainFKM_gkb_ent_noise_U(arma::mat data,
 
       }else{
 
-        for(int j=0; j<k;j++)
+        for(int j=0; j<(int)k;j++)
         {
           U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -2382,7 +2382,7 @@ List mainFKM_gk(arma::mat data,
   int countNoConv = 0;
   int warn = 0;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
 
@@ -2393,7 +2393,7 @@ List mainFKM_gk(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -2472,7 +2472,7 @@ List mainFKM_gk(arma::mat data,
     warning("Some membership degrees are NaN (Suggestion: Increase the number of starting points RS)");
   }
 
-  if(countNoConv == rs)
+  if(countNoConv == (int)rs)
   {
     warn = 1;
   }
@@ -2523,7 +2523,7 @@ List mainFKM_gk_U(arma::mat data,
 
   int warn = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -2641,7 +2641,7 @@ List mainFKM_gk_ent(arma::mat data,
   int countNoConv = 0;
   int warn = 0;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
     int iter = 0;
@@ -2650,7 +2650,7 @@ List mainFKM_gk_ent(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -2727,7 +2727,7 @@ List mainFKM_gk_ent(arma::mat data,
 
   }
 
-  if(countNoConv == rs)
+  if(countNoConv == (int)rs)
   {
     warn = 1;
   }
@@ -2776,7 +2776,7 @@ List mainFKM_gk_ent_U(arma::mat data,
 
   int warn = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -2896,7 +2896,7 @@ List mainFKM_gk_noise(arma::mat data,
   int nan_check = 1;
 
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
     int iter = 0;
@@ -2905,7 +2905,7 @@ List mainFKM_gk_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -2930,7 +2930,7 @@ List mainFKM_gk_noise(arma::mat data,
       }else{
 
         D = D_temp;
-        for(int i=0; i<n;i++)
+        for(int i=0; i<(int)n;i++)
         {
 
           d = D.row(i);
@@ -2944,7 +2944,7 @@ List mainFKM_gk_noise(arma::mat data,
 
           }else{
 
-            for(int j=0; j<k;j++)
+            for(int j=0; j<(int)k;j++)
             {
 
               q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -3005,7 +3005,7 @@ List mainFKM_gk_noise(arma::mat data,
     warning("Some membership degrees are NaN (Suggestion: Increase the number of starting points RS)");
 
   }
-  if(countNoConv == rs)
+  if(countNoConv == (int)rs)
   {
     warn = 1;
   }
@@ -3063,7 +3063,7 @@ List mainFKM_gk_noise_U(arma::mat data,
 
   int warn = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -3085,7 +3085,7 @@ List mainFKM_gk_noise_U(arma::mat data,
     }else{
 
       D = D_temp;
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
 
         d = D.row(i);
@@ -3098,7 +3098,7 @@ List mainFKM_gk_noise_U(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
 
             q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -3216,7 +3216,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
 
   double eps = std::numeric_limits<double>::epsilon();
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
     int iter = 0;
@@ -3225,7 +3225,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
@@ -3240,7 +3240,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
       D_temp = euclidean_distance_gk(data, H, F,D, n, k,p);
 
       if(D_temp.is_empty()){
-
+		warn = 1;
         U = U_old;
         D = D_old;
         F = F_old;
@@ -3251,7 +3251,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
       }else{
 
         D = D_temp;
-        for(int i=0; i<n;i++)
+        for(int i=0; i<(int)n;i++)
         {
 
           d = D.row(i);
@@ -3265,7 +3265,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
 
           }else{
 
-            for(int j=0; j<k;j++)
+            for(int j=0; j<(int)k;j++)
             {
               U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -3374,7 +3374,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
 
   int warn = 0;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
@@ -3396,7 +3396,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
     }else{
 
       D = D_temp;
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
 
         d = D.row(i);
@@ -3410,7 +3410,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
@@ -3461,7 +3461,8 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
                       Rcpp::Named("index") = ind,
                       Rcpp::Named("index_max") = ind_max,
                       Rcpp::Named("k") = k,
-                      Rcpp::Named("vp") = vp);
+                      Rcpp::Named("vp") = vp,
+					  Rcpp::Named("warn") = warn);
 
 }
 
@@ -3516,7 +3517,7 @@ List mainFKM_med(arma::mat data,
 
   int nan_check = 1;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
     int iter = 0;
     U = unifInit(n,k);
@@ -3524,17 +3525,17 @@ List mainFKM_med(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
       U_old = U;
 
-      for(int c = 0; c < k; c++)
+      for(int c = 0; c < (int)k; c++)
       {
         min_med_old = min_med_const;
 
-        for(int i=0; i<n; i++)
+        for(int i=0; i<(int)n; i++)
         {
           min_med = 0;
           nan_check = arma::is_finite(U.row(i));
@@ -3542,7 +3543,7 @@ List mainFKM_med(arma::mat data,
             break;
           }
 
-          for(int j=0; j<n; j++)
+          for(int j=0; j<(int)n; j++)
           {
             min_med = min_med + pow(U(j,c),m) * sum(pow(data.row(i) - data.row(j),2.0));
           }
@@ -3661,18 +3662,18 @@ List mainFKM_med_U(arma::mat data,
 
   int nan_check = 1;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
     U_old = U;
     medoid.zeros();
 
-    for(int c = 0; c < k; c++)
+    for(int c = 0; c < (int)k; c++)
     {
       min_med_old = min_med_const;
 
-      for(int i=0; i<n; i++)
+      for(int i=0; i<(int)n; i++)
       {
         nan_check = arma::is_finite(U.row(i));
         if(nan_check == 0){
@@ -3680,7 +3681,7 @@ List mainFKM_med_U(arma::mat data,
         }
         min_med = 0;
 
-        for(int j=0; j<n; j++)
+        for(int j=0; j<(int)n; j++)
         {
           min_med = min_med + pow(U(j,c),m) * sum(pow(data.row(i) - data.row(j),2.0));
 
@@ -3807,7 +3808,7 @@ List mainFKM_med_noise(arma::mat data,
 
   int nan_check = 1;
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
 
     int iter = 0;
@@ -3816,21 +3817,21 @@ List mainFKM_med_noise(arma::mat data,
 
     bool prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
 
       iter++;
       U_old = U;
 
-      for(int c = 0; c < k; c++)
+      for(int c = 0; c < (int)k; c++)
       {
         min_med_old = min_med_const;
 
-        for(int i=0; i<n; i++)
+        for(int i=0; i<(int)n; i++)
         {
           min_med = 0;
 
-          for(int j=0; j<n; j++)
+          for(int j=0; j<(int)n; j++)
           {
             min_med = min_med + pow(U(j,c),m) * sum(pow(data.row(i) - data.row(j),2.0));
           }
@@ -3851,7 +3852,7 @@ List mainFKM_med_noise(arma::mat data,
 
       D = euclidean_distance_medoid(data, H, n, k);
 
-      for(int i=0; i<n;i++)
+      for(int i=0; i<(int)n;i++)
       {
         nan_check = arma::is_finite(U.row(i));
         if(nan_check == 0){
@@ -3871,7 +3872,7 @@ List mainFKM_med_noise(arma::mat data,
 
           }else{
 
-            for(int j=0; j<k;j++)
+            for(int j=0; j<(int)k;j++)
             {
 
               q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -4001,21 +4002,21 @@ List mainFKM_med_noise_U(arma::mat data,
 
   int nan_check = 1;
 
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
 
     iter++;
     U_old = U;
 
-    for(int c = 0; c < k; c++)
+    for(int c = 0; c < (int)k; c++)
     {
       min_med_old = min_med_const;
 
-      for(int i=0; i<n; i++)
+      for(int i=0; i<(int)n; i++)
       {
         min_med = 0;
 
-        for(int j=0; j<n; j++)
+        for(int j=0; j<(int)n; j++)
         {
           min_med = min_med + pow(U(j,c),m) * sum(pow(data.row(i) - data.row(j),2.0));
 
@@ -4038,7 +4039,7 @@ List mainFKM_med_noise_U(arma::mat data,
 
     D = euclidean_distance_medoid(data, H, n, k);
 
-    for(int i=0; i<n;i++)
+    for(int i=0; i<(int)n;i++)
     {
 
       nan_check = arma::is_finite(U.row(i));
@@ -4058,7 +4059,7 @@ List mainFKM_med_noise_U(arma::mat data,
 
         }else{
 
-          for(int j=0; j<k;j++)
+          for(int j=0; j<(int)k;j++)
           {
 
             q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -4169,15 +4170,15 @@ List mainnefrc(arma::mat D,
   bool prova = true;
 
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
     iter = 0;
     U = unifInit(n,k);
 
     prova = true;
 
-    for(int i=0; i<n;i++){
-      for(int  j=0; j<k;j++)
+    for(int i=0; i<(int)n;i++){
+      for(int  j=0; j<(int)k;j++)
       {
 
         first_temp  = m * arma::as_scalar((pow(U.col(j),m).t() * D.col(i))) / arma::as_scalar(sum(pow(U.col(j),m)));
@@ -4187,15 +4188,15 @@ List mainnefrc(arma::mat D,
       }
     }
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
       iter++;
       U_old = U;
       func_old = func;
 
 
-      for(int i=0; i<n;i++){
-        for(int  j=0; j<k;j++)
+      for(int i=0; i<(int)n;i++){
+        for(int  j=0; j<(int)k;j++)
         {
 
           first_temp  = m * arma::as_scalar((pow(U.col(j),m).t() * D.col(i))) / arma::as_scalar(sum(pow(U.col(j),m)));
@@ -4208,7 +4209,7 @@ List mainnefrc(arma::mat D,
         {
           B1 = 1/b.row(i);
           dens = sum(B1.elem(arma::find(B1 > 0)));
-          for(int j=0; j < k; j++)
+          for(int j=0; j < (int)k; j++)
           {
             U(i,j) = (1/arma::as_scalar(b(i,j))) / dens;
             if(U(i,j) < 0)
@@ -4233,7 +4234,7 @@ List mainnefrc(arma::mat D,
       }
       func = 0;
 
-      for(int j = 0; j<k;j++)
+      for(int j = 0; j<(int)k;j++)
       {
         func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
       }
@@ -4297,8 +4298,8 @@ List mainnefrc_U(arma::mat D,
                double alpha) {
 
   int iter = 0;
-  arma::vec value; value.zeros();
-  arma::vec it; it.zeros();
+  //arma::vec value; value.zeros();
+  //arma::vec it; it.zeros();
   arma::mat U_old = U;
   arma::mat A(n,k); A.zeros();
   arma::mat b(n,k); b.zeros();
@@ -4313,6 +4314,7 @@ List mainnefrc_U(arma::mat D,
 
   double ind = 0;
   double ind_max = 0;
+             double value = 0;
 
   double func = 0;
   double func_old = 0;
@@ -4324,15 +4326,15 @@ List mainnefrc_U(arma::mat D,
   bool prova = true;
 
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
       iter++;
       U_old = U;
       func_old = func;
 
 
-      for(int i=0; i<n;i++){
-        for(int  j=0; j<k;j++)
+      for(int i=0; i<(int)n;i++){
+        for(int  j=0; j<(int)k;j++)
         {
 
           first_temp  = m * arma::as_scalar((pow(U.col(j),m).t() * D.col(i))) / arma::as_scalar(sum(pow(U.col(j),m)));
@@ -4345,7 +4347,7 @@ List mainnefrc_U(arma::mat D,
         {
           B1 = 1/b.row(i);
           dens = sum(B1.elem(arma::find(B1 > 0)));
-          for(int j=0; j < k; j++)
+          for(int j=0; j < (int)k; j++)
           {
             U(i,j) = (1/arma::as_scalar(b(i,j))) / dens;
             if(U(i,j) < 0)
@@ -4371,7 +4373,7 @@ List mainnefrc_U(arma::mat D,
       }
       func = 0;
 
-      for(int j = 0; j<k;j++)
+      for(int j = 0; j<(int)k;j++)
       {
         func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
       }
@@ -4386,7 +4388,7 @@ List mainnefrc_U(arma::mat D,
     }
 
 
-    it = iter;
+    //it = iter;
     value = func;
 
 
@@ -4405,7 +4407,7 @@ List mainnefrc_U(arma::mat D,
   }
 
   return List::create(Rcpp::Named("U") = U,
-                      Rcpp::Named("iter") = it,
+                      Rcpp::Named("iter") = iter,
                       Rcpp::Named("value") = value,
                       Rcpp::Named("k") = k,
                       Rcpp::Named("index") = ind,
@@ -4464,22 +4466,22 @@ List mainrnefrc(arma::mat D,
   bool prova = true;
 
 
-  for(int r=0; r<rs; r++)
+  for(int r=0; r<(int)rs; r++)
   {
     iter = 0;
     U = unifInit(n,k);
 
     prova = true;
 
-    while(prova && (iter < maxit))
+    while(prova && (iter < (int)maxit))
     {
       iter++;
       U_old = U;
       func_old = func;
 
 
-      for(int i=0; i<n;i++){
-        for(int  j=0; j<k;j++)
+      for(int i=0; i<(int)n;i++){
+        for(int  j=0; j<(int)k;j++)
         {
 
           first_temp  = m * arma::as_scalar((pow(U.col(j),m).t() * D.col(i))) / arma::as_scalar(sum(pow(U.col(j),m)));
@@ -4501,7 +4503,7 @@ List mainrnefrc(arma::mat D,
           {
             dens  += B2;
           }
-          for(int j=0; j < k; j++)
+          for(int j=0; j < (int)k; j++)
           {
             U(i,j) = (1/arma::as_scalar(b(i,j))) / dens;
             if(U(i,j) < 0)
@@ -4531,7 +4533,7 @@ List mainrnefrc(arma::mat D,
 
       func = 0;
 
-      for(int j = 0; j<k;j++)
+      for(int j = 0; j<(int)k;j++)
       {
         func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
       }
@@ -4598,8 +4600,8 @@ List mainrnefrc_U(arma::mat D,
                   double alpha) {
 
   int iter = 0;
-  arma::vec value; value.zeros();
-  arma::vec it; it.zeros();
+  //arma::vec value; value.zeros();
+  //arma::vec it; it.zeros();
   arma::mat U_old = U;
   arma::mat A(n,k); A.zeros();
   arma::mat b(n,k); b.zeros();
@@ -4625,17 +4627,17 @@ List mainrnefrc_U(arma::mat D,
   // arma::mat U_opt(n,k); U_opt.zeros();
 
   bool prova = true;
+			double value = 0;
 
-
-  while(prova && (iter < maxit))
+  while(prova && (iter < (int)maxit))
   {
     iter++;
     U_old = U;
     func_old = func;
 
 
-    for(int i=0; i<n;i++){
-      for(int  j=0; j<k;j++)
+    for(int i=0; i<(int)n;i++){
+      for(int  j=0; j<(int)k;j++)
       {
 
         first_temp  = m * arma::as_scalar((pow(U.col(j),m).t() * D.col(i))) / arma::as_scalar(sum(pow(U.col(j),m)));
@@ -4657,7 +4659,7 @@ List mainrnefrc_U(arma::mat D,
         {
           dens  += B2;
         }
-        for(int j=0; j < k; j++)
+        for(int j=0; j < (int)k; j++)
         {
           U(i,j) = (1/arma::as_scalar(b(i,j))) / dens;
           if(U(i,j) < 0)
@@ -4687,7 +4689,7 @@ List mainrnefrc_U(arma::mat D,
 
     func = 0;
 
-    for(int j = 0; j<k;j++)
+    for(int j = 0; j<(int)k;j++)
     {
       func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
     }
@@ -4703,7 +4705,7 @@ List mainrnefrc_U(arma::mat D,
   }
 
 
-  it = iter;
+  //it = iter;
   value = func;
 
 
@@ -4723,10 +4725,9 @@ List mainrnefrc_U(arma::mat D,
   }
 
   return List::create(Rcpp::Named("U") = U,
-                      Rcpp::Named("iter") = it,
+                      Rcpp::Named("iter") = iter,
                       Rcpp::Named("value") = value,
                       Rcpp::Named("k") = k,
                       Rcpp::Named("index") = ind,
                       Rcpp::Named("index_max") = ind_max);
-
 }

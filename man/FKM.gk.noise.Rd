@@ -50,8 +50,8 @@
 }
 \details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
- \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational start.
- \cr If a cluster covariance matrix becomes singular, then the algorithm stops and the element of \code{value} is {NaN}.
+ \cr If \code{startU} is given, the argument \code{RS} is ignored (the algorithm is run using the rational start) and therefore \code{value}, \code{cput} and \code{iter} refer to such a rational start.
+ \cr If a cluster covariance matrix becomes singular, then the algorithm stops and the element of \code{value} is \code{NaN}.
  \cr The Babuska et al. variant in \code{FKM.gkb.noise} is recommended.
 }
 \references{

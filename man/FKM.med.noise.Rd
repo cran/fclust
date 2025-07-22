@@ -49,7 +49,7 @@
 } 
 \details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
- \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational start.
+ \cr If \code{startU} is given, the argument \code{RS} is ignored (the algorithm is run using the rational start) and therefore \code{value}, \code{cput} and \code{iter} refer to such a rational start.
  \cr As for \code{FKM.med}, in \code{FKM.med.noise} the parameter of fuzziness is usually lower than the one used in \code{FKM}.
 } 
 \references{

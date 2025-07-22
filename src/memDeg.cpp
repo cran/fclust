@@ -21,7 +21,7 @@ arma::mat memb_degree(arma::mat D, double m, unsigned int n, unsigned int k, uns
   arma::rowvec d(n); d.zeros();
   arma::uword mm = 0;
 
-  for(int i=0; i<n;i++)
+  for(int i=0; i<(int)n;i++)
   {
 
     d = D.row(i);
@@ -34,7 +34,7 @@ arma::mat memb_degree(arma::mat D, double m, unsigned int n, unsigned int k, uns
 
     }else{
 
-      for(int j=0; j<k;j++)
+      for(int j=0; j<(int)k;j++)
       {
 
         out(i,j) = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
@@ -65,7 +65,7 @@ arma::mat memb_degree_pf(arma::mat D, double b, unsigned int n, unsigned int k, 
 
   arma::uvec id;
 
-  for(int i=0; i<n;i++)
+  for(int i=0; i<(int)n;i++)
   {
 
     d = D.row(i);
@@ -120,7 +120,7 @@ arma::mat memb_degree_ent(arma::mat D, double ent, unsigned int n, unsigned int 
 
   double    eps = std::numeric_limits<double>::epsilon();
 
-  for(int i=0; i<n;i++)
+  for(int i=0; i<(int)n;i++)
   {
 
     d = D.row(i);
@@ -133,7 +133,7 @@ arma::mat memb_degree_ent(arma::mat D, double ent, unsigned int n, unsigned int 
 
     }else{
 
-      for(int j=0; j<k;j++)
+      for(int j=0; j<(int)k;j++)
       {
         out(i,j) = (exp(-arma::as_scalar(D(i,j))/ent)) / sum(exp(D.row(i)/(-ent)));
         if(arma::is_finite(out(i,j)) == false)
@@ -166,14 +166,14 @@ arma::mat memb_degree_medoid(arma::mat D, arma::uvec medoid, double m, unsigned 
   arma::mat out(n,k); out.zeros();
   arma::rowvec d(n); d.zeros();
 
-  bool index_temp_med = true;
+  //bool index_temp_med = true;
   arma::uvec find_temp(1); find_temp.zeros();
 
-  for(int i=0; i<n;i++)
+  for(int i=0; i<(int)n;i++)
   {
 
     d = D.row(i);
-    index_temp_med = Match(i,medoid);
+    //index_temp_med = Match(i,medoid);
 
     if(d.min() == 0)
     {
@@ -183,7 +183,7 @@ arma::mat memb_degree_medoid(arma::mat D, arma::uvec medoid, double m, unsigned 
 
     }else{
 
-      for(int j=0; j<k;j++)
+      for(int j=0; j<(int)k;j++)
       {
 
         out(i,j) = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));

@@ -33,10 +33,10 @@ arma::cube F_gkb(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, double 
   double em = 0;
   double em_mcm = 0;
 
-  for(int i=0; i<k; i++)
+  for(int i=0; i<(int)k; i++)
   {
 
-    for(int j=0; j<n; j++)
+    for(int j=0; j<(int)n; j++)
     {
 
       F.slice(i) += pow(U(j,i),m)* (data.row(j) - H.row(i)).t()*(data.row(j) - H.row(i));
@@ -93,10 +93,10 @@ arma::cube F_gkb_ent(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, dou
   double em = 0;
   double em_mcm = 0;
 
-  for(int i=0; i<k; i++)
+  for(int i=0; i<(int)k; i++)
   {
 
-    for(int j=0; j<n; j++)
+    for(int j=0; j<(int)n; j++)
     {
 
       F.slice(i) += U(j,i)* (data.row(j) - H.row(i)).t()*(data.row(j) - H.row(i));
@@ -143,9 +143,9 @@ arma::cube F_gk(arma::mat data, arma::mat U, arma::mat H, double m,unsigned int 
   double dd = 0;
   arma::cube F(p,p,k); F.zeros();
 
-  for(int i = 0; i<k; i++)
+  for(int i = 0; i<(int)k; i++)
   {
-    for(int j=0; j<n; j++)
+    for(int j=0; j<(int)n; j++)
     {
 
       F.slice(i) += pow(U(j,i),m)* (data.row(j) - H.row(i)).t()*(data.row(j) - H.row(i));
@@ -169,9 +169,9 @@ arma::cube F_gk_ent(arma::mat data, arma::mat U, arma::mat H,unsigned int n, uns
   double dd = 0;
   arma::cube F(p,p,k); F.zeros();
 
-  for(int i = 0; i<k; i++)
+  for(int i = 0; i<(int)k; i++)
   {
-    for(int j=0; j<n; j++)
+    for(int j=0; j<(int)n; j++)
     {
       F.slice(i) += U(j,i)* (data.row(j) - H.row(i)).t()*(data.row(j) - H.row(i));
     }

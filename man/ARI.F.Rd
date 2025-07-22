@@ -14,7 +14,7 @@ ARI.F(VC, U, t_norm)
 \item{t_norm}{Type of the triangular norm: "minimum" (minimum triangular norm), "triangular product" (product norm) (default: "minimum")}
 }
 \value{
-\code{ari.f}{Value of the fuzzy adjusted Rand index}
+\item{ari.f}{Value of the fuzzy adjusted Rand index}
 }
 \references{
 Campello, R.J., 2007. A fuzzy extension of the Rand index and other related indexes for clustering and classification assessment. Pattern Recognition Letters, 28, 833-841.

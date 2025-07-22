@@ -19,9 +19,9 @@ arma::mat euclidean_distance(arma::mat data, arma::mat H, unsigned int n, unsign
 
   arma::mat out(n,k); out.zeros();
 
-  for(int i=0; i<n; i++)
+  for(int i=0; i<(int)n; i++)
   {
-    for(int j=0; j<k; j++)
+    for(int j=0; j<(int)k; j++)
     {
 
       out(i,j) = sum(square((data.row(i) - H.row(j))));
@@ -45,9 +45,9 @@ arma::mat euclidean_distance_gkb(arma::mat data, arma::mat H, arma::cube F, unsi
 
   arma::mat out(n,k); out.zeros();
 
-  for(int i=0; i<n; i++)
+  for(int i=0; i<(int)n; i++)
   {
-    for(int j=0; j<k; j++)
+    for(int j=0; j<(int)k; j++)
     {
       out(i,j) = arma::as_scalar(arma::dot((data.row(i)-H.row(j)) * arma::pinv(F.slice(j)) , (data.row(i)-H.row(j)).t()));
 
@@ -70,9 +70,9 @@ arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma:
   arma::rowvec temp = data.row(1);
   bool check = false;
 
-  for(int i=0; i<n; i++)
+  for(int i=0; i<(int)n; i++)
   {
-    for(int j=0; j<k; j++)
+    for(int j=0; j<(int)k; j++)
     {
       inv_temp = InvCheck(F.slice(j));
       check = (inv_temp.is_empty() == true);
@@ -108,9 +108,9 @@ arma::mat euclidean_distance_gk(arma::mat data, arma::mat H, arma::cube F, arma:
 arma::mat euclidean_distance_medoid(arma::mat data, arma::mat H, unsigned int n, unsigned int k, bool Square = false)
 {
   arma::mat out(n,k); out.zeros();
-  for(int i=0; i<n; i++)
+  for(int i=0; i<(int)n; i++)
   {
-    for(int j=0; j<k; j++)
+    for(int j=0; j<(int)k; j++)
     {
       out(i,j) = sum(square((data.row(i) - H.row(j))));
       if(Square == true) {out(i,j) = sqrt(out(i,j));}

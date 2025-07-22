@@ -181,6 +181,10 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed = NULL)
       startU=startU/apply(startU,1,sum)
       cat("The sums of the rows of startU must be equal to 1: the rows of startU will be normalized to unit row-wise sum ",fill=TRUE)
     }
+	if (check==0)
+	{
+		RS=1
+	}
     if (missing(index))
     {
       index = "SIL.F"
@@ -225,6 +229,11 @@ NEFRC = function(D, k, m, RS, startU,index,alpha,conv, maxit, seed = NULL)
   {
     m=2
   }
+    if(length(m) != 1){
+      m = 2
+      cat("The parameter of fuzziness m must be a single value: the default value m=2 will be used",fill=TRUE)
+
+    }
   if (!is.numeric(m))
   {
     m=2

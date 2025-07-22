@@ -37,12 +37,12 @@ List partition_comp(arma::mat HardClust, arma::mat Fuzzy, std::string t_norm)
 
   if(t_norm == "product") {tnorm = false;}
 
-  for(int j2 = 1; j2<N; j2++)
+  for(int j2 = 1; j2<(int)N; j2++)
   {
     for(int j1 = 0; j1<(j2); j1++)
     {
 
-      for(int i = 0; i<k; i++)
+      for(int i = 0; i<(int)k; i++)
       {
 
         if(tnorm == true){
@@ -54,9 +54,9 @@ List partition_comp(arma::mat HardClust, arma::mat Fuzzy, std::string t_norm)
         }
       }
 
-      for(int i1 = 0; i1<k; i1++)
+      for(int i1 = 0; i1<(int)k; i1++)
       {
-        for(int i2 = 0; i2<k; i2++)
+        for(int i2 = 0; i2<(int)k; i2++)
         {
           if(i1 != i2)
           {
@@ -71,7 +71,7 @@ List partition_comp(arma::mat HardClust, arma::mat Fuzzy, std::string t_norm)
         }
       }
 
-      for(int l = 0; l<v; l++)
+      for(int l = 0; l<(int)v; l++)
       {
 
         if(tnorm == true){
@@ -83,9 +83,9 @@ List partition_comp(arma::mat HardClust, arma::mat Fuzzy, std::string t_norm)
         }
       }
 
-      for(int l1 = 0; l1<v; l1++)
+      for(int l1 = 0; l1<(int)v; l1++)
       {
-        for(int l2 = 0; l2<v; l2++)
+        for(int l2 = 0; l2<(int)v; l2++)
         {
           if(l1 !=l2)
           {

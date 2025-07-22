@@ -47,7 +47,7 @@
 } 
 \details{
  If \code{startU} is given, the argument \code{k} is ignored (the number of clusters is \code{ncol(startU)}).
- \cr If \code{startU} is given, the first element of \code{value}, \code{cput} and \code{iter} refer to the rational start.
+ \cr If \code{startU} is given, the argument \code{RS} is ignored (the algorithm is run using the rational start) and therefore \code{value}, \code{cput} and \code{iter} refer to such a rational start.
 } 
 \references{
 Winkler R., Klawonn F., Hoeppner F., Kruse R., 2010. Fuzzy Cluster Analysis of Larger Data Sets. In: Scalable Fuzzy Algorithms for Data Management and Analysis: Methods and Design IGI Global, pp. 302-331. IGI Global, Hershey.
@@ -56,6 +56,7 @@ Winkler R., Klawonn F., Hoeppner F., Kruse R., 2010. Fuzzy Cluster Analysis of L
 \author{Paolo Giordani, Maria Brigida Ferraro, Alessio Serafini}
 \seealso{\code{\link{FKM.pf.noise}}, \code{\link{Fclust}}, \code{\link{Fclust.index}}, \code{\link{print.fclust}}, \code{\link{summary.fclust}}, \code{\link{plot.fclust}}, \code{\link{Mc}}}
 \examples{
+\dontrun{
 ## McDonald's data
 data(Mc)
 names(Mc)
@@ -69,6 +70,6 @@ Mc=Mc[,-1]
 clust=FKM.pf(Mc[,1:(ncol(Mc)-1)],k=6,stand=1)
 ## fuzzy k-means with polynomial fuzzifier, selecting the number of clusters  
 ## (excluded the factor column Type (last column))
-clust=FKM.pf(Mc[,1:(ncol(Mc)-1)],k=2:6,stand=1)
+clust=FKM.pf(Mc[,1:(ncol(Mc)-1)],k=2:6,stand=1)}
 }
 \keyword{multivariate}
