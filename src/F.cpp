@@ -48,7 +48,7 @@ arma::cube F_gkb(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, double 
 
     kappa = arma::cond(F.slice(i));
     kappaCond = kappa > mcn;
-    kappaFin = arma::is_finite(kappa);
+    kappaFin = std::isfinite(kappa);
 
     if(kappaCond | !kappaFin)
     {
@@ -109,7 +109,7 @@ arma::cube F_gkb_ent(arma::mat data, arma::mat U, arma::mat H, arma::mat F0, dou
     kappa = arma::cond(F.slice(i));
 
     kappaCond = kappa > pow(10.0,15.0);
-    kappaFin = arma::is_finite(kappa);
+    kappaFin = std::isfinite(kappa);
 
 
     if(kappaCond | !kappaFin)

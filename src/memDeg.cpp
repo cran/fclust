@@ -136,7 +136,7 @@ arma::mat memb_degree_ent(arma::mat D, double ent, unsigned int n, unsigned int 
       for(int j=0; j<(int)k;j++)
       {
         out(i,j) = (exp(-arma::as_scalar(D(i,j))/ent)) / sum(exp(D.row(i)/(-ent)));
-        if(arma::is_finite(out(i,j)) == false)
+        if(std::isfinite(out(i,j)) == false)
         {
           stop("Some membership degrees are NaN (Suggestion: run FKM.ent using standardized data)");
         }

@@ -6,7 +6,7 @@ bibentry(bibtype = "Article",
 		 journal      = "The {R} Journal",
 		 year         = "2019",
 		 volume       = "11",
-		 url          = "https://journal.r-project.org/archive/2019/RJ-2019-017/RJ-2019-017.pdf",
+		 url          = "https://journal.r-project.org/articles/RJ-2019-017/RJ-2019-017.pdf",
 		 header       = "To cite fclust in publications use:",
 		 textVersion  =  paste("M.B. Ferraro, P. Giordani and A. Serafini (2019) fclust: An R Package for Fuzzy Clustering, The R Journal, 11, https://journal.r-project.org/archive/2019/RJ-2019-017/RJ-2019-017.pdf")
 )

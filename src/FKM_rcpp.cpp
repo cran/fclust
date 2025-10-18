@@ -84,7 +84,7 @@ List mainFKM(arma::mat data,
     func = accu(pow(U,m)%D);
     it(r) = iter;
     value(r) = func;
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ( (r == 0) | (func < func_opt) )
       {
@@ -258,7 +258,7 @@ List mainFKM_ent(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -428,7 +428,7 @@ List mainFKM_noise(arma::mat data,
 
       for(int i=0; i<(int)n;i++)
       {
-        nan_check = arma::is_finite(U.row(i));
+        nan_check = U.row(i).is_finite();
         if(nan_check == 0){
           break;
         }
@@ -473,7 +473,7 @@ List mainFKM_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -485,7 +485,7 @@ List mainFKM_noise(arma::mat data,
   }
 
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -584,7 +584,7 @@ List mainFKM_noise_U(arma::mat data,
 
           q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
           q2 = pow(arma::as_scalar(D(i,j)),1/(m-1.0)) / pow(delta,2/(m-1.0));
-          nan_check = arma::is_finite(U.row(i));
+          nan_check = U.row(i).is_finite();
           if(nan_check == 0){
             break;
           }
@@ -707,7 +707,7 @@ List mainFKM_pf(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -893,7 +893,7 @@ List mainFKM_ent_noise(arma::mat data,
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-            if(arma::is_finite(U(i,j)) == false)
+            if(std::isfinite(U(i,j)) == false)
             {
               stop("Some membership degrees are NaN (Suggestion: run FKM.ent.noise using standardized data)");
             }
@@ -916,7 +916,7 @@ List mainFKM_ent_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -1015,7 +1015,7 @@ List mainFKM_ent_noise_U(arma::mat data,
         {
           U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-          if(arma::is_finite(U(i,j)) == false)
+          if(std::isfinite(U(i,j)) == false)
           {
             stop("Some membership degrees are NaN (Suggestion: run FKM.ent.noise using standardized data)");
           }
@@ -1134,7 +1134,7 @@ List mainFKM_pf_noise(arma::mat data,
 
       for(int i=0; i<(int)n;i++)
       {
-        nan_check = arma::is_finite(U.row(i));
+        nan_check = U.row(i).is_finite();
         if(nan_check == 0){
           break;
         }
@@ -1190,7 +1190,7 @@ List mainFKM_pf_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -1203,7 +1203,7 @@ List mainFKM_pf_noise(arma::mat data,
 
   ind = 1;
   ind_max = ind;
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, 1,  n, k, p,  exp(1.0), alpha);
 
@@ -1286,7 +1286,7 @@ List mainFKM_pf_noise_U(arma::mat data,
     for(int i=0; i<(int)n;i++)
     {
 
-      nan_check = arma::is_finite(U.row(i));
+      nan_check = U.row(i).is_finite();
       if(nan_check == 0){
         break;
       }
@@ -1447,7 +1447,7 @@ List mainFKM_gkb(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -1641,7 +1641,7 @@ List mainFKM_gkb_ent(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -1877,7 +1877,7 @@ List mainFKM_gkb_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -1889,7 +1889,7 @@ List mainFKM_gkb_noise(arma::mat data,
     }
   }
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -2001,7 +2001,7 @@ List mainFKM_gkb_noise_U(arma::mat data,
 
           q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
           q2 = pow(arma::as_scalar(D(i,j)),1/(m-1.0)) / pow(delta,2/(m-1.0));
-          nan_check = arma::is_finite(U.row(i));
+          nan_check = U.row(i).is_finite();
           if(nan_check == 0){
             break;
           }
@@ -2150,7 +2150,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-            if(arma::is_finite(U(i,j)) == false)
+            if(std::isfinite(U(i,j)) == false)
             {
               stop("Some membership degrees are NaN (Suggestion: run FKM.gkb.ent.noise using standardized data)");
             }
@@ -2172,7 +2172,7 @@ List mainFKM_gkb_ent_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -2283,7 +2283,7 @@ List mainFKM_gkb_ent_noise_U(arma::mat data,
         {
           U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-          if(arma::is_finite(U(i,j)) == false)
+          if(std::isfinite(U(i,j)) == false)
           {
             stop("Some membership degrees are NaN (Suggestion: run FKM.gkb.ent.noise using standardized data)");
           }
@@ -2439,7 +2439,7 @@ List mainFKM_gk(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -2451,7 +2451,7 @@ List mainFKM_gk(arma::mat data,
     }
   }
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -2692,7 +2692,7 @@ List mainFKM_gk_ent(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -2705,7 +2705,7 @@ List mainFKM_gk_ent(arma::mat data,
   }
 
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, 1,  n, k, p,  exp(1.0), alpha);
 
@@ -2971,7 +2971,7 @@ List mainFKM_gk_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -2984,7 +2984,7 @@ List mainFKM_gk_noise(arma::mat data,
   }
 
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -3104,7 +3104,7 @@ List mainFKM_gk_noise_U(arma::mat data,
             q1 = pow(1/arma::as_scalar(D(i,j)),1/(m-1.0)) / sum(pow(1/D.row(i),1/(m-1.0)));
             q2 = pow(arma::as_scalar(D(i,j)),1/(m-1.0)) / pow(delta,2/(m-1.0));
 
-            nan_check = arma::is_finite(U.row(i));
+            nan_check = U.row(i).is_finite();
             if(nan_check == 0){
               break;
             }
@@ -3269,7 +3269,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
             {
               U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-              if(arma::is_finite(U(i,j)) == false)
+              if(std::isfinite(U(i,j)) == false)
               {
                 stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent using standardized data)");
               }
@@ -3296,7 +3296,7 @@ List mainFKM_gk_ent_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -3414,7 +3414,7 @@ List mainFKM_gk_ent_noise_U(arma::mat data,
           {
             U(i,j) = exp(-arma::as_scalar(D(i,j))/ent) / (sum(exp(D.row(i)/(-ent))) + exp(- pow(delta,2.0) / ent));
 
-            if(arma::is_finite(U(i,j)) == false)
+            if(std::isfinite(U(i,j)) == false)
             {
               stop("Some membership degrees are NaN (Suggestion: run FKM.gk.ent.noise using standardized data)");
             }
@@ -3538,7 +3538,7 @@ List mainFKM_med(arma::mat data,
         for(int i=0; i<(int)n; i++)
         {
           min_med = 0;
-          nan_check = arma::is_finite(U.row(i));
+          nan_check = U.row(i).is_finite();
           if(nan_check == 0){
             break;
           }
@@ -3580,7 +3580,7 @@ List mainFKM_med(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -3592,7 +3592,7 @@ List mainFKM_med(arma::mat data,
     }
   }
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -3675,7 +3675,7 @@ List mainFKM_med_U(arma::mat data,
 
       for(int i=0; i<(int)n; i++)
       {
-        nan_check = arma::is_finite(U.row(i));
+        nan_check = U.row(i).is_finite();
         if(nan_check == 0){
           break;
         }
@@ -3854,7 +3854,7 @@ List mainFKM_med_noise(arma::mat data,
 
       for(int i=0; i<(int)n;i++)
       {
-        nan_check = arma::is_finite(U.row(i));
+        nan_check = U.row(i).is_finite();
         if(nan_check == 0){
           break;
         }
@@ -3907,7 +3907,7 @@ List mainFKM_med_noise(arma::mat data,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -3919,7 +3919,7 @@ List mainFKM_med_noise(arma::mat data,
     }
   }
 
-  if(arma::is_finite(func_opt)){
+  if(std::isfinite(func_opt)){
 
     ind = indices(index, data, U_opt, H_opt, m,  n, k, p,  exp(1.0), alpha);
 
@@ -4042,7 +4042,7 @@ List mainFKM_med_noise_U(arma::mat data,
     for(int i=0; i<(int)n;i++)
     {
 
-      nan_check = arma::is_finite(U.row(i));
+      nan_check = U.row(i).is_finite();
       if(nan_check == 0){
         break;
       }
@@ -4239,7 +4239,7 @@ List mainnefrc(arma::mat D,
         func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
       }
 
-      if(!arma::is_finite(func))
+      if(!std::isfinite(func))
       {
         U = U_old;
         func = func_old;
@@ -4250,7 +4250,7 @@ List mainnefrc(arma::mat D,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -4378,7 +4378,7 @@ List mainnefrc_U(arma::mat D,
         func += accu((pow(U.col(j),m) * pow(U.col(j),m).t())%D)/ (2*arma::as_scalar(sum(pow(U.col(j),m))));;
       }
 
-      if(!arma::is_finite(func))
+      if(!std::isfinite(func))
       {
         U = U_old;
         func = func_old;
@@ -4539,7 +4539,7 @@ List mainrnefrc(arma::mat D,
       }
 
       func += accu((pow(Unc,m) * pow(Unc,m).t()) * delta) / (2*arma::as_scalar(sum(pow(Unc,m))));
-      if(!arma::is_finite(func))
+      if(!std::isfinite(func))
       {
         U = U_old;
         func = func_old;
@@ -4552,7 +4552,7 @@ List mainrnefrc(arma::mat D,
     it(r) = iter;
     value(r) = func;
 
-    if(arma::is_finite(func) == true)
+    if(std::isfinite(func) == true)
     {
       if ((r == 0) | (func < func_opt))
       {
@@ -4695,7 +4695,7 @@ List mainrnefrc_U(arma::mat D,
     }
 
     func += accu((pow(Unc,m) * pow(Unc,m).t()) * delta) / (2*arma::as_scalar(sum(pow(Unc,m))));
-    if(!arma::is_finite(func))
+    if(!std::isfinite(func))
     {
       U = U_old;
       func = func_old;
